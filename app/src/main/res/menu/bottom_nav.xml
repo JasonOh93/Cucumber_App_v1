@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/menu_home"
+        android:title="홈"
+        android:icon="@drawable/ic_home_black_24dp"/>
+
+
+    <item android:id="@+id/menu_hospital_pharmacy"
+        android:title="병원/약국"
+        android:icon="@drawable/ic_local_hospital_black_24dp"/>
+
+    <item android:id="@+id/menu_health_feed"
+        android:title="건강피드"
+        android:icon="@drawable/ic_assistant_black_24dp"/>
+
+    <item android:id="@+id/menu_health_info"
+        android:title="건강정보"
+        android:icon="@drawable/ic_info_black_24dp"/>
+
+</menu>
