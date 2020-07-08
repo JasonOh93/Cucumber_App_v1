@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Cucumber</string>
+
+    <string name="intro_app_title1">오늘도</string>
+    <string name="intro_app_title2">이롭게</string>
+
+    <string name="bottom_nav_menu_home">홈</string>
+    <string name="bottom_nav_menu_hospital_pharmacy">병원/약국</string>
+    <string name="bottom_nav_menu_health_feed">건강피드</string>
+    <string name="bottom_nav_menu_health_info">건강정보</string>
+
+    <string name="frag_home_menu_calendar">Calendar</string>
+    <string name="frag_home_menu_location">Location</string>
+    <string name="frag_home_menu_MyMenu">My Menu</string>
+
+
 </resources>

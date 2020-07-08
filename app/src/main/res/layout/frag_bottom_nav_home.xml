@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/home_frag_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/home_frag_iv_app_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/cucumer_icon_1"/>
+
+                <TextView
+                    android:id="@+id/home_frag_tv_app_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="오이"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"/>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/home_frag_civ_center"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@mipmap/ic_launcher_round"
+                android:layout_centerInParent="true" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/home_frag_civ_health_feed"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/ic_assistant_black_24dp"
+                android:layout_above="@id/home_frag_civ_center"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="30dp"
+                android:clickable="true"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/home_frag_civ_health_info"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/ic_info_black_24dp"
+                android:layout_below="@id/home_frag_civ_center"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                android:clickable="true"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/home_frag_civ_hospital"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/ic_local_hospital_black_24dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/home_frag_civ_center"
+                android:layout_marginRight="30dp"
+                android:clickable="true"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/home_frag_civ_pharmacy"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/ic_local_hospital_black_24dp"
+                android:layout_toRightOf="@id/home_frag_civ_center"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="30dp"
+                android:clickable="true"/>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+
+</androidx.drawerlayout.widget.DrawerLayout>
