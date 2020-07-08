@@ -32,7 +32,8 @@
                     android:text="오이"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:textColor="@android:color/white"/>
+                    android:textColor="@android:color/white"
+                    android:layout_marginLeft="25dp"/>
 
             </androidx.appcompat.widget.Toolbar>
 

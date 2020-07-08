@@ -13,5 +13,15 @@
     <string name="frag_home_menu_location">Location</string>
     <string name="frag_home_menu_MyMenu">My Menu</string>
 
+    <string name="MyMenu_menu_like_hospital">관심 병원</string>
+    <string name="MyMenu_menu_like_pharmacy">관심 약국</string>
+    <string name="MyMenu_menu_health_feed">나의 건강 기록</string>
+    <string name="MyMenu_menu_health_board">건강 게시판</string>
+    <string name="MyMenu_menu_recently_info">최근 본 정보</string>
+    <string name="MyMenu_menu_notification_setting">알림 설정</string>
+    <string name="MyMenu_menu_password_setting">비밀번호 설정</string>
+    <string name="MyMenu_menu_password_change">비밀번호 변경</string>
+    <string name="MyMenu_menu_personal_info">개인정보처리방침</string>
+
 
 </resources>

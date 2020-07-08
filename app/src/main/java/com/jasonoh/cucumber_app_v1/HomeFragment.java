@@ -1,10 +1,12 @@
 package com.jasonoh.cucumber_app_v1;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -28,6 +30,10 @@ public class HomeFragment extends Fragment {
     CircleImageView civPharmacy;
     CircleImageView civHealthFeed;
     CircleImageView civHealthInfo;
+
+    final int CALENDAR_REQUEST = 100;
+    final int LOCATION_REQUEST = 200;
+    final int MY_MENU_REQUEST = 300;
 
     public HomeFragment() {
     }//HomeFragment Constructor (null)
@@ -68,9 +74,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "feed", Toast.LENGTH_SHORT).show();
-//                FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-//                transaction.replace( R.id.home_frag_civ_health_feed, new Fragment() );
-//                transaction.commit();
+                ((MainActivity)getActivity()).bottomNavigationView.setSelectedItemId( R.id.menu_health_feed );
 
             }//onClick method
         });//setOnClickListener
@@ -79,6 +83,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "info", Toast.LENGTH_SHORT).show();
+                ((MainActivity)getActivity()).bottomNavigationView.setSelectedItemId( R.id.menu_health_info );
             }//onClick method
         });//setOnClickListener
 
@@ -86,6 +91,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "hospital", Toast.LENGTH_SHORT).show();
+                ((MainActivity)getActivity()).bottomNavigationView.setSelectedItemId( R.id.menu_hospital_pharmacy );
+                //((MainActivity)getActivity()).bottomNavFrags[1]. //여기서 병원 탭또는 약국 탭으로 이동
             }//onClick method
         });//setOnClickListener
 
@@ -93,6 +100,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "pharmacy", Toast.LENGTH_SHORT).show();
+                ((MainActivity)getActivity()).bottomNavigationView.setSelectedItemId( R.id.menu_hospital_pharmacy );
             }//onClick method
         });//setOnClickListener
     }//
@@ -105,6 +113,27 @@ public class HomeFragment extends Fragment {
 
     }//onCreateOptionsMenu
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
+        switch (item.getItemId()) {
+            case R.id.menu_frag_home_calendar :
+                Toast.makeText(context, "calendar", Toast.LENGTH_SHORT).show();
+                startActivityForResult( new Intent(context, CalendarActivity.class), CALENDAR_REQUEST);
+                break;
+
+            case R.id.menu_frag_home_location :
+                Toast.makeText(context, "location", Toast.LENGTH_SHORT).show();
+                startActivityForResult( new Intent(context, LocationActivity.class), LOCATION_REQUEST);
+                break;
+
+            case R.id.menu_frag_home_my_menu :
+                Toast.makeText(context, "mymenu", Toast.LENGTH_SHORT).show();
+                startActivityForResult( new Intent(context, MyMenuActivity.class), MY_MENU_REQUEST);
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }//onOptionsItemSelected method
 
 }//HomeFragment Class

@@ -13,16 +13,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".IntroActivity" android:theme="@style/AppTheme.IntroActivity">
+        <activity android:name=".MyMenuActivity"></activity>
+        <activity android:name=".LocationActivity" />
+        <activity android:name=".CalendarActivity" />
+        <activity
+            android:name=".IntroActivity"
+            android:theme="@style/AppTheme.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" android:theme="@style/AppTheme.MainActivity">
-
-        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.MainActivity" />
     </application>
 
 </manifest>
