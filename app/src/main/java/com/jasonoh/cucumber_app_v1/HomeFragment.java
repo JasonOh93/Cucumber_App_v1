@@ -1,6 +1,7 @@
 package com.jasonoh.cucumber_app_v1;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -29,6 +30,10 @@ public class HomeFragment extends Fragment {
     CircleImageView civPharmacy;
     CircleImageView civHealthFeed;
     CircleImageView civHealthInfo;
+
+    final int CALENDAR_REQUEST = 100;
+    final int LOCATION_REQUEST = 200;
+    final int MY_MENU_REQUEST = 300;
 
     public HomeFragment() {
     }//HomeFragment Constructor (null)
@@ -114,17 +119,21 @@ public class HomeFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.menu_frag_home_calendar :
                 Toast.makeText(context, "calendar", Toast.LENGTH_SHORT).show();
+                startActivityForResult( new Intent(context, CalendarActivity.class), CALENDAR_REQUEST);
                 break;
 
             case R.id.menu_frag_home_location :
                 Toast.makeText(context, "location", Toast.LENGTH_SHORT).show();
+                startActivityForResult( new Intent(context, LocationActivity.class), LOCATION_REQUEST);
                 break;
 
             case R.id.menu_frag_home_my_menu :
                 Toast.makeText(context, "mymenu", Toast.LENGTH_SHORT).show();
+                startActivityForResult( new Intent(context, MyMenuActivity.class), MY_MENU_REQUEST);
                 break;
         }
 
         return super.onOptionsItemSelected(item);
-    }
+    }//onOptionsItemSelected method
+
 }//HomeFragment Class

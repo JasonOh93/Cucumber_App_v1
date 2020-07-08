@@ -1,9 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyMenuActivity">
+    tools:context=".MyMenuActivity"
+    android:orientation="vertical"
+    android:padding="16dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/my_menu_civ_profile"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@mipmap/ic_launcher_round"/>
+
+        <TextView
+            android:id="@+id/my_menu_tv_profile_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sample Name"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_toRightOf="@id/my_menu_civ_profile"
+            android:layout_marginLeft="20dp"/>
+
+        <TextView
+            android:id="@+id/my_menu_tv_profile_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sample@sample.com"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/my_menu_civ_profile"
+            android:layout_below="@id/my_menu_tv_profile_title"
+            android:layout_margin="20dp" />
+
+        <Button
+            android:id="@+id/btn_my_menu_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/mymenu_btn_selector"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="로그아웃"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <TextView
+        android:id="@+id/my_menu_like_hospital"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="@string/MyMenu_menu_like_hospital"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/my_menu_like_pharmacy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="@string/MyMenu_menu_like_pharmacy"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/my_menu_health_feed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="@string/MyMenu_menu_health_feed"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/my_menu_health_board"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="@string/MyMenu_menu_health_board"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/my_menu_recently_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="@string/MyMenu_menu_recently_info"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/my_menu_notification_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/MyMenu_menu_notification_setting"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"/>
+
+        <Switch
+            android:id="@+id/switch_btn_my_menu_notification_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="8dp"
+            android:switchMinWidth="56dp"
+            android:checked="true"
+            android:textOn="On"
+            android:textOff="Off"/>
+
+        <TextView
+            android:id="@+id/my_menu_password_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/MyMenu_menu_password_setting"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:layout_below="@id/my_menu_notification_setting"/>
+
+        <Switch
+            android:id="@+id/switch_btn_my_menu_password_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/switch_btn_my_menu_notification_setting"
+            android:padding="8dp"
+            android:switchMinWidth="56dp"
+            android:textOn="On"
+            android:textOff="Off"/>
+
+        <TextView
+            android:id="@+id/my_menu_password_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/MyMenu_menu_password_change"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:layout_below="@id/my_menu_password_setting"/>
+
+        <Button
+            android:id="@+id/btn_my_menu_password_change"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/mymenu_btn_selector"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/switch_btn_my_menu_password_setting"
+            android:text="변경"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/my_menu_personal_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/MyMenu_menu_personal_info"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:layout_below="@id/my_menu_password_change"/>
+
+        <Button
+            android:id="@+id/btn_my_menu_personal_info"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/mymenu_btn_selector"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/btn_my_menu_password_change"
+            android:text="확인"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>
