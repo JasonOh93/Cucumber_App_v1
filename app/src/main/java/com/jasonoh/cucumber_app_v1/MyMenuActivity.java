@@ -179,37 +179,37 @@ public class MyMenuActivity extends AppCompatActivity {
 
         switch (view.getId()) {
             case R.id.btn_my_menu_play_login :
-                startActivityForResult( new Intent(this, SocialLoginActivity.class), Global.SOCIAL_LOGIN_REQUEST );
+                startActivityForResult( new Intent(MyMenuActivity.this, SocialLoginActivity.class), Global.SOCIAL_LOGIN_REQUEST );
                 break;
             case R.id.btn_my_menu_password_change :
-                startActivityForResult( new Intent(this, AppInnerPasswordActivity.class), Global.APP_INNER_PASSWORD_SETTING_PASSWORD_REQUEST);
+                startActivityForResult( new Intent(MyMenuActivity.this, AppInnerPasswordActivity.class), Global.APP_INNER_PASSWORD_SETTING_PASSWORD_REQUEST);
                 break;
 
             case R.id.btn_my_menu_personal_info :
                 break;
 
             case R.id.btn_my_menu_logout :
-                signOut();
+                //signOut();
                 break;
         }// switch case 문
 
     }//clickBtn class
 
-    private void signOut() {
-
-        mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-
-                myMenuLogin.setVisibility(View.GONE);
-                myMenuNoLogin.setVisibility(View.VISIBLE);
-
-                //On Succesfull signout we navigate the user back to LoginActivity
-                Intent intent=new Intent(MyMenuActivity.this, SocialLoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
-    }//signOut method
+//    private void signOut() {
+//
+//        mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+//            @Override
+//            public void onComplete(@NonNull Task<Void> task) {
+//
+//                myMenuLogin.setVisibility(View.GONE);
+//                myMenuNoLogin.setVisibility(View.VISIBLE);
+//
+//                //On Succesfull signout we navigate the user back to LoginActivity
+//                Intent intent=new Intent(MyMenuActivity.this, SocialLoginActivity.class);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                startActivity(intent);
+//            }
+//        });
+//    }//signOut method
 
 }//MyMenuActivity class

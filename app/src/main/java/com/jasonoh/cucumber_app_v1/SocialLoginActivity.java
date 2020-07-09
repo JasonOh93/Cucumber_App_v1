@@ -91,12 +91,12 @@ public class SocialLoginActivity extends AppCompatActivity {
     }//handleSignInResult method
 
     private void updateUI(GoogleSignInAccount account) {
-        //로그인 시 발동 하도록 하는 메소드
-        //https://medium.com/@siisee111/android-google-sign-in%ED%95%98%EC%97%AC-profile-%ED%91%9C%EC%8B%9C%ED%95%98%EA%B8%B0-12e76899ea47
-        Intent intent = new Intent(SocialLoginActivity.this, MyMenuActivity.class);
-        intent.putExtra(Global.GOOGLE_ACCOUNT, account);
-        startActivityForResult(intent, Global.SOCIAL_LOGIN_GOOGLE_OK_REQUEST);
-        finish();
+//        //로그인 시 발동 하도록 하는 메소드
+//        //https://medium.com/@siisee111/android-google-sign-in%ED%95%98%EC%97%AC-profile-%ED%91%9C%EC%8B%9C%ED%95%98%EA%B8%B0-12e76899ea47
+//        Intent intent = new Intent(SocialLoginActivity.this, MyMenuActivity.class);
+//        intent.putExtra(Global.GOOGLE_ACCOUNT, account);
+//        startActivityForResult(intent, Global.SOCIAL_LOGIN_GOOGLE_OK_REQUEST);
+//        //finish();
     }//updateUi method
 
     private void signIn() {
