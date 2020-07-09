@@ -13,4 +13,7 @@ public class Global {
     //마이 메뉴에서 로그인 하는 창으로 이동
     final static int SOCIAL_LOGIN_REQUEST = 900;
 
+    // SocialLoginActivity 에서 구글 로그인
+    static final int RC_SIGN_IN = 800;
+
 }//Global class

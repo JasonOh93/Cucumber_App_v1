@@ -41,5 +41,8 @@
     <!--  app social login Activity text  -->
     <string name="social_login_title">Log in</string>
 
+    <!--  구글 로그인을 위한   -->
+<!--    <string name="default_web_client_id">392962139220-geggq99t5k0iotnt6s8ke76b95o4c4ku.apps.googleusercontent.com</string>-->
+
 
 </resources>
