@@ -31,9 +31,11 @@ public class HomeFragment extends Fragment {
     CircleImageView civHealthFeed;
     CircleImageView civHealthInfo;
 
-    final int CALENDAR_REQUEST = 100;
-    final int LOCATION_REQUEST = 200;
-    final int MY_MENU_REQUEST = 300;
+    //request code = 100 부터 199까지
+    // Global class에서 설정
+//    final int CALENDAR_REQUEST = 100;
+//    final int LOCATION_REQUEST = 101;
+//    final int MY_MENU_REQUEST = 102;
 
     public HomeFragment() {
     }//HomeFragment Constructor (null)
@@ -45,6 +47,10 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setHasOptionsMenu(true);
+
+
     }//onCreate method
 
     @Nullable
@@ -54,15 +60,15 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate( R.layout.frag_bottom_nav_home, container, false );
 
         toolbar = view.findViewById(R.id.home_frag_toolbar);
-        setHasOptionsMenu(true);
-
         ((MainActivity) getActivity()).setSupportActionBar( toolbar );
         ((MainActivity) getActivity()).setTitle("");
+
 
         civHealthFeed = view.findViewById(R.id.home_frag_civ_health_feed);
         civHealthInfo = view.findViewById(R.id.home_frag_civ_health_info);
         civHospital = view.findViewById(R.id.home_frag_civ_hospital);
         civPharmacy = view.findViewById(R.id.home_frag_civ_pharmacy);
+
 
         clickItem();
 
@@ -119,17 +125,17 @@ public class HomeFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.menu_frag_home_calendar :
                 Toast.makeText(context, "calendar", Toast.LENGTH_SHORT).show();
-                startActivityForResult( new Intent(context, CalendarActivity.class), CALENDAR_REQUEST);
+                startActivityForResult( new Intent(context, CalendarActivity.class), Global.CALENDAR_REQUEST);
                 break;
 
             case R.id.menu_frag_home_location :
                 Toast.makeText(context, "location", Toast.LENGTH_SHORT).show();
-                startActivityForResult( new Intent(context, LocationActivity.class), LOCATION_REQUEST);
+                startActivityForResult( new Intent(context, LocationActivity.class), Global.LOCATION_REQUEST);
                 break;
 
             case R.id.menu_frag_home_my_menu :
                 Toast.makeText(context, "mymenu", Toast.LENGTH_SHORT).show();
-                startActivityForResult( new Intent(context, MyMenuActivity.class), MY_MENU_REQUEST);
+                startActivityForResult( new Intent(context, MyMenuActivity.class), Global.MY_MENU_REQUEST);
                 break;
         }
 
