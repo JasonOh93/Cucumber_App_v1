@@ -47,6 +47,13 @@
                     android:textSize="35sp"
                     android:textColor="@android:color/black" />
 
+                <com.kakao.usermgmt.LoginButton
+                    android:id="@+id/social_login_kakao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="16dp"/>
+
             </RelativeLayout>
 
         </LinearLayout>
