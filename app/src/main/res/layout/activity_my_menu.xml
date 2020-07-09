@@ -16,8 +16,27 @@
             android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.Toolbar
+                android:id="@+id/my_menu_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:id="@+id/my_menu_back_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_back_white_24dp"
+                    android:background="@color/colorPrimary_my"
+                    android:onClick="clickBackBtn"/>
+
+                <TextView
+                    android:id="@+id/my_menu_top_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/MyMenu_menu_top_title"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="25dp"/>
+
 
             </androidx.appcompat.widget.Toolbar>
 
@@ -29,9 +48,13 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <!--     로그인시 나타나도록       -->
             <RelativeLayout
+                android:id="@+id/my_menu_login"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/my_menu_civ_profile"
                     android:layout_width="80dp"
@@ -66,7 +89,36 @@
                     android:background="@drawable/mymenu_btn_selector"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:text="로그아웃"/>
+                    android:text="@string/MyMenu_menu_logout_text"/>
+
+            </RelativeLayout>
+
+            <!--      비로그인시 나타나도록      -->
+            <RelativeLayout
+                android:id="@+id/my_menu_no_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/my_menu_no_login_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/MyMenu_menu_no_login_text"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:layout_marginBottom="8dp"/>
+
+
+                <Button
+                    android:id="@+id/btn_my_menu_play_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/mymenu_btn_selector"
+                    android:layout_below="@id/my_menu_no_login_title"
+                    android:text="@string/MyMenu_menu_play_login_text"
+                    android:layout_marginBottom="8dp"
+                    android:onClick="clickBtn"/>
 
             </RelativeLayout>
 
@@ -84,7 +136,8 @@
                 android:padding="8dp"
                 android:text="@string/MyMenu_menu_like_hospital"
                 android:textSize="18sp"
-                android:textColor="@android:color/black"/>
+                android:textColor="@android:color/black"
+                android:clickable="true"/>
 
             <TextView
                 android:id="@+id/my_menu_like_pharmacy"
@@ -93,7 +146,8 @@
                 android:padding="8dp"
                 android:text="@string/MyMenu_menu_like_pharmacy"
                 android:textSize="18sp"
-                android:textColor="@android:color/black"/>
+                android:textColor="@android:color/black"
+                android:clickable="true"/>
 
             <TextView
                 android:id="@+id/my_menu_health_feed"
@@ -102,7 +156,8 @@
                 android:padding="8dp"
                 android:text="@string/MyMenu_menu_health_feed"
                 android:textSize="18sp"
-                android:textColor="@android:color/black"/>
+                android:textColor="@android:color/black"
+                android:clickable="true"/>
 
             <TextView
                 android:id="@+id/my_menu_health_board"
@@ -111,7 +166,8 @@
                 android:padding="8dp"
                 android:text="@string/MyMenu_menu_health_board"
                 android:textSize="18sp"
-                android:textColor="@android:color/black"/>
+                android:textColor="@android:color/black"
+                android:clickable="true"/>
 
             <TextView
                 android:id="@+id/my_menu_recently_info"
@@ -120,7 +176,8 @@
                 android:padding="8dp"
                 android:text="@string/MyMenu_menu_recently_info"
                 android:textSize="18sp"
-                android:textColor="@android:color/black"/>
+                android:textColor="@android:color/black"
+                android:clickable="true"/>
 
             <View
                 android:layout_width="match_parent"
@@ -134,7 +191,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/my_menu_notification_setting"
+                    android:id="@+id/tv_my_menu_notification_setting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
@@ -154,14 +211,14 @@
                     android:textOff="Off"/>
 
                 <TextView
-                    android:id="@+id/my_menu_password_setting"
+                    android:id="@+id/tv_my_menu_password_setting"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:text="@string/MyMenu_menu_password_setting"
                     android:textSize="18sp"
                     android:textColor="@android:color/black"
-                    android:layout_below="@id/my_menu_notification_setting"/>
+                    android:layout_below="@id/tv_my_menu_notification_setting"/>
 
                 <Switch
                     android:id="@+id/switch_btn_my_menu_password_setting"
@@ -172,17 +229,17 @@
                     android:padding="8dp"
                     android:switchMinWidth="56dp"
                     android:textOn="On"
-                    android:textOff="Off"/>
+                    android:textOff="Off" />
 
                 <TextView
-                    android:id="@+id/my_menu_password_change"
+                    android:id="@+id/tv_my_menu_password_change"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:text="@string/MyMenu_menu_password_change"
                     android:textSize="18sp"
                     android:textColor="@android:color/black"
-                    android:layout_below="@id/my_menu_password_setting"/>
+                    android:layout_below="@id/tv_my_menu_password_setting"/>
 
                 <Button
                     android:id="@+id/btn_my_menu_password_change"
@@ -191,18 +248,19 @@
                     android:background="@drawable/mymenu_btn_selector"
                     android:layout_alignParentRight="true"
                     android:layout_below="@id/switch_btn_my_menu_password_setting"
-                    android:text="변경"
-                    android:layout_marginBottom="8dp"/>
+                    android:text="@string/MyMenu_menu_password_change_btn_text"
+                    android:layout_marginBottom="8dp"
+                    android:onClick="clickBtn"/>
 
                 <TextView
-                    android:id="@+id/my_menu_personal_info"
+                    android:id="@+id/tv_my_menu_personal_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:text="@string/MyMenu_menu_personal_info"
                     android:textSize="18sp"
                     android:textColor="@android:color/black"
-                    android:layout_below="@id/my_menu_password_change"/>
+                    android:layout_below="@id/tv_my_menu_password_change"/>
 
                 <Button
                     android:id="@+id/btn_my_menu_personal_info"
@@ -211,7 +269,8 @@
                     android:background="@drawable/mymenu_btn_selector"
                     android:layout_alignParentRight="true"
                     android:layout_below="@id/btn_my_menu_password_change"
-                    android:text="확인"/>
+                    android:text="@string/MyMenu_menu_personal_info_btn_text"
+                    android:onClick="clickBtn"/>
 
             </RelativeLayout>
 

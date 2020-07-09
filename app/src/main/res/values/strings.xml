@@ -1,18 +1,23 @@
 <resources>
     <string name="app_name">Cucumber</string>
 
+    <!--  앱 인트로화면 title  -->
     <string name="intro_app_title1">오늘도</string>
     <string name="intro_app_title2">이롭게</string>
 
+    <!--  앱 홈 fragment bottom navigation text  -->
     <string name="bottom_nav_menu_home">홈</string>
     <string name="bottom_nav_menu_hospital_pharmacy">병원/약국</string>
     <string name="bottom_nav_menu_health_feed">건강피드</string>
     <string name="bottom_nav_menu_health_info">건강정보</string>
 
+    <!--  app home top option menu icon  -->
     <string name="frag_home_menu_calendar">Calendar</string>
     <string name="frag_home_menu_location">Location</string>
     <string name="frag_home_menu_MyMenu">My Menu</string>
 
+    <!--  app my menu Activity text  -->
+    <string name="MyMenu_menu_top_title">마이 메뉴</string>
     <string name="MyMenu_menu_like_hospital">관심 병원</string>
     <string name="MyMenu_menu_like_pharmacy">관심 약국</string>
     <string name="MyMenu_menu_health_feed">나의 건강 기록</string>
@@ -22,6 +27,19 @@
     <string name="MyMenu_menu_password_setting">비밀번호 설정</string>
     <string name="MyMenu_menu_password_change">비밀번호 변경</string>
     <string name="MyMenu_menu_personal_info">개인정보처리방침</string>
+    <string name="MyMenu_menu_no_login_text">로그인이 필요한 기능입니다.</string>
+    <string name="MyMenu_menu_logout_text">로그아웃</string>
+    <string name="MyMenu_menu_play_login_text">로그인</string>
+    <string name="MyMenu_menu_password_change_btn_text">변경</string>
+    <string name="MyMenu_menu_personal_info_btn_text">확인</string>
+
+
+    <!--  app inner password Activity text  -->
+    <string name="app_inner_password_top_title">비밀번호 설정</string>
+    <string name="app_inner_password_ok">확인</string>
+
+    <!--  app social login Activity text  -->
+    <string name="social_login_title">Log in</string>
 
 
 </resources>

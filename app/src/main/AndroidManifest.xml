@@ -13,12 +13,23 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MyMenuActivity"></activity>
-        <activity android:name=".LocationActivity" />
-        <activity android:name=".CalendarActivity" />
+        <activity android:name=".SocialLoginActivity"></activity>
+        <activity
+            android:name=".AppInnerPasswordActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".MyMenuActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".LocationActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".CalendarActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".IntroActivity"
-            android:theme="@style/AppTheme.IntroActivity">
+            android:theme="@style/AppTheme.IntroActivity"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,7 +38,8 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme.MainActivity" />
+            android:theme="@style/AppTheme.MainActivity"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

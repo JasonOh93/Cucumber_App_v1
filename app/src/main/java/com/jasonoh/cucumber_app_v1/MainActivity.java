@@ -15,6 +15,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    //request code = 10 부터 99까지
+    //Global class에서 설정
+
     Fragment[] bottomNavFrags = new Fragment[4];
 
     BottomNavigationView bottomNavigationView;
