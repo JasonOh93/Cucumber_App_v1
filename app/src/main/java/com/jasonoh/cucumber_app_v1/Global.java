@@ -16,4 +16,8 @@ public class Global {
     // SocialLoginActivity 에서 구글 로그인
     static final int RC_SIGN_IN = 800;
 
+    // SocialLoginActivity 에서 구글 로그인 한 것을 가지고 MyMenu Activity 로 이동하는 REQUEST CODE
+    static final int SOCIAL_LOGIN_GOOGLE_OK_REQUEST = 810;
+    static final String GOOGLE_ACCOUNT = "google_account";
+
 }//Global class

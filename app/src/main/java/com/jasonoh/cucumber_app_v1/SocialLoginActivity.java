@@ -93,7 +93,10 @@ public class SocialLoginActivity extends AppCompatActivity {
     private void updateUI(GoogleSignInAccount account) {
         //로그인 시 발동 하도록 하는 메소드
         //https://medium.com/@siisee111/android-google-sign-in%ED%95%98%EC%97%AC-profile-%ED%91%9C%EC%8B%9C%ED%95%98%EA%B8%B0-12e76899ea47
-        //
+        Intent intent = new Intent(SocialLoginActivity.this, MyMenuActivity.class);
+        intent.putExtra(Global.GOOGLE_ACCOUNT, account);
+        startActivityForResult(intent, Global.SOCIAL_LOGIN_GOOGLE_OK_REQUEST);
+        finish();
     }//updateUi method
 
     private void signIn() {
@@ -120,7 +123,7 @@ public class SocialLoginActivity extends AppCompatActivity {
     //todo : 테스트용 구글 로그아웃
     public void clickLogoutBtn(View view) {
         mGoogleSignInClient.signOut();
-        // 로그아웃 되었는지 확인하는 테스트
+        // todo : 로그아웃 되었는지 확인하는 테스트
         if(!mGoogleSignInClient.signOut().isSuccessful()) Toast.makeText(this, "로그아웃", Toast.LENGTH_SHORT).show();
     }//clickLogoutBtn method
 }//SocialLoginActivity class

@@ -73,7 +73,7 @@
                     android:layout_marginLeft="20dp"/>
 
                 <TextView
-                    android:id="@+id/my_menu_tv_profile_subtitle"
+                    android:id="@+id/my_menu_tv_profile_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sample@sample.com"
@@ -89,7 +89,8 @@
                     android:background="@drawable/mymenu_btn_selector"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:text="@string/MyMenu_menu_logout_text"/>
+                    android:text="@string/MyMenu_menu_logout_text"
+                    android:onClick="clickBtn"/>
 
             </RelativeLayout>
 
