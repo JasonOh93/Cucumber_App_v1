@@ -110,6 +110,8 @@ public class SocialLoginActivity extends AppCompatActivity {
                 if(profile.getProfileImageUrl() != null) intent.putExtra("KakaoImage", profile.getProfileImageUrl());
                 setResult( RESULT_OK, intent );
 
+                Global.kakaoLoginSuccessBoolean = true;
+
                 SharedPreferences pref = getSharedPreferences("Login", MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putString("Name", profile.getNickname());

@@ -226,7 +226,7 @@ public class MyMenuActivity extends AppCompatActivity {
         if(!Global.loginPreferences.getString("Image", "").equals(""))
             Glide.with(this).load(Global.loginPreferences.getString("Image", "")).into(civMyMenuProfile);
         else Glide.with(this).load(R.mipmap.ic_launcher_round).into(civMyMenuProfile);
-        Global.kakaoLoginSuccessBoolean = true;
+//        Global.kakaoLoginSuccessBoolean = true;
 //        getSharedPreferences("Login", MODE_PRIVATE).edit()
 //                .putBoolean("KakaoLoginSuccessBoolean", Global.kakaoLoginSuccessBoolean).commit();
 
