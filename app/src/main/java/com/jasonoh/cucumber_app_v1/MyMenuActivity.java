@@ -322,9 +322,10 @@ public class MyMenuActivity extends AppCompatActivity {
 
     }//signOut method
 
+    //todo : MyMenuActivity onDestroy method
     @Override
     protected void onDestroy() {
         super.onDestroy();
         Session.getCurrentSession().removeCallback( sessionCallback );
-    }
+    }//onDestroy method
 }//MyMenuActivity class
