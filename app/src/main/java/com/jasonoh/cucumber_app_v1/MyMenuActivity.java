@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.Log;
@@ -24,6 +25,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.kakao.auth.ISessionCallback;
+import com.kakao.auth.Session;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.LogoutResponseCallback;
+import com.kakao.util.exception.KakaoException;
 
 import org.w3c.dom.Text;
 
@@ -41,6 +47,7 @@ public class MyMenuActivity extends AppCompatActivity {
     TextView tvPasswordChange;
     Button passwordChangeBtn;
 
+    Intent googleLoginIntent;
     GoogleSignInClient mGoogleSignInClient;
     GoogleSignInAccount mGoogleSignInAccount;
 
@@ -51,11 +58,6 @@ public class MyMenuActivity extends AppCompatActivity {
 
     //비로그인 시 나타나는 것
     RelativeLayout myMenuNoLogin;
-
-    //request code = 1000 부터 1999까지
-    //final int APP_INNER_PASSWORD_SETTING_PASSWORD_REQUEST = 1000;
-
-    //final int MY_MENU_REQUEST = 102; // 홈 프레그먼트에서 마이메뉴 액티비티로 연결되는 인탠트 연결 변호
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,13 +93,12 @@ public class MyMenuActivity extends AppCompatActivity {
 
         //==========================================================================
         //todo : 구글 로그인을 위해서 소셜 로그인 액티비티에서 마이 메뉴로 보낸 것을 확인
-        if(getIntent().getParcelableExtra(Global.GOOGLE_ACCOUNT) != null) {
-            myMenuLogin.setVisibility(View.VISIBLE);
-            myMenuNoLogin.setVisibility(View.GONE);
-            googleLogin(getIntent().getParcelableExtra(Global.GOOGLE_ACCOUNT));
-        }// if
+//        if(getIntent().getParcelableExtra(Global.GOOGLE_ACCOUNT) != null) {
+//            myMenuLogin.setVisibility(View.VISIBLE);
+//            myMenuNoLogin.setVisibility(View.GONE);
+//            googleLogin(getIntent().getParcelableExtra(Global.GOOGLE_ACCOUNT));
+//        }// if
         //===========================================================================
-
 
     }//onCreate method
 
@@ -105,16 +106,22 @@ public class MyMenuActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         // todo : google login 확인
-        Log.w("TAG", "Intent : " + getIntent().getParcelableExtra(Global.GOOGLE_ACCOUNT));
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
 
         Log.w("TAG", "account : " + account);
+        Log.w("TAG", "Global Google Preference : " + Global.loginPreferences);
 
         if(account != null) {
             googleLogin(account);
             myMenuLogin.setVisibility(View.VISIBLE);
             myMenuNoLogin.setVisibility(View.GONE);
+        }
+        Log.w("TAG", "kakaoLoginBoolean : " + Global.kakaoLoginSuccessBoolean);
+        if (Global.kakaoLoginSuccessBoolean) {
+            myMenuLogin.setVisibility(View.VISIBLE);
+            myMenuNoLogin.setVisibility(View.GONE);
+            kakaoLoadData();
         }
     }//onStart method
 
@@ -133,6 +140,9 @@ public class MyMenuActivity extends AppCompatActivity {
             Glide.with(this).load(mGoogleSignInAccount.getPhotoUrl()).into(civMyMenuProfile);
             tvMyMenuProfileTitle.setText( mGoogleSignInAccount.getDisplayName() );
             tvMyMenuProfileEmail.setText( mGoogleSignInAccount.getEmail() );
+
+            //todo : Log 구글 돌아온 이미지 경로 확인 하는 것
+            Log.w("TAG", "Image Uri : " + mGoogleSignInAccount.getPhotoUrl().toString());
 
         } else {
             Glide.with(this).load(R.mipmap.ic_launcher_round).into(civMyMenuProfile);
@@ -181,21 +191,59 @@ public class MyMenuActivity extends AppCompatActivity {
                 break;
 
                 //todo : 구글 로그인을 위해서 소셜 로그인 액티비티로 간 것을 다시 돌아 온 것을 확인 한것
-//            case Global.SOCIAL_LOGIN_REQUEST :
-//                //todo : 구글 로그인 확인용 로그 : 인텐트 돌아온 것 확인
-//                Log.w("TAG", "msg : " + data.getParcelableExtra(Global.GOOGLE_ACCOUNT));
-//
-//                googleLoginIntent = data;
-//                if(googleLoginIntent != null) {
-//                    myMenuLogin.setVisibility(View.VISIBLE);
-//                    myMenuNoLogin.setVisibility(View.GONE);
-//                    googleLogin();
-//                }
-//                break;
+            case Global.SOCIAL_LOGIN_REQUEST :
+
+                if(resultCode == RESULT_OK) {
+
+                    //todo : 구글 로그인 확인용 로그 : 인텐트 돌아온 것 확인
+                    //Log.w("TAG", "msg : " + data.getParcelableExtra(Global.GOOGLE_ACCOUNT));
+
+                    googleLoginIntent = data;
+                    if(data != null) {
+                        myMenuLogin.setVisibility(View.VISIBLE);
+                        myMenuNoLogin.setVisibility(View.GONE);
+
+                        if(data.getParcelableExtra(Global.GOOGLE_ACCOUNT) != null) googleLogin(data.getParcelableExtra(Global.GOOGLE_ACCOUNT));
+                        else kakaoLoadData();
+                    }
+
+                }// if result ok
+
+                break;
 
         } // switch case 문
 
     }//onActivityResult method
+
+    //todo : kakaoLoadData() method
+    public void kakaoLoadData(){
+
+        Session.getCurrentSession().addCallback( sessionCallback );
+
+        tvMyMenuProfileTitle.setText( Global.loginPreferences.getString("Name", "") );
+        tvMyMenuProfileEmail.setText( Global.loginPreferences.getString("Email", "") );
+        if(!Global.loginPreferences.getString("Image", "").equals(""))
+            Glide.with(this).load(Global.loginPreferences.getString("Image", "")).into(civMyMenuProfile);
+        else Glide.with(this).load(R.mipmap.ic_launcher_round).into(civMyMenuProfile);
+        Global.kakaoLoginSuccessBoolean = true;
+        getSharedPreferences("Login", MODE_PRIVATE).edit()
+                .putBoolean("KakaoLoginSuccessBoolean", Global.kakaoLoginSuccessBoolean).commit();
+
+    }//kakaoLoadData method
+
+    //카카오 로그인 서버와 연결을 시도하는 세션 작업의 결과를 듣는 리스너
+    ISessionCallback sessionCallback = new ISessionCallback() {
+        @Override
+        public void onSessionOpened() {
+            Toast.makeText(MyMenuActivity.this, "로그인 세션연결 성공", Toast.LENGTH_SHORT).show();
+
+        }
+
+        @Override
+        public void onSessionOpenFailed(KakaoException exception) {
+            Toast.makeText(MyMenuActivity.this, "로그인 실패", Toast.LENGTH_SHORT).show();
+        }
+    };
 
     public void clickBackBtn(View view) {
         //이전화면으로 돌아가기 위해서
@@ -206,10 +254,7 @@ public class MyMenuActivity extends AppCompatActivity {
 
         switch (view.getId()) {
             case R.id.btn_my_menu_play_login :
-//                startActivityForResult( new Intent(this, SocialLoginActivity.class), Global.SOCIAL_LOGIN_REQUEST );
-                Intent intent = new Intent(this, SocialLoginActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity( intent );
+                startActivityForResult( new Intent(this, SocialLoginActivity.class), Global.SOCIAL_LOGIN_REQUEST );
                 break;
             case R.id.btn_my_menu_password_change :
                 startActivityForResult( new Intent(this, AppInnerPasswordActivity.class), Global.APP_INNER_PASSWORD_SETTING_PASSWORD_REQUEST);
@@ -227,19 +272,59 @@ public class MyMenuActivity extends AppCompatActivity {
 
     private void signOut() {
 
-        mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
+        if(mGoogleSignInClient != null) {
+            mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
 
-                myMenuLogin.setVisibility(View.GONE);
-                myMenuNoLogin.setVisibility(View.VISIBLE);
+                    myMenuLogin.setVisibility(View.GONE);
+                    myMenuNoLogin.setVisibility(View.VISIBLE);
 
-                //On Succesfull signout we navigate the user back to LoginActivity
+                    //On Succesfull signout we navigate the user back to LoginActivity
 //                Intent intent=new Intent(MyMenuActivity.this, SocialLoginActivity.class);
 //                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //                startActivity(intent);
-            }
-        });
+                }
+            });
+        } else {
+
+            Log.w("TAG", "kakao Login Section : 1");
+            UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
+                @Override
+                public void onCompleteLogout() {
+
+                    // todo : 이미 카카오에서는 그래픽을 건드는 것을 할수 없게 되어 있는 것 같아서 Thread를 사용
+                    new Thread(){
+                        @Override
+                        public void run() {
+                            super.run();
+
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(MyMenuActivity.this, "로그아웃 완료", Toast.LENGTH_SHORT).show();
+                                    myMenuLogin.setVisibility(View.GONE);
+                                    myMenuNoLogin.setVisibility(View.VISIBLE);
+                                    Session.getCurrentSession().removeCallback( sessionCallback );
+                                    Global.kakaoLoginSuccessBoolean = false;
+                                    getSharedPreferences("Login", MODE_PRIVATE).edit()
+                                            .putBoolean("KakaoLoginSuccessBoolean", Global.kakaoLoginSuccessBoolean).commit();
+                                }
+                            });// runOnUiThread
+
+                        }//run method
+                    }.start(); //Thread
+                }// onCompleteLogout() method
+            }); // UserManagement.getInstance().requestLogout
+
+        }// if else
+
+
     }//signOut method
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Session.getCurrentSession().removeCallback( sessionCallback );
+    }
 }//MyMenuActivity class

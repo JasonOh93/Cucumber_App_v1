@@ -1,5 +1,9 @@
 package com.jasonoh.cucumber_app_v1;
 
+import android.content.SharedPreferences;
+
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+
 public class Global {
     //전체에서 사용 할수 있도록 하는 것
 
@@ -17,7 +21,10 @@ public class Global {
     static final int RC_SIGN_IN = 800;
 
     // SocialLoginActivity 에서 구글 로그인 한 것을 가지고 MyMenu Activity 로 이동하는 REQUEST CODE
-    static final int SOCIAL_LOGIN_GOOGLE_OK_REQUEST = 810;
     static final String GOOGLE_ACCOUNT = "google_account";
+
+    // 로그인 시 전체적으로 사용하기 위해서 인트로 액티비티에서 설정 해주고 나머지는 SocialLoginActivity, MyMenuActivity에서 실행함
+    static SharedPreferences loginPreferences = null;
+    static boolean kakaoLoginSuccessBoolean = false;
 
 }//Global class
