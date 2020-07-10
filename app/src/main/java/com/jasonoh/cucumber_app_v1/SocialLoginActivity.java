@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -91,12 +92,36 @@ public class SocialLoginActivity extends AppCompatActivity {
     }//handleSignInResult method
 
     private void updateUI(GoogleSignInAccount account) {
-//        //로그인 시 발동 하도록 하는 메소드
-//        //https://medium.com/@siisee111/android-google-sign-in%ED%95%98%EC%97%AC-profile-%ED%91%9C%EC%8B%9C%ED%95%98%EA%B8%B0-12e76899ea47
-//        Intent intent = new Intent(SocialLoginActivity.this, MyMenuActivity.class);
-//        intent.putExtra(Global.GOOGLE_ACCOUNT, account);
-//        startActivityForResult(intent, Global.SOCIAL_LOGIN_GOOGLE_OK_REQUEST);
-//        //finish();
+        //로그인 시 발동 하도록 하는 메소드
+        //https://medium.com/@siisee111/android-google-sign-in%ED%95%98%EC%97%AC-profile-%ED%91%9C%EC%8B%9C%ED%95%98%EA%B8%B0-12e76899ea47
+
+        //todo : 구글 로그인을 위해서 소셜 로그인 액티비티로 간 것을 다시 돌아 온 것을 확인 한것
+//        if(account != null) {
+//            if(account instanceof Parcelable) {
+//                Log.w("TAG", "parcelable");
+//            }
+//            Log.w("TAG", "name : " + account.getDisplayName());
+//            Intent intent = getIntent();
+//            intent.putExtra(Global.GOOGLE_ACCOUNT, account);
+//            setResult(RESULT_OK, intent);
+//            finish();
+//        } //if
+
+        //==============================================================================================
+
+        if(account != null) {
+            if(account instanceof Parcelable) {
+                Log.w("TAG", "parcelable");
+            }
+            Log.w("TAG", "name : " + account.getDisplayName());
+            Intent intent = new Intent(this, MyMenuActivity.class);
+            intent.putExtra(Global.GOOGLE_ACCOUNT, account);
+            setResult(RESULT_OK, intent);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity( intent );
+            finish();
+        } //if
+
     }//updateUi method
 
     private void signIn() {

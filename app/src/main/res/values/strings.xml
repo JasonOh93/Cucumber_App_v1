@@ -25,6 +25,8 @@
     <string name="MyMenu_menu_recently_info">최근 본 정보</string>
     <string name="MyMenu_menu_notification_setting">알림 설정</string>
     <string name="MyMenu_menu_password_setting">비밀번호 설정</string>
+    <string name="MyMenu_menu_password_setting_on">비밀번호 설정이 ON 되었습니다.</string>
+    <string name="MyMenu_menu_password_setting_off">비밀번호 설정이 OFF 되었습니다.</string>
     <string name="MyMenu_menu_password_change">비밀번호 변경</string>
     <string name="MyMenu_menu_personal_info">개인정보처리방침</string>
     <string name="MyMenu_menu_no_login_text">로그인이 필요한 기능입니다.</string>

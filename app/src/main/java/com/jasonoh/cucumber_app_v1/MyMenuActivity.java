@@ -7,6 +7,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -46,7 +48,6 @@ public class MyMenuActivity extends AppCompatActivity {
     RelativeLayout myMenuLogin;
     CircleImageView civMyMenuProfile;
     TextView tvMyMenuProfileTitle, tvMyMenuProfileEmail;
-    Button btnMyMenuLogOut;
 
     //비로그인 시 나타나는 것
     RelativeLayout myMenuNoLogin;
@@ -71,10 +72,13 @@ public class MyMenuActivity extends AppCompatActivity {
         checkSwitchBtn();
 
         //비밀번호 변경 하기 위한 것들을 우선 없애고 비밀번호 설정시에만 나오도록 설정
-        passwordChangeBtn = MyMenuActivity.this.findViewById(R.id.btn_my_menu_password_change);
-        tvPasswordChange = MyMenuActivity.this.findViewById(R.id.tv_my_menu_password_change);
-        passwordChangeBtn.setVisibility(View.GONE);
-        tvPasswordChange.setVisibility(View.GONE);
+        passwordChangeBtn = findViewById(R.id.btn_my_menu_password_change);
+        tvPasswordChange = findViewById(R.id.tv_my_menu_password_change);
+
+        if(!passwordSetting.isChecked()) {
+            passwordChangeBtn.setVisibility(View.GONE);
+            tvPasswordChange.setVisibility(View.GONE);
+        } // if 스위치가 체크 되어 있을때만 나타나도록 하기 위해서
 
         //로그인시 나타나도록 하기 위해서 찾아온는 것
         myMenuLogin = findViewById(R.id.my_menu_login);
@@ -85,22 +89,36 @@ public class MyMenuActivity extends AppCompatActivity {
         //비로그인시 나타나도록 하기 위해서 찾아 오는 것
         myMenuNoLogin = findViewById(R.id.my_menu_no_login);
 
-
-//        if(getIntent().getParcelableExtra(Global.GOOGLE_ACCOUNT).equals( Global.GOOGLE_ACCOUNT )) {
-//            myMenuLogin.setVisibility(View.VISIBLE);
-//            myMenuNoLogin.setVisibility(View.GONE);
-//            googleLogin();
-//        } else {
-//
-//        }// if else문
-
-        // todo : nullPoint 예외 발생
-        //googleLogin();
+        //==========================================================================
+        //todo : 구글 로그인을 위해서 소셜 로그인 액티비티에서 마이 메뉴로 보낸 것을 확인
+        if(getIntent().getParcelableExtra(Global.GOOGLE_ACCOUNT) != null) {
+            myMenuLogin.setVisibility(View.VISIBLE);
+            myMenuNoLogin.setVisibility(View.GONE);
+            googleLogin(getIntent().getParcelableExtra(Global.GOOGLE_ACCOUNT));
+        }// if
+        //===========================================================================
 
 
     }//onCreate method
 
-    public void googleLogin(){
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // todo : google login 확인
+        Log.w("TAG", "Intent : " + getIntent().getParcelableExtra(Global.GOOGLE_ACCOUNT));
+
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+
+        Log.w("TAG", "account : " + account);
+
+        if(account != null) {
+            googleLogin(account);
+            myMenuLogin.setVisibility(View.VISIBLE);
+            myMenuNoLogin.setVisibility(View.GONE);
+        }
+    }//onStart method
+
+    public void googleLogin(GoogleSignInAccount account){
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -108,15 +126,17 @@ public class MyMenuActivity extends AppCompatActivity {
                 .build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        mGoogleSignInAccount = getIntent().getParcelableExtra(Global.GOOGLE_ACCOUNT);
+        if(getIntent() != null) mGoogleSignInAccount = account;
+        else mGoogleSignInAccount = account;
 
-        Glide.with(this).load(mGoogleSignInAccount.getPhotoUrl()).into(civMyMenuProfile);
-        tvMyMenuProfileTitle.setText( mGoogleSignInAccount.getDisplayName() );
-        tvMyMenuProfileEmail.setText( mGoogleSignInAccount.getEmail() );
+        if(mGoogleSignInAccount.getPhotoUrl() != null) {
+            Glide.with(this).load(mGoogleSignInAccount.getPhotoUrl()).into(civMyMenuProfile);
+            tvMyMenuProfileTitle.setText( mGoogleSignInAccount.getDisplayName() );
+            tvMyMenuProfileEmail.setText( mGoogleSignInAccount.getEmail() );
 
-        myMenuLogin.setVisibility(View.VISIBLE);
-        myMenuNoLogin.setVisibility(View.GONE);
-
+        } else {
+            Glide.with(this).load(R.mipmap.ic_launcher_round).into(civMyMenuProfile);
+        } // if else (그림이 없을경우 대체 그림으로 하기)
 
     }//googleLogin method
 
@@ -130,12 +150,13 @@ public class MyMenuActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
+                //todo : 비밀번호 설정이 체크 되었는지 확인 한 것
                 if(isChecked) {
                     startActivityForResult( new Intent(MyMenuActivity.this, AppInnerPasswordActivity.class), Global.APP_INNER_PASSWORD_SETTING_PASSWORD_REQUEST);
                     passwordChangeBtn.setVisibility(View.VISIBLE);
                     tvPasswordChange.setVisibility(View.VISIBLE);
                 } else {
-                    Toast.makeText(MyMenuActivity.this, "비밀번호 설정이 OFF 됩니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MyMenuActivity.this, R.string.MyMenu_menu_password_setting_off, Toast.LENGTH_SHORT).show();
                     passwordChangeBtn.setVisibility(View.GONE);
                     tvPasswordChange.setVisibility(View.GONE);
                 }// if else 문
@@ -152,20 +173,26 @@ public class MyMenuActivity extends AppCompatActivity {
         switch (requestCode) {
             case Global.APP_INNER_PASSWORD_SETTING_PASSWORD_REQUEST :
                 if(resultCode == RESULT_OK) {
+                    // 설정 완료시 토스트 띄우기
+                    Toast.makeText(MyMenuActivity.this, R.string.MyMenu_menu_password_setting_on, Toast.LENGTH_SHORT).show();
                 } else {
                     passwordSetting.setChecked( false );
                 }// if else 문
                 break;
 
-                // 이곳이 아닌 가능성이 있어서 우선 감추기
-//            case Global.SOCIAL_LOGIN_GOOGLE_OK_REQUEST :
-//                if(resultCode == RESULT_OK) {
+                //todo : 구글 로그인을 위해서 소셜 로그인 액티비티로 간 것을 다시 돌아 온 것을 확인 한것
+//            case Global.SOCIAL_LOGIN_REQUEST :
+//                //todo : 구글 로그인 확인용 로그 : 인텐트 돌아온 것 확인
+//                Log.w("TAG", "msg : " + data.getParcelableExtra(Global.GOOGLE_ACCOUNT));
 //
-//                } else {
-//                    //todo : 이곳 부터 구글 로그인 되는 것을 확인 할 것
-//                    Toast.makeText(this, "aaa", Toast.LENGTH_SHORT).show();
+//                googleLoginIntent = data;
+//                if(googleLoginIntent != null) {
+//                    myMenuLogin.setVisibility(View.VISIBLE);
+//                    myMenuNoLogin.setVisibility(View.GONE);
+//                    googleLogin();
 //                }
 //                break;
+
         } // switch case 문
 
     }//onActivityResult method
@@ -179,37 +206,40 @@ public class MyMenuActivity extends AppCompatActivity {
 
         switch (view.getId()) {
             case R.id.btn_my_menu_play_login :
-                startActivityForResult( new Intent(MyMenuActivity.this, SocialLoginActivity.class), Global.SOCIAL_LOGIN_REQUEST );
+//                startActivityForResult( new Intent(this, SocialLoginActivity.class), Global.SOCIAL_LOGIN_REQUEST );
+                Intent intent = new Intent(this, SocialLoginActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity( intent );
                 break;
             case R.id.btn_my_menu_password_change :
-                startActivityForResult( new Intent(MyMenuActivity.this, AppInnerPasswordActivity.class), Global.APP_INNER_PASSWORD_SETTING_PASSWORD_REQUEST);
+                startActivityForResult( new Intent(this, AppInnerPasswordActivity.class), Global.APP_INNER_PASSWORD_SETTING_PASSWORD_REQUEST);
                 break;
 
             case R.id.btn_my_menu_personal_info :
                 break;
 
             case R.id.btn_my_menu_logout :
-                //signOut();
+                signOut();
                 break;
         }// switch case 문
 
     }//clickBtn class
 
-//    private void signOut() {
-//
-//        mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
-//            @Override
-//            public void onComplete(@NonNull Task<Void> task) {
-//
-//                myMenuLogin.setVisibility(View.GONE);
-//                myMenuNoLogin.setVisibility(View.VISIBLE);
-//
-//                //On Succesfull signout we navigate the user back to LoginActivity
+    private void signOut() {
+
+        mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+
+                myMenuLogin.setVisibility(View.GONE);
+                myMenuNoLogin.setVisibility(View.VISIBLE);
+
+                //On Succesfull signout we navigate the user back to LoginActivity
 //                Intent intent=new Intent(MyMenuActivity.this, SocialLoginActivity.class);
 //                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 //                startActivity(intent);
-//            }
-//        });
-//    }//signOut method
+            }
+        });
+    }//signOut method
 
 }//MyMenuActivity class

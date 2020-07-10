@@ -79,7 +79,6 @@ public class HomeFragment extends Fragment {
         civHealthFeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "feed", Toast.LENGTH_SHORT).show();
                 ((MainActivity)getActivity()).bottomNavigationView.setSelectedItemId( R.id.menu_health_feed );
 
             }//onClick method
@@ -88,7 +87,6 @@ public class HomeFragment extends Fragment {
         civHealthInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "info", Toast.LENGTH_SHORT).show();
                 ((MainActivity)getActivity()).bottomNavigationView.setSelectedItemId( R.id.menu_health_info );
             }//onClick method
         });//setOnClickListener
@@ -96,7 +94,6 @@ public class HomeFragment extends Fragment {
         civHospital.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "hospital", Toast.LENGTH_SHORT).show();
                 ((MainActivity)getActivity()).bottomNavigationView.setSelectedItemId( R.id.menu_hospital_pharmacy );
                 //((MainActivity)getActivity()).bottomNavFrags[1]. //여기서 병원 탭또는 약국 탭으로 이동
             }//onClick method
@@ -105,7 +102,6 @@ public class HomeFragment extends Fragment {
         civPharmacy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "pharmacy", Toast.LENGTH_SHORT).show();
                 ((MainActivity)getActivity()).bottomNavigationView.setSelectedItemId( R.id.menu_hospital_pharmacy );
             }//onClick method
         });//setOnClickListener

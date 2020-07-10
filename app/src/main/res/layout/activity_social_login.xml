@@ -62,13 +62,13 @@
                     android:layout_above="@id/social_login_kakao"
                     android:layout_marginBottom="16dp"/>
 
-                <Button
-                    android:id="@+id/logout_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/social_login_kakao"
-                    android:text="logout"
-                    android:onClick="clickLogoutBtn"/>
+<!--                <Button-->
+<!--                    android:id="@+id/logout_btn"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@id/social_login_kakao"-->
+<!--                    android:text="logout"-->
+<!--                    android:onClick="clickLogoutBtn"/>-->
 
             </RelativeLayout>
 

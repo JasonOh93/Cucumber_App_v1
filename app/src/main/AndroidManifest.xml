@@ -26,7 +26,7 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".MyMenuActivity"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".LocationActivity"
             android:windowSoftInputMode="adjustResize" />
