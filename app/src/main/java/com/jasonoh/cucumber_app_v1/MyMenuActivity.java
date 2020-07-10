@@ -133,7 +133,7 @@ public class MyMenuActivity extends AppCompatActivity {
                 .build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        if(getIntent() != null) mGoogleSignInAccount = account;
+        if(googleLoginIntent != null) mGoogleSignInAccount = account;
         else mGoogleSignInAccount = account;
 
         if(mGoogleSignInAccount.getPhotoUrl() != null) {
@@ -198,13 +198,14 @@ public class MyMenuActivity extends AppCompatActivity {
                     //todo : 구글 로그인 확인용 로그 : 인텐트 돌아온 것 확인
                     //Log.w("TAG", "msg : " + data.getParcelableExtra(Global.GOOGLE_ACCOUNT));
 
-                    googleLoginIntent = data;
                     if(data != null) {
                         myMenuLogin.setVisibility(View.VISIBLE);
                         myMenuNoLogin.setVisibility(View.GONE);
 
-                        if(data.getParcelableExtra(Global.GOOGLE_ACCOUNT) != null) googleLogin(data.getParcelableExtra(Global.GOOGLE_ACCOUNT));
-                        else kakaoLoadData();
+                        if(data.getParcelableExtra(Global.GOOGLE_ACCOUNT) != null) {
+                            googleLoginIntent = data;
+                            googleLogin(data.getParcelableExtra(Global.GOOGLE_ACCOUNT));
+                        } else kakaoLoadData();
                     }
 
                 }// if result ok
@@ -226,8 +227,8 @@ public class MyMenuActivity extends AppCompatActivity {
             Glide.with(this).load(Global.loginPreferences.getString("Image", "")).into(civMyMenuProfile);
         else Glide.with(this).load(R.mipmap.ic_launcher_round).into(civMyMenuProfile);
         Global.kakaoLoginSuccessBoolean = true;
-        getSharedPreferences("Login", MODE_PRIVATE).edit()
-                .putBoolean("KakaoLoginSuccessBoolean", Global.kakaoLoginSuccessBoolean).commit();
+//        getSharedPreferences("Login", MODE_PRIVATE).edit()
+//                .putBoolean("KakaoLoginSuccessBoolean", Global.kakaoLoginSuccessBoolean).commit();
 
     }//kakaoLoadData method
 

@@ -115,6 +115,7 @@ public class SocialLoginActivity extends AppCompatActivity {
                 editor.putString("Name", profile.getNickname());
                 editor.putString("Email", userAccount.getEmail());
                 editor.putString("ImageUri", profile.getProfileImageUrl());
+                editor.putBoolean("KakaoLoginSuccessBoolean", Global.kakaoLoginSuccessBoolean);
                 editor.commit();
 
                 // todo : 나중에 확인
