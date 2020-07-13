@@ -113,19 +113,4 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }//getKeyHash method
 
-    //확인용 : 병원 약국 탭
-    public void clickBtn(View view) {
-
-        switch (view.getId()) {
-            case R.id.btn_frag_hospital_top :
-                findViewById(R.id.btn_frag_hospital_top).setSelected(true);
-                findViewById(R.id.btn_frag_pharmacy_top).setSelected(false);
-                break;
-            case R.id.btn_frag_pharmacy_top :
-                findViewById(R.id.btn_frag_pharmacy_top).setSelected(true);
-                findViewById(R.id.btn_frag_hospital_top).setSelected(false);
-                break;
-        }// switch case
-
-    }//clickBtn method
 }//MainActivity class

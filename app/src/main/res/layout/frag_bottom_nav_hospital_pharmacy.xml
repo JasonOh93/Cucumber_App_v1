@@ -40,19 +40,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toLeftOf="@id/frag_hospital_pharmacy_top_center_point"
-                        android:background="@drawable/frag_hospi_pharm_btn_selector"
-                        android:text="@string/frag_hospital_top_title_btn"
-                        android:onClick="clickBtn"/>
+                        android:background="@drawable/frag_hospi_pharm_top_btn_selector"
+                        android:text="@string/frag_hospital_top_title_btn" />
 
 
                     <Button
                         android:id="@+id/btn_frag_pharmacy_top"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/frag_hospi_pharm_btn_selector"
+                        android:background="@drawable/frag_hospi_pharm_top_btn_selector"
                         android:layout_toRightOf="@id/frag_hospital_pharmacy_top_center_point"
-                        android:text="@string/frag_pharmacy_top_title_btn"
-                        android:onClick="clickBtn"/>
+                        android:text="@string/frag_pharmacy_top_title_btn" />
 
                 </RelativeLayout>
 
@@ -63,8 +61,23 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <RelativeLayout
+            android:id="@+id/frag_hospital_relative"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <View
+                android:id="@+id/frag_hospital_center_point"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_centerHorizontal="true"/>
+
+            <Button
+                android:id="@+id/frag_hospital_medical_subjects"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/frag_hospital_center_point"
+                android:background="@drawable/frag_hospi_pharm_all_btn_selector"
+                android:text=""/>
 
         </RelativeLayout>
 

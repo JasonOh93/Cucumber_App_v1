@@ -296,7 +296,7 @@ public class MyMenuActivity extends AppCompatActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(MyMenuActivity.this, gso);
 
-        if(mGoogleSignInClient != null) {
+        if(Global.googleLoginSuccessBoolean) {
             mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
@@ -306,11 +306,16 @@ public class MyMenuActivity extends AppCompatActivity {
 
                     Global.googleLoginSuccessBoolean = false;
                     getSharedPreferences("Login", MODE_PRIVATE).edit()
-                            .putBoolean("GoogleLoginSuccessBoolean", Global.googleLoginSuccessBoolean).commit();
+                            .putBoolean("GoogleLoginSuccessBoolean", Global.googleLoginSuccessBoolean)
+                            .putString("Name", null)
+                            .putString("Email", null)
+                            .putString("ImageUri", null).commit();
+
+                    mGoogleSignInClient = null;
 
                 }
             });
-        } else {
+        } else if(Global.kakaoLoginSuccessBoolean) {
 
             UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
                 @Override
@@ -326,7 +331,10 @@ public class MyMenuActivity extends AppCompatActivity {
                             Session.getCurrentSession().removeCallback( sessionCallback );
                             Global.kakaoLoginSuccessBoolean = false;
                             getSharedPreferences("Login", MODE_PRIVATE).edit()
-                                    .putBoolean("KakaoLoginSuccessBoolean", Global.kakaoLoginSuccessBoolean).commit();
+                                    .putBoolean("KakaoLoginSuccessBoolean", Global.kakaoLoginSuccessBoolean)
+                                    .putString("Name", null)
+                                    .putString("Email", null)
+                                    .putString("ImageUri", null).commit();
                         }
                     });// runOnUiThread
                 }// onCompleteLogout() method
