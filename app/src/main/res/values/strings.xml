@@ -16,24 +16,28 @@
     <string name="frag_home_menu_location">Location</string>
     <string name="frag_home_menu_MyMenu">My Menu</string>
 
+    <!--  app hospital pharmacy   -->
+    <string name="frag_hospital_top_title_btn">병원</string>
+    <string name="frag_pharmacy_top_title_btn">약국</string>
+
     <!--  app my menu Activity text  -->
-    <string name="MyMenu_menu_top_title">마이 메뉴</string>
-    <string name="MyMenu_menu_like_hospital">관심 병원</string>
-    <string name="MyMenu_menu_like_pharmacy">관심 약국</string>
-    <string name="MyMenu_menu_health_feed">나의 건강 기록</string>
-    <string name="MyMenu_menu_health_board">건강 게시판</string>
-    <string name="MyMenu_menu_recently_info">최근 본 정보</string>
-    <string name="MyMenu_menu_notification_setting">알림 설정</string>
-    <string name="MyMenu_menu_password_setting">비밀번호 설정</string>
-    <string name="MyMenu_menu_password_setting_on">비밀번호 설정이 ON 되었습니다.</string>
-    <string name="MyMenu_menu_password_setting_off">비밀번호 설정이 OFF 되었습니다.</string>
-    <string name="MyMenu_menu_password_change">비밀번호 변경</string>
-    <string name="MyMenu_menu_personal_info">개인정보처리방침</string>
-    <string name="MyMenu_menu_no_login_text">로그인이 필요한 기능입니다.</string>
-    <string name="MyMenu_menu_logout_text">로그아웃</string>
-    <string name="MyMenu_menu_play_login_text">로그인</string>
-    <string name="MyMenu_menu_password_change_btn_text">변경</string>
-    <string name="MyMenu_menu_personal_info_btn_text">확인</string>
+    <string name="myMenu_menu_top_title">마이 메뉴</string>
+    <string name="myMenu_menu_like_hospital">관심 병원</string>
+    <string name="myMenu_menu_like_pharmacy">관심 약국</string>
+    <string name="myMenu_menu_health_feed">나의 건강 기록</string>
+    <string name="myMenu_menu_health_board">건강 게시판</string>
+    <string name="myMenu_menu_recently_info">최근 본 정보</string>
+    <string name="myMenu_menu_notification_setting">알림 설정</string>
+    <string name="myMenu_menu_password_setting">비밀번호 설정</string>
+    <string name="myMenu_menu_password_setting_on">비밀번호 설정이 ON 되었습니다.</string>
+    <string name="myMenu_menu_password_setting_off">비밀번호 설정이 OFF 되었습니다.</string>
+    <string name="myMenu_menu_password_change">비밀번호 변경</string>
+    <string name="myMenu_menu_personal_info">개인정보처리방침</string>
+    <string name="myMenu_menu_no_login_text">로그인이 필요한 기능입니다.</string>
+    <string name="myMenu_menu_logout_text">로그아웃</string>
+    <string name="myMenu_menu_play_login_text">로그인</string>
+    <string name="myMenu_menu_password_change_btn_text">변경</string>
+    <string name="myMenu_menu_personal_info_btn_text">확인</string>
 
 
     <!--  app inner password Activity text  -->
@@ -45,6 +49,15 @@
 
     <!--  구글 로그인을 위한   -->
 <!--    <string name="default_web_client_id">392962139220-geggq99t5k0iotnt6s8ke76b95o4c4ku.apps.googleusercontent.com</string>-->
+
+    <!--  Location Activity  -->
+    <string name="location_top_title">위치 선택</string>
+    <string name="location_search_text">위치 검색</string>
+    <string name="location_search_et_hint">지역, 주소, 지하철역 검색</string>
+    <string name="location_search_now_location_text">현재 위치로 설정</string>
+    <string name="location_tv_empty">검색 결과가 없습니다.</string>
+
+
 
 
 </resources>

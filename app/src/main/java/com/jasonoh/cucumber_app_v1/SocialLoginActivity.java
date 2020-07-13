@@ -193,11 +193,14 @@ public class SocialLoginActivity extends AppCompatActivity {
             intent.putExtra(Global.GOOGLE_ACCOUNT, account);
             setResult(RESULT_OK, intent);
 
+            Global.googleLoginSuccessBoolean = true;
+
             SharedPreferences pref = getSharedPreferences("Login", MODE_PRIVATE);
             SharedPreferences.Editor editor = pref.edit();
             editor.putString("Name", account.getDisplayName());
             editor.putString("Email", account.getEmail());
             editor.putString("ImageUri", account.getPhotoUrl().toString());
+            editor.putBoolean("GoogleLoginSuccessBoolean", Global.googleLoginSuccessBoolean);
             editor.commit();
 
             // todo : 나중에 확인
@@ -247,10 +250,4 @@ public class SocialLoginActivity extends AppCompatActivity {
         finish();
     }// clickBackBtn method
 
-    //todo : 테스트용 구글 로그아웃
-    public void clickLogoutBtn(View view) {
-        mGoogleSignInClient.signOut();
-        // todo : 로그아웃 되었는지 확인하는 테스트
-        if(!mGoogleSignInClient.signOut().isSuccessful()) Toast.makeText(this, "로그아웃", Toast.LENGTH_SHORT).show();
-    }//clickLogoutBtn method
 }//SocialLoginActivity class

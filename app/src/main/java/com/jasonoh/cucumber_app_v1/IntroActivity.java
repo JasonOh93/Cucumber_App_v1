@@ -32,6 +32,8 @@ public class IntroActivity extends AppCompatActivity {
         Global.loginPreferences.getString( "ImageUri", "" );
         Global.kakaoLoginSuccessBoolean = Global.loginPreferences
                 .getBoolean("KakaoLoginSuccessBoolean", false);
+        Global.googleLoginSuccessBoolean = Global.loginPreferences
+                .getBoolean("GoogleLoginSuccessBoolean", false);
 
     }
 }

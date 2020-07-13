@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     public void setBottomNav(){
 
         bottomNavFrags[0] = new HomeFragment(this);
-        bottomNavFrags[1] = new Fragment();
+        bottomNavFrags[1] = new HospitalPharmacyFragment(this);
         bottomNavFrags[2] = new Fragment();
         bottomNavFrags[3] = new Fragment();
 
@@ -111,6 +111,21 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return null;
-    }
+    }//getKeyHash method
 
+    //확인용 : 병원 약국 탭
+    public void clickBtn(View view) {
+
+        switch (view.getId()) {
+            case R.id.btn_frag_hospital_top :
+                findViewById(R.id.btn_frag_hospital_top).setSelected(true);
+                findViewById(R.id.btn_frag_pharmacy_top).setSelected(false);
+                break;
+            case R.id.btn_frag_pharmacy_top :
+                findViewById(R.id.btn_frag_pharmacy_top).setSelected(true);
+                findViewById(R.id.btn_frag_hospital_top).setSelected(false);
+                break;
+        }// switch case
+
+    }//clickBtn method
 }//MainActivity class

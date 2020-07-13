@@ -26,5 +26,6 @@ public class Global {
     // 로그인 시 전체적으로 사용하기 위해서 인트로 액티비티에서 설정 해주고 나머지는 SocialLoginActivity, MyMenuActivity에서 실행함
     static SharedPreferences loginPreferences = null;
     static boolean kakaoLoginSuccessBoolean = false;
+    static boolean googleLoginSuccessBoolean = false;
 
 }//Global class

@@ -29,6 +29,7 @@
             android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".LocationActivity"
+            android:theme="@style/AppTheme.LocationActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".CalendarActivity"

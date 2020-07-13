@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
+            
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/frag_hospital_pharmacy_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/frag_hospital_pharmacy_star"
+                        android:layout_width="40dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_star_border_gray_24dp"/>
+
+                    <View
+                        android:id="@+id/frag_hospital_pharmacy_top_center_point"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_centerInParent="true"/>
+                    <Button
+                        android:id="@+id/btn_frag_hospital_top"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@id/frag_hospital_pharmacy_top_center_point"
+                        android:background="@drawable/frag_hospi_pharm_btn_selector"
+                        android:text="@string/frag_hospital_top_title_btn"
+                        android:onClick="clickBtn"/>
+
+
+                    <Button
+                        android:id="@+id/btn_frag_pharmacy_top"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/frag_hospi_pharm_btn_selector"
+                        android:layout_toRightOf="@id/frag_hospital_pharmacy_top_center_point"
+                        android:text="@string/frag_pharmacy_top_title_btn"
+                        android:onClick="clickBtn"/>
+
+                </RelativeLayout>
+
+
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

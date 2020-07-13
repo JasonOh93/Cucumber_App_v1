@@ -138,4 +138,23 @@ public class HomeFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }//onOptionsItemSelected method
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case Global.CALENDAR_REQUEST :
+                break;
+
+            case Global.LOCATION_REQUEST :
+                break;
+
+            case Global.MY_MENU_REQUEST :
+                //돌아오는지 확인 용
+                if(resultCode != getActivity().RESULT_OK)
+                    Toast.makeText(context, "" + resultCode, Toast.LENGTH_SHORT).show();
+                break;
+        }//switch case
+
+    }//onActivityResult method
 }//HomeFragment Class

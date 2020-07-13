@@ -47,9 +47,9 @@ public class MyMenuActivity extends AppCompatActivity {
     TextView tvPasswordChange;
     Button passwordChangeBtn;
 
-    Intent googleLoginIntent;
+//    Intent googleLoginIntent;
     GoogleSignInClient mGoogleSignInClient;
-    GoogleSignInAccount mGoogleSignInAccount;
+//    GoogleSignInAccount mGoogleSignInAccount;
 
     //로그인 시 사용되는 프로필 정보
     RelativeLayout myMenuLogin;
@@ -69,8 +69,6 @@ public class MyMenuActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
 
         //스위치 버튼 클릭시 발동하기 위해
-        passwordSetting = findViewById(R.id.switch_btn_my_menu_password_setting);
-        notificationSetting = findViewById(R.id.switch_btn_my_menu_notification_setting);
         checkSwitchBtn();
 
         //비밀번호 변경 하기 위한 것들을 우선 없애고 비밀번호 설정시에만 나오도록 설정
@@ -107,15 +105,21 @@ public class MyMenuActivity extends AppCompatActivity {
         super.onStart();
         // todo : google login 확인
 
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+//        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+//
+//        Log.w("TAG", "account : " + account);
 
-        Log.w("TAG", "account : " + account);
         Log.w("TAG", "Global Google Preference : " + Global.loginPreferences);
 
-        if(account != null) {
-            googleLogin(account);
+//        if(account != null) {
+//            googleLogin(account);
+//            myMenuLogin.setVisibility(View.VISIBLE);
+//            myMenuNoLogin.setVisibility(View.GONE);
+//        }
+        if (Global.googleLoginSuccessBoolean) {
             myMenuLogin.setVisibility(View.VISIBLE);
             myMenuNoLogin.setVisibility(View.GONE);
+            googleLogin();
         }
         Log.w("TAG", "kakaoLoginBoolean : " + Global.kakaoLoginSuccessBoolean);
         if (Global.kakaoLoginSuccessBoolean) {
@@ -125,33 +129,44 @@ public class MyMenuActivity extends AppCompatActivity {
         }
     }//onStart method
 
-    public void googleLogin(GoogleSignInAccount account){
+    public void googleLogin(){
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
+//        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestIdToken(getString(R.string.default_web_client_id))
+//                .requestEmail()
+//                .build();
+//
+//        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+//        if(googleLoginIntent != null) mGoogleSignInAccount = account;
+//        else mGoogleSignInAccount = account;
+//
+//        if(mGoogleSignInAccount.getPhotoUrl() != null) {
+//            Glide.with(this).load(mGoogleSignInAccount.getPhotoUrl()).into(civMyMenuProfile);
+//            tvMyMenuProfileTitle.setText( mGoogleSignInAccount.getDisplayName() );
+//            tvMyMenuProfileEmail.setText( mGoogleSignInAccount.getEmail() );
+//
+//            //todo : Log 구글 돌아온 이미지 경로 확인 하는 것
+//            Log.w("TAG", "Image Uri : " + mGoogleSignInAccount.getPhotoUrl().toString());
+//
+//        } else {
+//            Glide.with(this).load(R.mipmap.ic_launcher_round).into(civMyMenuProfile);
+//        } // if else (그림이 없을경우 대체 그림으로 하기)
 
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
-        if(googleLoginIntent != null) mGoogleSignInAccount = account;
-        else mGoogleSignInAccount = account;
+        //=====================================================================================================
 
-        if(mGoogleSignInAccount.getPhotoUrl() != null) {
-            Glide.with(this).load(mGoogleSignInAccount.getPhotoUrl()).into(civMyMenuProfile);
-            tvMyMenuProfileTitle.setText( mGoogleSignInAccount.getDisplayName() );
-            tvMyMenuProfileEmail.setText( mGoogleSignInAccount.getEmail() );
-
-            //todo : Log 구글 돌아온 이미지 경로 확인 하는 것
-            Log.w("TAG", "Image Uri : " + mGoogleSignInAccount.getPhotoUrl().toString());
-
-        } else {
-            Glide.with(this).load(R.mipmap.ic_launcher_round).into(civMyMenuProfile);
-        } // if else (그림이 없을경우 대체 그림으로 하기)
+        // 데이터 안쓰고 사용하기 위해서
+        tvMyMenuProfileTitle.setText( Global.loginPreferences.getString("Name", "") );
+        tvMyMenuProfileEmail.setText( Global.loginPreferences.getString("Email", "") );
+        if(!Global.loginPreferences.getString("ImageUri", "").equals(""))
+            Glide.with(this).load(Global.loginPreferences.getString("ImageUri", "")).into(civMyMenuProfile);
+        else Glide.with(this).load(R.mipmap.ic_launcher_round).into(civMyMenuProfile);
 
     }//googleLogin method
 
     public void checkSwitchBtn(){
         //스위치 버튼 클릭시 발동
+        passwordSetting = findViewById(R.id.switch_btn_my_menu_password_setting);
+        notificationSetting = findViewById(R.id.switch_btn_my_menu_notification_setting);
 
         // notification setting switch button
 
@@ -166,7 +181,7 @@ public class MyMenuActivity extends AppCompatActivity {
                     passwordChangeBtn.setVisibility(View.VISIBLE);
                     tvPasswordChange.setVisibility(View.VISIBLE);
                 } else {
-                    Toast.makeText(MyMenuActivity.this, R.string.MyMenu_menu_password_setting_off, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MyMenuActivity.this, R.string.myMenu_menu_password_setting_off, Toast.LENGTH_SHORT).show();
                     passwordChangeBtn.setVisibility(View.GONE);
                     tvPasswordChange.setVisibility(View.GONE);
                 }// if else 문
@@ -184,7 +199,7 @@ public class MyMenuActivity extends AppCompatActivity {
             case Global.APP_INNER_PASSWORD_SETTING_PASSWORD_REQUEST :
                 if(resultCode == RESULT_OK) {
                     // 설정 완료시 토스트 띄우기
-                    Toast.makeText(MyMenuActivity.this, R.string.MyMenu_menu_password_setting_on, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MyMenuActivity.this, R.string.myMenu_menu_password_setting_on, Toast.LENGTH_SHORT).show();
                 } else {
                     passwordSetting.setChecked( false );
                 }// if else 문
@@ -203,8 +218,9 @@ public class MyMenuActivity extends AppCompatActivity {
                         myMenuNoLogin.setVisibility(View.GONE);
 
                         if(data.getParcelableExtra(Global.GOOGLE_ACCOUNT) != null) {
-                            googleLoginIntent = data;
-                            googleLogin(data.getParcelableExtra(Global.GOOGLE_ACCOUNT));
+//                            googleLoginIntent = data;
+//                            googleLogin(data.getParcelableExtra(Global.GOOGLE_ACCOUNT));
+                            googleLogin();
                         } else kakaoLoadData();
                     }
 
@@ -273,6 +289,13 @@ public class MyMenuActivity extends AppCompatActivity {
 
     private void signOut() {
 
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(MyMenuActivity.this, gso);
+
         if(mGoogleSignInClient != null) {
             mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
                 @Override
@@ -281,40 +304,31 @@ public class MyMenuActivity extends AppCompatActivity {
                     myMenuLogin.setVisibility(View.GONE);
                     myMenuNoLogin.setVisibility(View.VISIBLE);
 
-                    //On Succesfull signout we navigate the user back to LoginActivity
-//                Intent intent=new Intent(MyMenuActivity.this, SocialLoginActivity.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                startActivity(intent);
+                    Global.googleLoginSuccessBoolean = false;
+                    getSharedPreferences("Login", MODE_PRIVATE).edit()
+                            .putBoolean("GoogleLoginSuccessBoolean", Global.googleLoginSuccessBoolean).commit();
+
                 }
             });
         } else {
 
-            Log.w("TAG", "kakao Login Section : 1");
             UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
                 @Override
                 public void onCompleteLogout() {
 
                     // todo : 이미 카카오에서는 그래픽을 건드는 것을 할수 없게 되어 있는 것 같아서 Thread를 사용
-                    new Thread(){
+                    runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            super.run();
-
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(MyMenuActivity.this, "로그아웃 완료", Toast.LENGTH_SHORT).show();
-                                    myMenuLogin.setVisibility(View.GONE);
-                                    myMenuNoLogin.setVisibility(View.VISIBLE);
-                                    Session.getCurrentSession().removeCallback( sessionCallback );
-                                    Global.kakaoLoginSuccessBoolean = false;
-                                    getSharedPreferences("Login", MODE_PRIVATE).edit()
-                                            .putBoolean("KakaoLoginSuccessBoolean", Global.kakaoLoginSuccessBoolean).commit();
-                                }
-                            });// runOnUiThread
-
-                        }//run method
-                    }.start(); //Thread
+                            Toast.makeText(MyMenuActivity.this, "로그아웃 완료", Toast.LENGTH_SHORT).show();
+                            myMenuLogin.setVisibility(View.GONE);
+                            myMenuNoLogin.setVisibility(View.VISIBLE);
+                            Session.getCurrentSession().removeCallback( sessionCallback );
+                            Global.kakaoLoginSuccessBoolean = false;
+                            getSharedPreferences("Login", MODE_PRIVATE).edit()
+                                    .putBoolean("KakaoLoginSuccessBoolean", Global.kakaoLoginSuccessBoolean).commit();
+                        }
+                    });// runOnUiThread
                 }// onCompleteLogout() method
             }); // UserManagement.getInstance().requestLogout
 
@@ -328,5 +342,6 @@ public class MyMenuActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Session.getCurrentSession().removeCallback( sessionCallback );
+        mGoogleSignInClient = null;
     }//onDestroy method
 }//MyMenuActivity class
