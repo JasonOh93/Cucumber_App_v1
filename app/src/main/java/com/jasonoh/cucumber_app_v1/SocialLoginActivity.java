@@ -19,8 +19,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.kakao.auth.AccessTokenCallback;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
+import com.kakao.auth.authorization.accesstoken.AccessToken;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeV2ResponseCallback;
@@ -28,6 +30,8 @@ import com.kakao.usermgmt.response.MeV2Response;
 import com.kakao.usermgmt.response.model.Profile;
 import com.kakao.usermgmt.response.model.UserAccount;
 import com.kakao.util.exception.KakaoException;
+
+import java.util.Arrays;
 
 public class SocialLoginActivity extends AppCompatActivity {
 
@@ -100,6 +104,8 @@ public class SocialLoginActivity extends AppCompatActivity {
                 UserAccount userAccount = result.getKakaoAccount();
                 if(userAccount == null) return;
 
+                if(userAccount.getEmail() == null) requestUserInfoAddAccept();
+
                 // 기본 프로필 정보 (닉네임, 이미지, 섬네일 이미지)
                 Profile profile = userAccount.getProfile();
                 if(profile == null) return;
@@ -128,6 +134,28 @@ public class SocialLoginActivity extends AppCompatActivity {
             }
         });//UserManagement
     }//requestUserInfo method
+
+    // todo : 카카오 로그인 추가 선택동의 받기 위한 메소드
+    public void requestUserInfoAddAccept(){
+
+        Session.getCurrentSession()
+                .updateScopes(SocialLoginActivity.this, Arrays.asList("account_email"), new AccessTokenCallback() {
+                    @Override
+                    public void onAccessTokenReceived(AccessToken accessToken) {
+                        Log.i("KAKAO_SESSION", "새로운 동의항목 추가 완료");
+                        // 요청한 scope이 추가되어 토큰이 재발급 됨
+
+                        // TODO: 사용자 동의 획득 이후 프로세스
+                    }
+
+                    @Override
+                    public void onAccessTokenFailure(ErrorResult errorResult) {
+                        Log.e("KAKAO_SESSION", "사용자 동의 실패: " + errorResult);
+
+                    }
+                });
+
+    }//requestUserInfoAddAccept method
 
     //todo : onDestroy method
     @Override
