@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    tools:context=".LocationActivity">
+    tools:context=".FavoritesHospitalAndPharmacyActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,12 +17,12 @@
             android:backgroundTint="@android:color/white">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/location_toolbar"
+                android:id="@+id/favorites_hospital_pharmacy_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <ImageButton
-                    android:id="@+id/location_back_btn"
+                    android:id="@+id/favorites_hospital_pharmacy_back_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_back_black_24dp"
@@ -31,10 +30,10 @@
                     android:onClick="clickBackBtn"/>
 
                 <TextView
-                    android:id="@+id/location_top_title"
+                    android:id="@+id/favorites_hospital_pharmacy_top_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/location_top_title"
+                    android:text="@string/favorites_hospital_pharmacy_top_title"
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
                     android:layout_marginLeft="25dp"/>
@@ -49,26 +48,17 @@
             android:orientation="vertical">
 
             <View
-                android:id="@+id/location_first_line"
+                android:id="@+id/favorites_hospital_pharmacy_first_line"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"/>
-
-            <TextView
-                android:id="@+id/tv_location_search"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/location_search_text"
-                android:padding="16dp"
-                android:textSize="16sp"/>
+                android:layout_marginBottom="8dp"/>
 
             <ImageButton
-                android:id="@+id/btn_location_search"
+                android:id="@+id/btn_favorites_hospital_pharmacy_search"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_location_search"
+                android:layout_below="@id/favorites_hospital_pharmacy_first_line"
                 android:layout_alignParentRight="true"
                 android:src="@drawable/ic_search_black_24dp"
                 android:background="@android:color/white"
@@ -76,59 +66,42 @@
                 android:onClick="clickBtn"/>
 
             <EditText
-                android:id="@+id/et_location_search"
+                android:id="@+id/et_favorites_hospital_pharmacy_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_location_search"
-                android:layout_toLeftOf="@id/btn_location_search"
+                android:layout_below="@id/favorites_hospital_pharmacy_first_line"
+                android:layout_toLeftOf="@id/btn_favorites_hospital_pharmacy_search"
                 android:padding="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
-                android:hint="@string/location_search_et_hint"
+                android:hint="@string/search_hospital_pharmacy_et_hint"
                 android:maxLines="1"
                 android:inputType="text"/>
 
-            <Button
-                android:id="@+id/btn_location_now_location_setting"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_now_location_black_24dp"
-                android:drawablePadding="16dp"
-                android:paddingLeft="130dp"
-                android:paddingRight="130dp"
-                android:gravity="left|center"
-                android:background="@drawable/location_now_btn_selector"
-                android:layout_below="@id/et_location_search"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="8dp"
-                android:text="@string/location_search_now_location_text"
-                android:layout_marginBottom="8dp"
-                android:onClick="clickBtn"/>
-
             <View
-                android:id="@+id/location_second_line"
+                android:id="@+id/favorites_hospital_pharmacy_second_line"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_below="@id/btn_location_now_location_setting"/>
+                android:layout_below="@id/et_favorites_hospital_pharmacy_search"/>
 
             <ListView
-                android:id="@+id/list_view_location_list"
+                android:id="@+id/list_favorites_hospital_pharmacy_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/location_second_line"
+                android:layout_below="@id/favorites_hospital_pharmacy_second_line"
                 android:layout_marginTop="8dp" />
 
             <TextView
-                android:id="@+id/tv_location_empty"
+                android:id="@+id/tv_favorites_hospital_pharmacy_empty"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/location_second_line"
+                android:layout_below="@id/favorites_hospital_pharmacy_second_line"
                 android:layout_marginTop="8dp"
                 android:padding="16dp"
-                android:text="@string/location_tv_empty"
+                android:text="@string/favorites_hospital_pharmacy_tv_empty"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="20sp"
                 android:textStyle="bold"

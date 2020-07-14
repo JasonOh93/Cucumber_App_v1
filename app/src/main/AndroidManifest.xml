@@ -22,7 +22,7 @@
         android:allowAudioPlaybackCapture="true">
         <activity android:name=".SearchHospitalAndPharmacyActivity"></activity>
         <activity
-            android:name=".LikeHospitalAndPharmacyActivity"
+            android:name=".FavoritesHospitalAndPharmacyActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".SocialLoginActivity"

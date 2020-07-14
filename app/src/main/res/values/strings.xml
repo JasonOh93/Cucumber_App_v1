@@ -64,5 +64,15 @@
     <string name="location_search_now_location_text">현재 위치로 설정</string>
     <string name="location_tv_empty">검색 결과가 없습니다.</string>
 
+    <!--  SearchHospitalAndPharmacy Activity  -->
+    <string name="search_hospital_pharmacy_top_title">병원 및 약국</string>
+    <string name="search_hospital_pharmacy_et_hint">검색어를 입력하세요</string>
+    <string name="search_hospital_pharmacy_tv_empty">검색 결과가 없습니다</string>
+
+    <!--  FavoritesHospitalAndPharmacy Activity  -->
+    <string name="favorites_hospital_pharmacy_top_title">관심 병원 및 약국</string>
+    <string name="favorites_hospital_pharmacy_et_hint">검색어를 입력하세요</string>
+    <string name="favorites_hospital_pharmacy_tv_empty">검색 결과가 없습니다</string>
+
 
 </resources>
