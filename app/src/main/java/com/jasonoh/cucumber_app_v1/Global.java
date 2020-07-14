@@ -28,4 +28,9 @@ public class Global {
     static boolean kakaoLoginSuccessBoolean = false;
     static boolean googleLoginSuccessBoolean = false;
 
+    //Hospital Pharmacy Fragment
+    final static int FAVORITES_HOSPITAL_PHARMACY_REQUEST_FROM_FRAG_HOSPITAL_PHARMACY = 200;
+    final static int SEARCH_HOSPITAL_PHARMACY_REQUEST_FROM_FRAG_HOSPITAL_PHARMACY = 201;
+    final static int LOCATION_REQUEST_FROM_FRAG_HOSPITAL_PHARMACY = 202;
+
 }//Global class

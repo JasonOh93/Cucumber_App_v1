@@ -56,11 +56,11 @@ public class LocationActivity extends AppCompatActivity {
     }//setLocationListView method
 
     public void addLocationListView(){
-//        arrayListLocation.add( "aaa" );
-//        arrayListLocation.add( "aaa" );
-//        arrayListLocation.add( "aaa" );
-//        arrayListLocation.add( "aaa" );
-//        arrayListLocation.add( "aaa" );
+        arrayListLocation.add( "aaa" );
+        arrayListLocation.add( "aaa" );
+        arrayListLocation.add( "aaa" );
+        arrayListLocation.add( "aaa" );
+        arrayListLocation.add( "aaa" );
     }//addLocationListView method
 
     public void clickBackBtn(View view) {

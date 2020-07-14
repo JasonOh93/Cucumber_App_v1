@@ -35,5 +35,5 @@ public class IntroActivity extends AppCompatActivity {
         Global.googleLoginSuccessBoolean = Global.loginPreferences
                 .getBoolean("GoogleLoginSuccessBoolean", false);
 
-    }
-}
+    }//onCreate method
+}//IntroActivity class

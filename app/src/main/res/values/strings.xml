@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Cucumber</string>
 
+    <!--  카카오 LOGIN API KEY  -->
+    <string name="kakao_api_key">38df59b6a482263085938b8e57e640f7</string>
+
     <!--  앱 인트로화면 title  -->
     <string name="intro_app_title1">오늘도</string>
     <string name="intro_app_title2">이롭게</string>
@@ -19,6 +22,10 @@
     <!--  app hospital pharmacy   -->
     <string name="frag_hospital_top_title_btn">병원</string>
     <string name="frag_pharmacy_top_title_btn">약국</string>
+    <string name="frag_hospital_medical_subjects_btn">전체 진료 과목</string>
+    <string name="frag_hospital_pharmacy_location_btn">위치 선택</string>
+    <string name="frag_hospital_see_more_btn">병원 보기</string>
+    <string name="frag_pharmacy_see_more_btn">약국 보기</string>
 
     <!--  app my menu Activity text  -->
     <string name="myMenu_menu_top_title">마이 메뉴</string>
@@ -48,7 +55,7 @@
     <string name="social_login_title">Log in</string>
 
     <!--  구글 로그인을 위한   -->
-<!--    <string name="default_web_client_id">392962139220-geggq99t5k0iotnt6s8ke76b95o4c4ku.apps.googleusercontent.com</string>-->
+    <!--    <string name="default_web_client_id">392962139220-geggq99t5k0iotnt6s8ke76b95o4c4ku.apps.googleusercontent.com</string>-->
 
     <!--  Location Activity  -->
     <string name="location_top_title">위치 선택</string>
@@ -56,8 +63,6 @@
     <string name="location_search_et_hint">지역, 주소, 지하철역 검색</string>
     <string name="location_search_now_location_text">현재 위치로 설정</string>
     <string name="location_tv_empty">검색 결과가 없습니다.</string>
-
-
 
 
 </resources>

@@ -120,17 +120,14 @@ public class HomeFragment extends Fragment {
 
         switch (item.getItemId()) {
             case R.id.menu_frag_home_calendar :
-                Toast.makeText(context, "calendar", Toast.LENGTH_SHORT).show();
                 startActivityForResult( new Intent(context, CalendarActivity.class), Global.CALENDAR_REQUEST);
                 break;
 
             case R.id.menu_frag_home_location :
-                Toast.makeText(context, "location", Toast.LENGTH_SHORT).show();
                 startActivityForResult( new Intent(context, LocationActivity.class), Global.LOCATION_REQUEST);
                 break;
 
             case R.id.menu_frag_home_my_menu :
-                Toast.makeText(context, "mymenu", Toast.LENGTH_SHORT).show();
                 startActivityForResult( new Intent(context, MyMenuActivity.class), Global.MY_MENU_REQUEST);
                 break;
         }

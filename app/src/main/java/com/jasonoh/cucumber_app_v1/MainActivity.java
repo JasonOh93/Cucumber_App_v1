@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -36,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
     //카카오톡 키 해쉬
     String kakaoKeyHash;
 
+    //하단 뒤로가기 버튼 두번 클릭시 종료되도록
+    BackPressCloseAppHandler backPressCloseAppHandler;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         //카카오 키해시 얻어오기
         kakaoKeyHash = getKeyHash(this);
         Log.w("TAG", kakaoKeyHash);
+
+        backPressCloseAppHandler = new BackPressCloseAppHandler(this);
 
     }//onCreate Method
 
@@ -113,4 +120,12 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }//getKeyHash method
 
+    // 하단 뒤로가기 버튼 클릭시
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+
+        backPressCloseAppHandler.onBackPressedApp();
+
+    }//onBackPressed method
 }//MainActivity class
