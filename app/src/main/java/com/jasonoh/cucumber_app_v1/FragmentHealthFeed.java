@@ -179,7 +179,7 @@ public class FragmentHealthFeed extends Fragment {
         btnMyHealthEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "aaa", Toast.LENGTH_SHORT).show();
+                startActivity( new Intent( context, EditActivity.class ) );
             }//onClick method
         });//btnMyHealthEdit.setOnClickListener
 
