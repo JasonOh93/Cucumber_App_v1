@@ -81,5 +81,16 @@
     <string name="favorites_hospital_pharmacy_et_hint">검색어를 입력하세요</string>
     <string name="favorites_hospital_pharmacy_tv_empty">검색 결과가 없습니다</string>
 
+    <!--  Edit Activity  -->
+    <string name="edit_top_title">작성</string>
+    <string name="edit_share_all">전체공유</string>
+    <string name="edit_picture">사진</string>
+    <string name="edit_title">타이틀</string>
+    <string name="edit_location">위치</string>
+    <string name="edit_message">메세지</string>
+    <string name="edit_date">날짜</string>
+    <string name="edit_weight">몸무게</string>
+    <string name="edit_cancel_btn">취소</string>
+    <string name="edit_ok_btn">확인</string>
 
 </resources>
