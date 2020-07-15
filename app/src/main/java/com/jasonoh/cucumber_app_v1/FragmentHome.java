@@ -21,7 +21,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class HomeFragment extends Fragment {
+public class FragmentHome extends Fragment {
 
     Context context;
 
@@ -37,10 +37,10 @@ public class HomeFragment extends Fragment {
 //    final int LOCATION_REQUEST = 101;
 //    final int MY_MENU_REQUEST = 102;
 
-    public HomeFragment() {
+    public FragmentHome() {
     }//HomeFragment Constructor (null)
 
-    public HomeFragment(Context context) {
+    public FragmentHome(Context context) {
         this.context = context;
     }//HomeFragment Constructor
 
@@ -95,6 +95,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ((MainActivity)getActivity()).bottomNavigationView.setSelectedItemId( R.id.menu_hospital_pharmacy );
+                Global.hospitalPharmacyBooleanFromHomeFrag = false;
                 //((MainActivity)getActivity()).bottomNavFrags[1]. //여기서 병원 탭또는 약국 탭으로 이동
             }//onClick method
         });//setOnClickListener
@@ -103,6 +104,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ((MainActivity)getActivity()).bottomNavigationView.setSelectedItemId( R.id.menu_hospital_pharmacy );
+                Global.hospitalPharmacyBooleanFromHomeFrag = true;
             }//onClick method
         });//setOnClickListener
     }//

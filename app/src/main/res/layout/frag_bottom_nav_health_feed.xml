@@ -58,23 +58,25 @@
                 android:id="@+id/frag_health_feed_linear_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
                 <Button
-                    android:id="@+id/frag_btn_hospital_medical_subjects"
+                    android:id="@+id/frag_btn_health_feed_my_health"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/frag_hospi_pharm_all_btn_selector"
+                    android:background="@drawable/frag_hospi_pharm_top_btn_selector"
                     android:text="@string/frag_health_feed_my_health_feed_btn"
                     android:maxLines="1"
                     android:gravity="center"/>
 
                 <Button
-                    android:id="@+id/frag_btn_hospital_pharmacy_location"
+                    android:id="@+id/frag_btn_health_feed_board"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:background="@drawable/frag_hospi_pharm_all_btn_selector"
+                    android:background="@drawable/frag_hospi_pharm_top_btn_selector"
                     android:text="@string/frag_health_feed_board"
                     android:maxLines="1"
                     android:gravity="center" />
@@ -119,9 +121,52 @@
                         android:layout_below="@id/frag_health_feed_tv_profile_title"
                         android:layout_margin="20dp" />
 
+                    <Button
+                        android:id="@+id/frag_health_feed_btn_see_line_chart"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/mymenu_btn_selector"
+                        android:text="@string/frag_health_feed_see_line_chart"/>
+
                 </RelativeLayout>
 
                 <!--       그래프 넣기         -->
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/frag_health_feed_line_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/frag_health_feed_login_view"
+                    android:visibility="gone"/>
+                <View
+                    android:id="@+id/frag_health_feed_my_health_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"
+                    android:layout_below="@id/frag_health_feed_line_chart"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"/>
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/frag_health_feed_my_health_float_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/colorPrimary_my"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="16dp"
+                    android:src="@drawable/ic_edit_black_24dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/frag_health_feed_my_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/frag_health_feed_my_health_line"
+                    android:padding="8dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:orientation="vertical"/>
 
             </RelativeLayout>
 

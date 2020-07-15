@@ -32,5 +32,6 @@ public class Global {
     final static int FAVORITES_HOSPITAL_PHARMACY_REQUEST_FROM_FRAG_HOSPITAL_PHARMACY = 200;
     final static int SEARCH_HOSPITAL_PHARMACY_REQUEST_FROM_FRAG_HOSPITAL_PHARMACY = 201;
     final static int LOCATION_REQUEST_FROM_FRAG_HOSPITAL_PHARMACY = 202;
+    static boolean hospitalPharmacyBooleanFromHomeFrag = false;
 
 }//Global class

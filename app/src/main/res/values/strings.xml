@@ -31,6 +31,8 @@
     <string name="frag_health_feed_top_title_tv">건강피드</string>
     <string name="frag_health_feed_my_health_feed_btn">나의 건강</string>
     <string name="frag_health_feed_board">게시판</string>
+    <string name="frag_health_feed_see_line_chart">차트 보기</string>
+    <string name="frag_health_feed_close_line_chart">차트 닫기</string>
 
     <!--  app my menu Activity text  -->
     <string name="myMenu_menu_top_title">마이 메뉴</string>
@@ -78,8 +80,6 @@
     <string name="favorites_hospital_pharmacy_top_title">관심 병원 및 약국</string>
     <string name="favorites_hospital_pharmacy_et_hint">검색어를 입력하세요</string>
     <string name="favorites_hospital_pharmacy_tv_empty">검색 결과가 없습니다</string>
-
-
 
 
 </resources>

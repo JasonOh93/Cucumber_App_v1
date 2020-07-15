@@ -54,4 +54,7 @@ dependencies {
     //구글 로그인
     implementation 'com.google.firebase:firebase-auth:19.3.1'
     implementation 'com.google.android.gms:play-services-auth:18.0.0'
+
+    //그래프를 위한 추가
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }

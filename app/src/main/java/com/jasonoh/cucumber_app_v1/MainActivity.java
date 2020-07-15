@@ -3,7 +3,6 @@ package com.jasonoh.cucumber_app_v1;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Context;
@@ -14,9 +13,6 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -60,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void setBottomNav(){
 
-        bottomNavFrags[0] = new HomeFragment(this);
-        bottomNavFrags[1] = new HospitalPharmacyFragment(this);
-        bottomNavFrags[2] = new Fragment();
+        bottomNavFrags[0] = new FragmentHome(this);
+        bottomNavFrags[1] = new FragmentHospitalPharmacy(this);
+        bottomNavFrags[2] = new FragmentHealthFeed( this );
         bottomNavFrags[3] = new Fragment();
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -75,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
                 FragmentTransaction transaction1 = getSupportFragmentManager().beginTransaction();
+                transaction1.addToBackStack( null ); // Activity 처럼 스텍영역에 저장 되는 것 FILO 방식
 
                 switch (menuItem.getItemId()) {
                     case R.id.menu_home :

@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +28,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
-public class HospitalPharmacyFragment extends Fragment {
+public class FragmentHospitalPharmacy extends Fragment {
 
     Context context;
 
@@ -49,10 +50,10 @@ public class HospitalPharmacyFragment extends Fragment {
     SupportMapFragment supportMapFragment;
 
 
-    public HospitalPharmacyFragment() {
+    public FragmentHospitalPharmacy() {
     }//HomeFragment Constructor (null)
 
-    public HospitalPharmacyFragment(Context context) {
+    public FragmentHospitalPharmacy(Context context) {
         this.context = context;
     }//HomeFragment Constructor
 
@@ -63,7 +64,6 @@ public class HospitalPharmacyFragment extends Fragment {
         setHasOptionsMenu(true);
 
         arrayList.add(0, "aaa");
-
 
     }//onCreate method
 
@@ -101,6 +101,9 @@ public class HospitalPharmacyFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         clickItem();
+
+        if(!Global.hospitalPharmacyBooleanFromHomeFrag) setHospital();
+        else setPharmacy();
 
         supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.frag_map_google);
         supportMapFragment.getMapAsync(new OnMapReadyCallback() {
@@ -143,14 +146,7 @@ public class HospitalPharmacyFragment extends Fragment {
         btnHospital.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnHospital.setSelected(true);
-                btnPharmacy.setSelected(false);
-
-                btnMedicalSubject.setVisibility(View.VISIBLE);
-                btnSeeMore.setText( R.string.frag_hospital_see_more_btn );
-
-                seeMoreBooleanFalse();
-
+                setHospital();
             }//onClick method
         });//btnHospital.setOnClickListener
 
@@ -158,14 +154,7 @@ public class HospitalPharmacyFragment extends Fragment {
         btnPharmacy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                btnHospital.setSelected(false);
-                btnPharmacy.setSelected(true);
-
-                btnMedicalSubject.setVisibility(View.GONE);
-                btnSeeMore.setText( R.string.frag_pharmacy_see_more_btn );
-
-                seeMoreBooleanFalse();
-
+               setPharmacy();
             }//onClick method
         });//btnHospital.setOnClickListener
 
@@ -191,7 +180,7 @@ public class HospitalPharmacyFragment extends Fragment {
         btnMedicalSubject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(context, "전체 진료 과목 선택", Toast.LENGTH_SHORT).show();
             }//onClick method
         });//btnMedicalSubject.setOnClickListener
 
@@ -229,6 +218,28 @@ public class HospitalPharmacyFragment extends Fragment {
 
     }//clickItem
 
+    public void setHospital(){
+        //병원 탭 누를 시
+        btnHospital.setSelected(true);
+        btnPharmacy.setSelected(false);
+
+        btnMedicalSubject.setVisibility(View.VISIBLE);
+        btnSeeMore.setText( R.string.frag_hospital_see_more_btn );
+
+        seeMoreBooleanFalse();
+
+    }//setHospital method
+    public void setPharmacy(){
+        //약국 팁 누를 시
+        btnHospital.setSelected(false);
+        btnPharmacy.setSelected(true);
+
+        btnMedicalSubject.setVisibility(View.GONE);
+        btnSeeMore.setText( R.string.frag_pharmacy_see_more_btn );
+
+        seeMoreBooleanFalse();
+    }//setPharmacy method
+
     //병원 보기 및 약국 보기가 참일경우
     public void seeMoreBooleanTrue(){
 
@@ -254,6 +265,6 @@ public class HospitalPharmacyFragment extends Fragment {
             btnSeeMoreBoolean = false;
         }// if
 
-    }//seMoreB
+    }//seeMoreBooleanFalse method
 
-}//HomeFragment Class
+}//FragmentHospitalPharmacy Class
