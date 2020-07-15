@@ -14,18 +14,23 @@
     <string name="bottom_nav_menu_health_feed">건강피드</string>
     <string name="bottom_nav_menu_health_info">건강정보</string>
 
-    <!--  app home top option menu icon  -->
+    <!--  app fragment home top option menu icon  -->
     <string name="frag_home_menu_calendar">Calendar</string>
     <string name="frag_home_menu_location">Location</string>
     <string name="frag_home_menu_MyMenu">My Menu</string>
 
-    <!--  app hospital pharmacy   -->
+    <!--  app fragment hospital pharmacy   -->
     <string name="frag_hospital_top_title_btn">병원</string>
     <string name="frag_pharmacy_top_title_btn">약국</string>
     <string name="frag_hospital_medical_subjects_btn">전체 진료 과목</string>
     <string name="frag_hospital_pharmacy_location_btn">위치 선택</string>
     <string name="frag_hospital_see_more_btn">병원 보기</string>
     <string name="frag_pharmacy_see_more_btn">약국 보기</string>
+
+    <!--  app fragment health feed  -->
+    <string name="frag_health_feed_top_title_tv">건강피드</string>
+    <string name="frag_health_feed_my_health_feed_btn">나의 건강</string>
+    <string name="frag_health_feed_board">게시판</string>
 
     <!--  app my menu Activity text  -->
     <string name="myMenu_menu_top_title">마이 메뉴</string>
@@ -73,6 +78,8 @@
     <string name="favorites_hospital_pharmacy_top_title">관심 병원 및 약국</string>
     <string name="favorites_hospital_pharmacy_et_hint">검색어를 입력하세요</string>
     <string name="favorites_hospital_pharmacy_tv_empty">검색 결과가 없습니다</string>
+
+
 
 
 </resources>
