@@ -27,9 +27,9 @@ public class IntroActivity extends AppCompatActivity {
         }.start();
 
         Global.loginPreferences = getSharedPreferences("Login", MODE_PRIVATE);
-        Global.loginPreferences.getString( "Name", "" );
-        Global.loginPreferences.getString( "Email", "" );
-        Global.loginPreferences.getString( "ImageUri", "" );
+//        Global.loginPreferences.getString( "Name", "" );
+//        Global.loginPreferences.getString( "Email", "" );
+//        Global.loginPreferences.getString( "ImageUri", "" );
         Global.kakaoLoginSuccessBoolean = Global.loginPreferences
                 .getBoolean("KakaoLoginSuccessBoolean", false);
         Global.googleLoginSuccessBoolean = Global.loginPreferences

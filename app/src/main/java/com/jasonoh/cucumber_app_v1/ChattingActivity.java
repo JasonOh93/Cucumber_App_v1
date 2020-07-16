@@ -7,6 +7,8 @@ import android.view.View;
 
 public class ChattingActivity extends AppCompatActivity {
 
+    //todo : firebase 실시간 DB로 보내는 것을 기준으로 시작하기!!
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

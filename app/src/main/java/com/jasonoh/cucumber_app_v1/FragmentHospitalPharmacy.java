@@ -75,7 +75,7 @@ public class FragmentHospitalPharmacy extends Fragment {
 
         toolbar = view.findViewById(R.id.frag_hospital_pharmacy_toolbar);
         ((MainActivity) getActivity()).setSupportActionBar( toolbar );
-        ((MainActivity) getActivity()).setTitle("");
+        getActivity().setTitle("");
 
         btnHospital = view.findViewById(R.id.btn_frag_hospital_top);
         btnPharmacy = view.findViewById(R.id.btn_frag_pharmacy_top);

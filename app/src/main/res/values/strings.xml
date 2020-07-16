@@ -29,7 +29,7 @@
 
     <!--  app fragment health feed  -->
     <string name="frag_health_feed_top_title_tv">건강피드</string>
-    <string name="frag_health_feed_my_health_feed_btn">나의 건강</string>
+    <string name="frag_health_feed_my_health_feed_btn">나의건강기록</string>
     <string name="frag_health_feed_board">게시판</string>
     <string name="frag_health_feed_see_line_chart">차트 보기</string>
     <string name="frag_health_feed_close_line_chart">차트 닫기</string>
@@ -43,6 +43,11 @@
         <item>"나의 정보 제외 후 보기"</item>
         <item>"공유한 나의 정보 보기"</item>
     </string-array>
+
+    <!--  app fragment health info  -->
+    <string name="frag_health_info_top_title_tv">건강정보</string>
+    <string name="frag_health_info_web_search_tv">웹으로 검색</string>
+    <string name="frag_health_info_youtube_search_tv">YouTube 검색</string>
 
     <!--  app my menu Activity text  -->
     <string name="myMenu_menu_top_title">마이 메뉴</string>

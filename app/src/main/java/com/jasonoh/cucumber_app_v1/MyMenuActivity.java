@@ -239,8 +239,8 @@ public class MyMenuActivity extends AppCompatActivity {
 
         tvMyMenuProfileTitle.setText( Global.loginPreferences.getString("Name", "") );
         tvMyMenuProfileEmail.setText( Global.loginPreferences.getString("Email", "") );
-        if(!Global.loginPreferences.getString("Image", "").equals(""))
-            Glide.with(this).load(Global.loginPreferences.getString("Image", "")).into(civMyMenuProfile);
+        if(!Global.loginPreferences.getString("ImageUri", "").equals(""))
+            Glide.with(this).load(Global.loginPreferences.getString("ImageUri", "")).into(civMyMenuProfile);
         else Glide.with(this).load(R.mipmap.ic_launcher_round).into(civMyMenuProfile);
 //        Global.kakaoLoginSuccessBoolean = true;
 //        getSharedPreferences("Login", MODE_PRIVATE).edit()

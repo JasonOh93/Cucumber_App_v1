@@ -61,7 +61,7 @@ public class FragmentHome extends Fragment {
 
         toolbar = view.findViewById(R.id.home_frag_toolbar);
         ((MainActivity) getActivity()).setSupportActionBar( toolbar );
-        ((MainActivity) getActivity()).setTitle("");
+        getActivity().setTitle("");
 
 
         civHealthFeed = view.findViewById(R.id.home_frag_civ_health_feed);

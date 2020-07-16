@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -41,6 +43,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FragmentHealthFeed extends Fragment {
 
@@ -60,6 +64,9 @@ public class FragmentHealthFeed extends Fragment {
     private RecyclerView recyclerViewMyHealth, recyclerViewBoard;
     private ArrayList<FragmentMyHealthMember> myHealthMembers = new ArrayList<>();
     private RecyclerViewMyHealthAdapter adapterMyHealth;
+
+    private CircleImageView civProfile;
+    private TextView tvName, tvEmail;
 
     private ArrayList<FragmentBoardMember> boardMembers = new ArrayList<>();
     private RecyclerViewBoardAdapter adapterBoard;
@@ -109,7 +116,7 @@ public class FragmentHealthFeed extends Fragment {
         View view = inflater.inflate( R.layout.frag_bottom_nav_health_feed, container, false );
 
         ((MainActivity) getActivity()).setSupportActionBar( view.findViewById(R.id.frag_health_feed_toolbar) );
-        ((MainActivity) getActivity()).setTitle("");
+        getActivity().setTitle("");
 
         myMenu = view.findViewById(R.id.frag_health_feed_my_page);
 
@@ -127,8 +134,25 @@ public class FragmentHealthFeed extends Fragment {
         lineChart = view.findViewById(R.id.frag_health_feed_line_chart);
         btnSeeLineChart = view.findViewById(R.id.frag_health_feed_btn_see_line_chart);
 
+        civProfile = view.findViewById(R.id.frag_health_feed_civ_profile);
+        tvName = view.findViewById(R.id.frag_health_feed_tv_profile_title);
+        tvEmail = view.findViewById(R.id.frag_health_feed_tv_profile_email);
+
         return view;
     }//onCreateView method
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // 로그인 정보가 없다면 기본정보로 -> 임시 방편
+        if(!Global.loginPreferences.getString("ImageUri", "").equals(""))
+            Glide.with(context).load(Global.loginPreferences.getString("ImageUri", "")).into(civProfile);
+        else Glide.with(context).load(R.mipmap.ic_launcher_round).into(civProfile);
+        tvName.setText( Global.loginPreferences.getString("Name", "No Name") );
+        tvEmail.setText( Global.loginPreferences.getString( "Email", "No Email" ) );
+
+    }//onResume method
 
     // View 가 Create 되고 난 다음에 나타나는 것
     @Override
@@ -172,6 +196,12 @@ public class FragmentHealthFeed extends Fragment {
     public void clickMyHealthFeed(){
 
         btnMyHealthInfo.setSelected(true); // 기본 처음 설정
+
+        if(!Global.loginPreferences.getString("ImageUri", "").equals(""))
+            Glide.with(context).load(Global.loginPreferences.getString("ImageUri", "")).into(civProfile);
+        else Glide.with(context).load(R.mipmap.ic_launcher_round).into(civProfile);
+        tvName.setText( Global.loginPreferences.getString("Name", "No Name") );
+        tvEmail.setText( Global.loginPreferences.getString( "Email", "No Email" ) );
 
         // 나의 건강 정보 나오도록 설정
         btnMyHealthInfo.setOnClickListener(new View.OnClickListener() {
