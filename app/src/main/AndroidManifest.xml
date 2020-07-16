@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".EditActivity"></activity>
+        <activity android:name=".ChattingActivity"></activity>
+        <activity android:name=".EditActivity" />
         <activity android:name=".SearchHospitalAndPharmacyActivity" />
         <activity
             android:name=".FavoritesHospitalAndPharmacyActivity"

@@ -1,12 +1,14 @@
 package com.jasonoh.cucumber_app_v1;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -50,12 +53,16 @@ public class FragmentHealthFeed extends Fragment {
     private boolean btnSeeLineChartBoolean = false;
 
     private FloatingActionButton btnMyHealthEdit;
+    private FloatingActionButton btnBoardSelectMore;
 
     private Button btnMyHealthInfo, btnBoard;
     private RelativeLayout myHealthInfoView, boardView;
     private RecyclerView recyclerViewMyHealth, recyclerViewBoard;
-    private ArrayList<FragmentMyHealthMember> members = new ArrayList<>();
+    private ArrayList<FragmentMyHealthMember> myHealthMembers = new ArrayList<>();
     private RecyclerViewMyHealthAdapter adapterMyHealth;
+
+    private ArrayList<FragmentBoardMember> boardMembers = new ArrayList<>();
+    private RecyclerViewBoardAdapter adapterBoard;
 
 
     public FragmentHealthFeed() {
@@ -71,11 +78,27 @@ public class FragmentHealthFeed extends Fragment {
 
         setHasOptionsMenu(true);
 
-        members.add( new FragmentMyHealthMember( "https://i.pinimg.com/originals/c6/f4/4a/c6f44a7aba8db7ae72bfd08e0160c752.png",
+        myHealthMembers.add( new FragmentMyHealthMember( "https://i.pinimg.com/originals/c6/f4/4a/c6f44a7aba8db7ae72bfd08e0160c752.png",
                 "title",
                 "weight",
                 "message",
                 "date" ) );
+
+        boardMembers.add( new FragmentBoardMember( "https://i.pinimg.com/originals/c6/f4/4a/c6f44a7aba8db7ae72bfd08e0160c752.png",
+                "title",
+                "weight",
+                "message",
+                "date",
+                "sample@email.com",
+                1) );
+
+        boardMembers.add( new FragmentBoardMember( "https://i.pinimg.com/originals/c6/f4/4a/c6f44a7aba8db7ae72bfd08e0160c752.png",
+                "title",
+                "weight",
+                "message",
+                "date",
+                "sample@email.com",
+                0) );
 
     }//onCreate method
 
@@ -96,8 +119,10 @@ public class FragmentHealthFeed extends Fragment {
         boardView = view.findViewById(R.id.frag_health_feed_board_view);
 
         btnMyHealthEdit = view.findViewById(R.id.frag_health_feed_my_health_float_btn);
+        btnBoardSelectMore = view.findViewById(R.id.frag_health_feed_board_float_btn);
 
         recyclerViewMyHealth = view.findViewById(R.id.frag_health_feed_my_recycler);
+        recyclerViewBoard = view.findViewById(R.id.frag_health_feed_board_recycler);
 
         lineChart = view.findViewById(R.id.frag_health_feed_line_chart);
         btnSeeLineChart = view.findViewById(R.id.frag_health_feed_btn_see_line_chart);
@@ -112,20 +137,15 @@ public class FragmentHealthFeed extends Fragment {
 
         clickItem();
 
+        clickMyHealthFeed();
+
+        clickBoard();
+
         setMyHealthRecyclerItem();
 
+        setBoardRecyclerItem();
+
     }//onViewCreated method
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Toast.makeText(context, "파괴 되었다!!!", Toast.LENGTH_SHORT).show();
-    }
-
-    public void setMyHealthRecyclerItem(){
-        adapterMyHealth = new RecyclerViewMyHealthAdapter(context, members);
-        recyclerViewMyHealth.setAdapter( adapterMyHealth );
-    }//setMyHealthRecyclerItem method
 
     public void clickItem(){
 
@@ -137,6 +157,20 @@ public class FragmentHealthFeed extends Fragment {
             }//onClick
         });//myPage.setOnClickListener
 
+    }//clickItem
+
+    public void setMyHealthRecyclerItem(){
+        adapterMyHealth = new RecyclerViewMyHealthAdapter(context, myHealthMembers);
+        recyclerViewMyHealth.setAdapter( adapterMyHealth );
+    }//setMyHealthRecyclerItem method
+
+    public void setBoardRecyclerItem(){
+        adapterBoard = new RecyclerViewBoardAdapter(context, boardMembers);
+        recyclerViewBoard.setAdapter( adapterBoard );
+    }//setBoardRecyclerItem method
+
+    public void clickMyHealthFeed(){
+
         btnMyHealthInfo.setSelected(true); // 기본 처음 설정
 
         // 나의 건강 정보 나오도록 설정
@@ -147,15 +181,7 @@ public class FragmentHealthFeed extends Fragment {
             }//onClick method
         });//btnMyHealthInfo.setOnClickListener
 
-        //게시판 정보 보여주기
-        //기본은 전체 보기로 설정되어 있음
-        btnBoard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setBoard();
-            }//onClick method
-        });//btnBoard.setOnClickListener
-
+        // 차트 보기 클릭
         btnSeeLineChart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,6 +202,7 @@ public class FragmentHealthFeed extends Fragment {
             }//onClick method
         });//btnSeeLineChart.setOnClickListener
 
+        //정보 입력 창으로
         btnMyHealthEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,7 +210,37 @@ public class FragmentHealthFeed extends Fragment {
             }//onClick method
         });//btnMyHealthEdit.setOnClickListener
 
-    }//clickItem
+    }//clickMyHealthFeed method
+
+    public void clickBoard(){
+
+        //게시판 정보 보여주기
+        //기본은 전체 보기로 설정되어 있음
+        btnBoard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setBoard();
+            }//onClick method
+        });//btnBoard.setOnClickListener
+
+        //더보기 클릭시 다이얼 로그 띄뭐서 정보 정하기
+        btnBoardSelectMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(context).setItems(R.array.alert_board_see_more, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //가져온 글자들
+                        String[] items = getResources().getStringArray(R.array.alert_board_see_more);
+
+                        //가져온 글자 우선 토스트 띄우기
+                        Toast.makeText(context, items[which], Toast.LENGTH_SHORT).show();
+                    }
+                }).show();
+            }//onClick method
+        });//btnBoardSelectMore.setOnClickListener
+
+    }//clickBoard method
 
     public void setMyMenu(){
         myHealthInfoView.setVisibility(View.VISIBLE);

@@ -33,6 +33,16 @@
     <string name="frag_health_feed_board">게시판</string>
     <string name="frag_health_feed_see_line_chart">차트 보기</string>
     <string name="frag_health_feed_close_line_chart">차트 닫기</string>
+    
+    <string name="frag_health_feed_board_all_see_alert">전체보기</string>
+    <string name="frag_health_feed_board_other_see_alert">나의 정보 제외 후 보기</string>
+    <string name="frag_health_feed_board_my_info_see_alert">공유한 나의 정보 보기</string>
+    
+    <string-array name="alert_board_see_more">
+        <item>전체보기</item>
+        <item>"나의 정보 제외 후 보기"</item>
+        <item>"공유한 나의 정보 보기"</item>
+    </string-array>
 
     <!--  app my menu Activity text  -->
     <string name="myMenu_menu_top_title">마이 메뉴</string>
@@ -85,12 +95,18 @@
     <string name="edit_top_title">작성</string>
     <string name="edit_share_all">전체공유</string>
     <string name="edit_picture">사진</string>
-    <string name="edit_title">타이틀</string>
+    <string name="edit_title">제목</string>
     <string name="edit_location">위치</string>
     <string name="edit_message">메세지</string>
     <string name="edit_date">날짜</string>
     <string name="edit_weight">몸무게</string>
     <string name="edit_cancel_btn">취소</string>
     <string name="edit_ok_btn">확인</string>
+    <string name="edit_cancel_alert_msg">작성을 취소하시겠습니까?</string>
+    <string name="edit_ok_alert_msg">작성을 완료하셨습니까?</string>
+
+    <!--  Chatting Activity  -->
+    <string name="chat_top_name">대화상대이름</string>
+    <string name="chat_send_btn">전송</string>
 
 </resources>

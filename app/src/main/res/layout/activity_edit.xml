@@ -42,41 +42,194 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-        <RelativeLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="240dp">
-            <ImageView
-                android:id="@+id/edit_iv"
+            android:layout_height="match_parent">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="240dp"
-                android:src="@drawable/hospital_icon"
-                android:adjustViewBounds="true"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/edit_select_image_fa_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/colorPrimary_my"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_margin="16dp"
-                android:src="@drawable/ic_pictures_white_24dp"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp">
+                    <ImageView
+                        android:id="@+id/edit_iv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/hospital_icon"
+                        android:adjustViewBounds="true"/>
 
-        </RelativeLayout>
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/edit_select_image_fa_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/colorPrimary_my"
+                        android:layout_alignParentBottom="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="16dp"
+                        android:src="@drawable/ic_pictures_white_24dp"
+                        android:onClick="clickBtn"/>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
+                </RelativeLayout>
 
-            <CheckBox
-                android:id="@+id/edit_share_all_check_box"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/edit_share_all"/>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="16dp">
 
-        </RelativeLayout>
+                    <CheckBox
+                        android:id="@+id/edit_share_all_check_box"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/edit_share_all"/>
+
+                    <CheckBox
+                        android:id="@+id/edit_share_picture_check_box"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/edit_picture"
+                        android:layout_alignParentRight="true"/>
+
+                    <CheckBox
+                        android:id="@+id/edit_share_title_check_box"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/edit_title"
+                        android:layout_below="@id/edit_share_all_check_box"/>
+
+                    <EditText
+                        android:id="@+id/edit_title_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/edit_share_title_check_box"
+                        android:inputType="text"
+                        android:maxLines="1"/>
+
+                    <CheckBox
+                        android:id="@+id/edit_share_location_check_box"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/edit_location"
+                        android:layout_below="@id/edit_title_et"/>
+
+                    <EditText
+                        android:id="@+id/edit_location_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/edit_share_location_check_box"
+                        android:inputType="text"
+                        android:maxLines="1"
+                        android:enabled="false"/>
+
+                    <ImageView
+                        android:id="@+id/edit_location_iv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_location_black_24dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@id/edit_share_location_check_box"
+                        android:clickable="true"
+                        android:onClick="clickIv"/>
+
+                    <CheckBox
+                        android:id="@+id/edit_share_msg_check_box"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/edit_message"
+                        android:layout_below="@id/edit_location_et"/>
+
+                    <EditText
+                        android:id="@+id/edit_msg_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/edit_share_msg_check_box"
+                        android:inputType="textMultiLine"
+                        android:lines="2"/>
+
+                    <CheckBox
+                        android:id="@+id/edit_share_date_check_box"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/edit_msg_et"
+                        android:text="@string/edit_date"/>
+
+                    <ImageView
+                        android:id="@+id/edit_calendar_iv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_calendar_black_24dp"
+                        android:layout_below="@id/edit_msg_et"
+                        android:layout_toRightOf="@id/edit_share_date_check_box"
+                        android:layout_marginLeft="8dp"
+                        android:clickable="true"
+                        android:onClick="clickIv"/>
+
+                    <EditText
+                        android:id="@+id/edit_date_et"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="2020-07-16 AM 10:02"
+                        android:layout_marginRight="8dp"
+                        android:layout_below="@id/edit_share_date_check_box"
+                        android:inputType="text"
+                        android:maxLines="1"/>
+
+                    <CheckBox
+                        android:id="@+id/edit_share_weight_check_box"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/edit_msg_et"
+                        android:layout_toRightOf="@id/edit_date_et"
+                        android:text="@string/edit_weight"/>
+
+                    <EditText
+                        android:id="@+id/edit_weight_et"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="80.65kg"
+                        android:layout_marginLeft="8dp"
+                        android:layout_below="@id/edit_share_weight_check_box"
+                        android:layout_toRightOf="@id/edit_date_et"
+                        android:inputType="text"
+                        android:maxLines="1"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_below="@id/edit_date_et">
+
+                        <Button
+                            android:id="@+id/edit_cancel_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="8dp"
+                            android:background="@drawable/mymenu_btn_selector"
+                            android:text="@string/edit_cancel_btn"
+                            android:onClick="clickBtn"/>
+
+                        <Button
+                            android:id="@+id/edit_ok_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="8dp"
+                            android:background="@drawable/mymenu_btn_selector"
+                            android:text="@string/edit_ok_btn"
+                            android:onClick="clickBtn"/>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
 
     </LinearLayout>
+
 
 </androidx.drawerlayout.widget.DrawerLayout>
