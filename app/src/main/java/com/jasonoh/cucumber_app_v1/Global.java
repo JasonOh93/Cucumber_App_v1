@@ -26,6 +26,13 @@ public class Global {
 
     // 로그인 시 전체적으로 사용하기 위해서 인트로 액티비티에서 설정 해주고 나머지는 SocialLoginActivity, MyMenuActivity에서 실행함
     static SharedPreferences loginPreferences = null;
+    static final String LOGIN_PREFERENCES_KEY = "Login";
+    static final String LOGIN_NAME_KEY = "Name";
+    static final String LOGIN_EMAIL_KEY = "Email";
+    static final String LOGIN_IMG_URI_KEY = "ImageUri";
+    static final String LOGIN_APP_PASSWORD_KEY = "AppPassword";
+    static final String LOGIN_GOOGLE_SUCCESS_BOOLEAN_KEY = "KakaoLoginSuccessBoolean";
+    static final String LOGIN_KAKAO_SUCCESS_BOOLEAN_KEY = "GoogleLoginSuccessBoolean";
     static boolean kakaoLoginSuccessBoolean = false;
     static boolean googleLoginSuccessBoolean = false;
 
@@ -38,10 +45,14 @@ public class Global {
     //Favorites Hospital Pharmacy Activity
     static boolean favoritesHospitalPharmacyBooleanFromMyMenuActivity = false;
 
+    // Health Feed Fragment
+    static boolean healthFeedBooleanFromMyMenuActivity = false;
+
     //Search Hospital Pharmacy Activity
 //    static boolean searchHospitalPharmacyBooleanFromMyMenuActivity = false;
 
-    // Health Feed Fragment
-    static boolean healthFeedBooleanFromMyMenuActivity = false;
+    //App Inner Password Activity
+    static String appPassword;
+
 
 }//Global class

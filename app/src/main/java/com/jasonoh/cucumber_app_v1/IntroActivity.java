@@ -20,13 +20,15 @@ public class IntroActivity extends AppCompatActivity {
 
                 SystemClock.sleep(2000);
 
-                startActivity( new Intent(IntroActivity.this, MainActivity.class) );
+                if(Global.loginPreferences.getString( Global.LOGIN_APP_PASSWORD_KEY, null ) != null)
+                    startActivity(new Intent(IntroActivity.this, AppIntroPasswordActivity.class));
+                else startActivity( new Intent(IntroActivity.this, MainActivity.class) );
                 finish();
 
             }
         }.start();
 
-        Global.loginPreferences = getSharedPreferences("Login", MODE_PRIVATE);
+        Global.loginPreferences = getSharedPreferences(Global.LOGIN_PREFERENCES_KEY, MODE_PRIVATE);
 //        Global.loginPreferences.getString( "Name", "" );
 //        Global.loginPreferences.getString( "Email", "" );
 //        Global.loginPreferences.getString( "ImageUri", "" );
@@ -34,6 +36,8 @@ public class IntroActivity extends AppCompatActivity {
                 .getBoolean("KakaoLoginSuccessBoolean", false);
         Global.googleLoginSuccessBoolean = Global.loginPreferences
                 .getBoolean("GoogleLoginSuccessBoolean", false);
+
+        Global.appPassword = Global.loginPreferences.getString( Global.LOGIN_APP_PASSWORD_KEY, null );
 
     }//onCreate method
 }//IntroActivity class

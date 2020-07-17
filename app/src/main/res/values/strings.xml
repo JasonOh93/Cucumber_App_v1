@@ -33,11 +33,11 @@
     <string name="frag_health_feed_board">게시판</string>
     <string name="frag_health_feed_see_line_chart">차트 보기</string>
     <string name="frag_health_feed_close_line_chart">차트 닫기</string>
-    
+
     <string name="frag_health_feed_board_all_see_alert">전체보기</string>
     <string name="frag_health_feed_board_other_see_alert">나의 정보 제외 후 보기</string>
     <string name="frag_health_feed_board_my_info_see_alert">공유한 나의 정보 보기</string>
-    
+
     <string-array name="alert_board_see_more">
         <item>전체보기</item>
         <item>"나의 정보 제외 후 보기"</item>
@@ -72,6 +72,10 @@
     <!--  app inner password Activity text  -->
     <string name="app_inner_password_top_title">비밀번호 설정</string>
     <string name="app_inner_password_ok">확인</string>
+
+    <!--  app intro password Activity text  -->
+    <string name="app_intro_password_top_title">비밀번호 확인</string>
+    <string name="app_intro_password_different_password">비밀번호가 일치하지 않습니다.</string>
 
     <!--  app social login Activity text  -->
     <string name="social_login_title">Log in</string>

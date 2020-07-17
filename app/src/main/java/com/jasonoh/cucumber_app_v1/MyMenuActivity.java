@@ -75,6 +75,8 @@ public class MyMenuActivity extends AppCompatActivity {
         passwordChangeBtn = findViewById(R.id.btn_my_menu_password_change);
         tvPasswordChange = findViewById(R.id.tv_my_menu_password_change);
 
+        if(Global.appPassword != null) passwordSetting.setChecked(true);
+
         if(!passwordSetting.isChecked()) {
             passwordChangeBtn.setVisibility(View.GONE);
             tvPasswordChange.setVisibility(View.GONE);
@@ -155,10 +157,10 @@ public class MyMenuActivity extends AppCompatActivity {
         //=====================================================================================================
 
         // 데이터 안쓰고 사용하기 위해서
-        tvMyMenuProfileTitle.setText( Global.loginPreferences.getString("Name", "") );
-        tvMyMenuProfileEmail.setText( Global.loginPreferences.getString("Email", "") );
-        if(!Global.loginPreferences.getString("ImageUri", "").equals(""))
-            Glide.with(this).load(Global.loginPreferences.getString("ImageUri", "")).into(civMyMenuProfile);
+        tvMyMenuProfileTitle.setText( Global.loginPreferences.getString(Global.LOGIN_NAME_KEY, "") );
+        tvMyMenuProfileEmail.setText( Global.loginPreferences.getString(Global.LOGIN_EMAIL_KEY, "") );
+        if(!Global.loginPreferences.getString(Global.LOGIN_IMG_URI_KEY, "").equals(""))
+            Glide.with(this).load(Global.loginPreferences.getString(Global.LOGIN_IMG_URI_KEY, "")).into(civMyMenuProfile);
         else Glide.with(this).load(R.mipmap.ic_launcher_round).into(civMyMenuProfile);
 
     }//googleLogin method
@@ -177,13 +179,16 @@ public class MyMenuActivity extends AppCompatActivity {
 
                 //todo : 비밀번호 설정이 체크 되었는지 확인 한 것
                 if(isChecked) {
-                    startActivityForResult( new Intent(MyMenuActivity.this, AppInnerPasswordActivity.class), Global.APP_INNER_PASSWORD_SETTING_PASSWORD_REQUEST);
+                    if(Global.appPassword == null)
+                        startActivityForResult( new Intent(MyMenuActivity.this, AppInnerPasswordActivity.class), Global.APP_INNER_PASSWORD_SETTING_PASSWORD_REQUEST);
                     passwordChangeBtn.setVisibility(View.VISIBLE);
                     tvPasswordChange.setVisibility(View.VISIBLE);
                 } else {
                     Toast.makeText(MyMenuActivity.this, R.string.myMenu_menu_password_setting_off, Toast.LENGTH_SHORT).show();
                     passwordChangeBtn.setVisibility(View.GONE);
                     tvPasswordChange.setVisibility(View.GONE);
+                    Global.appPassword = null;
+                    getSharedPreferences(Global.LOGIN_PREFERENCES_KEY, MODE_PRIVATE).edit().putString(Global.LOGIN_APP_PASSWORD_KEY, null).commit();
                 }// if else 문
 
             }//onCheckedChanged method
@@ -237,10 +242,10 @@ public class MyMenuActivity extends AppCompatActivity {
 
         Session.getCurrentSession().addCallback( sessionCallback );
 
-        tvMyMenuProfileTitle.setText( Global.loginPreferences.getString("Name", "") );
-        tvMyMenuProfileEmail.setText( Global.loginPreferences.getString("Email", "") );
-        if(!Global.loginPreferences.getString("ImageUri", "").equals(""))
-            Glide.with(this).load(Global.loginPreferences.getString("ImageUri", "")).into(civMyMenuProfile);
+        tvMyMenuProfileTitle.setText( Global.loginPreferences.getString(Global.LOGIN_NAME_KEY, "") );
+        tvMyMenuProfileEmail.setText( Global.loginPreferences.getString(Global.LOGIN_EMAIL_KEY, "") );
+        if(!Global.loginPreferences.getString(Global.LOGIN_IMG_URI_KEY, "").equals(""))
+            Glide.with(this).load(Global.loginPreferences.getString(Global.LOGIN_IMG_URI_KEY, "")).into(civMyMenuProfile);
         else Glide.with(this).load(R.mipmap.ic_launcher_round).into(civMyMenuProfile);
 //        Global.kakaoLoginSuccessBoolean = true;
 //        getSharedPreferences("Login", MODE_PRIVATE).edit()
@@ -305,11 +310,11 @@ public class MyMenuActivity extends AppCompatActivity {
                     myMenuNoLogin.setVisibility(View.VISIBLE);
 
                     Global.googleLoginSuccessBoolean = false;
-                    getSharedPreferences("Login", MODE_PRIVATE).edit()
-                            .putBoolean("GoogleLoginSuccessBoolean", Global.googleLoginSuccessBoolean)
-                            .putString("Name", null)
-                            .putString("Email", null)
-                            .putString("ImageUri", null).commit();
+                    getSharedPreferences(Global.LOGIN_PREFERENCES_KEY, MODE_PRIVATE).edit()
+                            .putBoolean(Global.LOGIN_GOOGLE_SUCCESS_BOOLEAN_KEY, Global.googleLoginSuccessBoolean)
+                            .putString(Global.LOGIN_NAME_KEY, null)
+                            .putString(Global.LOGIN_EMAIL_KEY, null)
+                            .putString(Global.LOGIN_IMG_URI_KEY, null).commit();
 
                     mGoogleSignInClient = null;
 
@@ -330,11 +335,11 @@ public class MyMenuActivity extends AppCompatActivity {
                             myMenuNoLogin.setVisibility(View.VISIBLE);
                             Session.getCurrentSession().removeCallback( sessionCallback );
                             Global.kakaoLoginSuccessBoolean = false;
-                            getSharedPreferences("Login", MODE_PRIVATE).edit()
-                                    .putBoolean("KakaoLoginSuccessBoolean", Global.kakaoLoginSuccessBoolean)
-                                    .putString("Name", null)
-                                    .putString("Email", null)
-                                    .putString("ImageUri", null).commit();
+                            getSharedPreferences(Global.LOGIN_PREFERENCES_KEY, MODE_PRIVATE).edit()
+                                    .putBoolean(Global.LOGIN_KAKAO_SUCCESS_BOOLEAN_KEY, Global.kakaoLoginSuccessBoolean)
+                                    .putString(Global.LOGIN_NAME_KEY, null)
+                                    .putString(Global.LOGIN_EMAIL_KEY, null)
+                                    .putString(Global.LOGIN_IMG_URI_KEY, null).commit();
                         }
                     });// runOnUiThread
                 }// onCompleteLogout() method
