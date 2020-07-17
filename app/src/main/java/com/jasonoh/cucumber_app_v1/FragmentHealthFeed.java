@@ -152,6 +152,10 @@ public class FragmentHealthFeed extends Fragment {
         tvName.setText( Global.loginPreferences.getString("Name", "No Name") );
         tvEmail.setText( Global.loginPreferences.getString( "Email", "No Email" ) );
 
+        //마이 메뉴에서 나의 건강 정보 또는 건강 게시판 누를시에 해당 탭으로 이동
+        if(!Global.healthFeedBooleanFromMyMenuActivity) setMyHealthInfo();
+        else setBoard();
+
     }//onResume method
 
     // View 가 Create 되고 난 다음에 나타나는 것
@@ -164,6 +168,9 @@ public class FragmentHealthFeed extends Fragment {
         clickMyHealthFeed();
 
         clickBoard();
+
+        if(!Global.healthFeedBooleanFromMyMenuActivity) setMyHealthInfo();
+        else setBoard();
 
         setMyHealthRecyclerItem();
 
@@ -207,7 +214,7 @@ public class FragmentHealthFeed extends Fragment {
         btnMyHealthInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setMyMenu();
+                setMyHealthInfo();
             }//onClick method
         });//btnMyHealthInfo.setOnClickListener
 
@@ -272,7 +279,7 @@ public class FragmentHealthFeed extends Fragment {
 
     }//clickBoard method
 
-    public void setMyMenu(){
+    public void setMyHealthInfo(){
         myHealthInfoView.setVisibility(View.VISIBLE);
         boardView.setVisibility(View.GONE);
         btnMyHealthInfo.setSelected(true);

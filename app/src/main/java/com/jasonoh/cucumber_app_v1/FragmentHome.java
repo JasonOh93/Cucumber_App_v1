@@ -151,7 +151,15 @@ public class FragmentHome extends Fragment {
             case Global.MY_MENU_REQUEST :
                 //돌아오는지 확인 용
                 if(resultCode != getActivity().RESULT_OK)
-                    Toast.makeText(context, "" + resultCode, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "CANCEL" + resultCode, Toast.LENGTH_SHORT).show();
+
+                if(resultCode == getActivity().RESULT_OK) {
+                    Toast.makeText(context, "OK" + resultCode, Toast.LENGTH_SHORT).show();
+                    //마이 메뉴에서 설정한 값으로 프레그먼트 제어
+                    if(data.getStringExtra(Global.GET_START_HEALTH_FEED_FROM_MY_MENU_ACTIVITY)
+                            .equals(Global.GET_START_HEALTH_FEED_FROM_MY_MENU_ACTIVITY))
+                        ((MainActivity)getActivity()).bottomNavigationView.setSelectedItemId( R.id.menu_health_feed );
+                }//if resultCode OK
                 break;
         }//switch case
 

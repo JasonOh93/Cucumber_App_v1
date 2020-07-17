@@ -352,4 +352,45 @@ public class MyMenuActivity extends AppCompatActivity {
         Session.getCurrentSession().removeCallback( sessionCallback );
         mGoogleSignInClient = null;
     }//onDestroy method
+
+    public void clickTextView(View view) {
+
+        switch (view.getId()) {
+
+            //관심병원 클릭시
+            case R.id.my_menu_like_hospital :
+                Global.favoritesHospitalPharmacyBooleanFromMyMenuActivity = false;
+                startActivity( new Intent(this, FavoritesHospitalAndPharmacyActivity.class) );
+                break;
+
+            //관심약국 클릭시
+            case R.id.my_menu_like_pharmacy :
+                Global.favoritesHospitalPharmacyBooleanFromMyMenuActivity = true;
+                startActivity( new Intent(this, FavoritesHospitalAndPharmacyActivity.class) );
+                break;
+
+            //나의 건강 기록 클릭시
+            case R.id.my_menu_health_feed :
+                Global.healthFeedBooleanFromMyMenuActivity = false;
+                Intent intent = getIntent();
+                intent.putExtra( "StartHealthFeed", "StartHealthFeed" );
+                setResult( RESULT_OK, intent );
+                finish();
+                break;
+
+            //건강게시판 클릭시
+            case R.id.my_menu_health_board :
+                Global.healthFeedBooleanFromMyMenuActivity = true;
+                getIntent().putExtra( "StartHealthFeed", "StartHealthFeed" );
+                setResult(RESULT_OK, getIntent());
+                finish();
+                break;
+
+            //최근 본 정보 클릭시
+            case R.id.my_menu_recently_info :
+                break;
+
+        }//switch case
+
+    }//clickTextView method
 }//MyMenuActivity class

@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -20,6 +22,9 @@ public class FavoritesHospitalAndPharmacyActivity extends AppCompatActivity {
     ArrayAdapter<String> adapter;
     ArrayList<String> arrayListFavoritesHospitalPharmacy = new ArrayList<>();
 
+    ImageButton btnSearch;
+    Button btnHospital, btnPharmacy;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +36,17 @@ public class FavoritesHospitalAndPharmacyActivity extends AppCompatActivity {
         etFavoritesHospitalSearch = findViewById(R.id.et_favorites_hospital_pharmacy_search);
 
         setFavoritesHospitalPharmacyListView();
+
+        btnSearch = findViewById(R.id.btn_favorites_hospital_pharmacy_search);
+        btnHospital = findViewById(R.id.btn_favorites_hospital);
+        btnPharmacy = findViewById(R.id.btn_favorites_Pharmacy);
+
+        //초기 화면 설정
+        setFavoritesHospital();
+
+        //외부에서 오는 값 확인후 해당으로 탭으로
+        if(!Global.favoritesHospitalPharmacyBooleanFromMyMenuActivity) setFavoritesHospital();
+        else setFavoritesPharmacy();
 
     }//onCreate method
 
@@ -61,7 +77,43 @@ public class FavoritesHospitalAndPharmacyActivity extends AppCompatActivity {
 //        arrayListFavoritesHospitalPharmacy.add( "aaa" );
     }//addFavoritesHospitalPharmacyListView method
 
+    public void setFavoritesHospital(){
+        btnHospital.setSelected(true);
+        btnPharmacy.setSelected(false);
+    }//setFavoritesHospital method
+
+    public void setFavoritesPharmacy(){
+        btnHospital.setSelected(false);
+        btnPharmacy.setSelected(true);
+
+    }//setFavoritesPharmacy method
+
     public void clickBackBtn(View view) {
         finish();
     }//clickBackBtn method
+
+    public void clickBtn(View view) {
+
+        switch (view.getId()) {
+
+            //검색창 누를시
+            case R.id.btn_favorites_hospital_pharmacy_search :
+                Toast.makeText(this, "검색", Toast.LENGTH_SHORT).show();
+                break;
+
+            //병원 탭 클릭시
+            case R.id.btn_favorites_hospital :
+                Toast.makeText(this, "병원", Toast.LENGTH_SHORT).show();
+                setFavoritesHospital();
+                break;
+
+            //약국 탭 클릭시
+            case R.id.btn_favorites_Pharmacy :
+                Toast.makeText(this, "약국", Toast.LENGTH_SHORT).show();
+                setFavoritesPharmacy();
+                break;
+
+        }//switch case
+
+    }//clickBtn method
 }//FavoritesHospitalAndPharmacyActivity class

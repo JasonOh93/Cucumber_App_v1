@@ -87,18 +87,48 @@
                 android:layout_marginTop="8dp"
                 android:layout_below="@id/et_favorites_hospital_pharmacy_search"/>
 
+            <Button
+                android:id="@+id/btn_favorites_hospital"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/favorites_hospital_pharmacy_second_line"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/frag_hospi_pharm_top_btn_selector"
+                android:text="@string/favorites_hospital_btn"
+                android:onClick="clickBtn"/>
+
+            <Button
+                android:id="@+id/btn_favorites_Pharmacy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/frag_hospi_pharm_top_btn_selector"
+                android:layout_below="@id/favorites_hospital_pharmacy_second_line"
+                android:layout_toRightOf="@id/btn_favorites_hospital"
+                android:layout_marginLeft="16dp"
+                android:text="@string/favorites_pharmacy_btn"
+                android:onClick="clickBtn"/>
+
+            <View
+                android:id="@+id/favorites_hospital_pharmacy_third_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@id/btn_favorites_hospital"/>
+
             <ListView
                 android:id="@+id/list_favorites_hospital_pharmacy_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/favorites_hospital_pharmacy_second_line"
+                android:layout_below="@id/favorites_hospital_pharmacy_third_line"
                 android:layout_marginTop="8dp" />
 
             <TextView
                 android:id="@+id/tv_favorites_hospital_pharmacy_empty"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_below="@id/favorites_hospital_pharmacy_second_line"
+                android:layout_below="@id/favorites_hospital_pharmacy_third_line"
                 android:layout_marginTop="8dp"
                 android:padding="16dp"
                 android:text="@string/favorites_hospital_pharmacy_tv_empty"

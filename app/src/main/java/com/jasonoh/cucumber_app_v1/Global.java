@@ -11,6 +11,7 @@ public class Global {
     final static int CALENDAR_REQUEST = 100;
     final static int LOCATION_REQUEST = 101;
     final static int MY_MENU_REQUEST = 102;
+    final static String GET_START_HEALTH_FEED_FROM_MY_MENU_ACTIVITY = "StartHealthFeed";
 
     //마이 메뉴에서 앱 내의 비밀번호 설정 창으로 이동하는 것
     final static int APP_INNER_PASSWORD_SETTING_PASSWORD_REQUEST = 1000;
@@ -33,5 +34,14 @@ public class Global {
     final static int SEARCH_HOSPITAL_PHARMACY_REQUEST_FROM_FRAG_HOSPITAL_PHARMACY = 201;
     final static int LOCATION_REQUEST_FROM_FRAG_HOSPITAL_PHARMACY = 202;
     static boolean hospitalPharmacyBooleanFromHomeFrag = false;
+
+    //Favorites Hospital Pharmacy Activity
+    static boolean favoritesHospitalPharmacyBooleanFromMyMenuActivity = false;
+
+    //Search Hospital Pharmacy Activity
+//    static boolean searchHospitalPharmacyBooleanFromMyMenuActivity = false;
+
+    // Health Feed Fragment
+    static boolean healthFeedBooleanFromMyMenuActivity = false;
 
 }//Global class

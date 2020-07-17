@@ -140,7 +140,8 @@
                 android:text="@string/myMenu_menu_like_hospital"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:onClick="clickTextView"/>
 
             <TextView
                 android:id="@+id/my_menu_like_pharmacy"
@@ -150,7 +151,8 @@
                 android:text="@string/myMenu_menu_like_pharmacy"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:onClick="clickTextView"/>
 
             <TextView
                 android:id="@+id/my_menu_health_feed"
@@ -160,7 +162,8 @@
                 android:text="@string/myMenu_menu_health_feed"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:onClick="clickTextView"/>
 
             <TextView
                 android:id="@+id/my_menu_health_board"
@@ -170,7 +173,8 @@
                 android:text="@string/myMenu_menu_health_board"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:onClick="clickTextView"/>
 
             <TextView
                 android:id="@+id/my_menu_recently_info"
@@ -180,7 +184,8 @@
                 android:text="@string/myMenu_menu_recently_info"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:onClick="clickTextView"/>
 
             <View
                 android:layout_width="match_parent"
