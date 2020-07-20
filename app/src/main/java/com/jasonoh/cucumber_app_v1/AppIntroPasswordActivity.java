@@ -134,7 +134,4 @@ public class AppIntroPasswordActivity extends AppCompatActivity {
 
     }//setPassword method
 
-    public void clickBackBtn(View view) {
-        finish();
-    }//clickBackBtn method
 }//AppIntroPasswordActivity class

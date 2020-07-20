@@ -57,4 +57,7 @@ dependencies {
 
     //그래프를 위한 추가
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    //구글 위치 정보 가져오기
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
 }

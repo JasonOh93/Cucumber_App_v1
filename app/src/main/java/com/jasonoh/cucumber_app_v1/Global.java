@@ -54,5 +54,9 @@ public class Global {
     //App Inner Password Activity
     static String appPassword;
 
+    //Location Activity
+    static double locationLatitude;
+    static double locationLongitude;
+
 
 }//Global class
