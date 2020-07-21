@@ -4,9 +4,11 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -59,6 +61,7 @@ public class FragmentHospitalPharmacy extends Fragment {
     ArrayAdapter<String> adapter;
     ArrayList<String> arrayListNearHospital = new ArrayList<>();
     ArrayList<String> arrayListGetDataHospital = new ArrayList<>();
+    ArrayList<String> arrayListGetDataSafetyHospital = new ArrayList<>();
 
     GoogleMap GoogleMap;
     SupportMapFragment supportMapFragment;
@@ -119,22 +122,11 @@ public class FragmentHospitalPharmacy extends Fragment {
         if(!Global.hospitalPharmacyBooleanFromHomeFrag) setHospital();
         else setPharmacy();
 
-//        supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.frag_map_google);
-//        supportMapFragment.getMapAsync(new OnMapReadyCallback() {
-//            @Override
-//            public void onMapReady(GoogleMap googleMap) {
-//                GoogleMap = googleMap;
-//                setGoogleMapLocation(googleMap);
-//            }
-//        });
-
     }//onViewCreated method
 
     @Override
     public void onResume() {
         super.onResume();
-
-        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_frag, this).commit();
 
         supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.frag_map_google);
         supportMapFragment.getMapAsync(new OnMapReadyCallback() {
@@ -177,6 +169,9 @@ public class FragmentHospitalPharmacy extends Fragment {
 
                     StringBuffer stringBuffer = new StringBuffer();
 
+                    String lat = null;
+                    String lon = null;
+
                     while (eventType != XmlPullParser.END_DOCUMENT) {
 
                         eventType = xpp.next();
@@ -202,20 +197,32 @@ public class FragmentHospitalPharmacy extends Fragment {
                                     xpp.next();
                                     stringBuffer.append("병원 이름 : " + xpp.getText() + "\n");
                                 }
+                                else if(tagName_start.equals("wgs84Lat")) {
+                                    xpp.next();
+                                    stringBuffer.append("Lat : " + xpp.getText() + "\n");
+                                    lat = xpp.getText();
+                                }
+                                else if(tagName_start.equals("wgs84Lon")) {
+                                    xpp.next();
+                                    stringBuffer.append("Lon : " + xpp.getText() + "\n");
+                                    lon = xpp.getText();
+                                }
                                 break;
                             case XmlPullParser.TEXT :
                                 break;
                             case XmlPullParser.END_TAG :
                                 if(xpp.getName().equals("item")) {
+                                    Log.w("TAG", "Hospital : " + stringBuffer.toString());
+
+//                                    MarkerOptions markerOptions = new MarkerOptions();
+//                                    markerOptions.position( new LatLng( Double.parseDouble(lat), Double.parseDouble(lon) ) );
+//                                    markerOptions.title(stringBuffer.toString());
+//
+//                                    GoogleMap.addMarker( markerOptions );
+
                                     arrayListGetDataHospital.add( stringBuffer.toString() );
                                     stringBuffer = new StringBuffer();
                                 }
-//                                getActivity().runOnUiThread(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        adapter.notifyDataSetChanged();
-//                                    }
-//                                });
                                 break;
                         }//switch case
 
@@ -226,6 +233,97 @@ public class FragmentHospitalPharmacy extends Fragment {
                         public void run() {
                             Toast.makeText(context, "검색종료", Toast.LENGTH_SHORT).show();
                             adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, arrayListGetDataHospital);
+
+                            try {
+                                isr.close();
+                                is.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    });
+
+                } catch (Exception e) { }
+
+            }//run
+        }.start();
+
+    }//getDataHospital method
+
+    //todo : 안심병원데이터 가져오기!!
+    public void getDataSafetyHospital(){
+
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+
+                //네트워크 주소 저장
+                String dataHospitalAddress = "http://apis.data.go.kr/B551182/pubReliefHospService/getpubReliefHospList"
+                        + "?serviceKey=" + "6dqyQeM6Z1N4y9BZCEBwdt00gqLY6XZhny6jJs3ljEWE2NypmtrGJHRNkfgA%2FvtgZlWdqYCjoFGnPu3oKSTi0g%3D%3D"
+                        + "&pageNo=" + "1" + "&numOfRows=" + "100"
+                        + "&spclAdmTyCd=" + "A0";
+
+                try {
+
+                    URL url =new URL(dataHospitalAddress);
+                    InputStream is = url.openStream();
+                    InputStreamReader isr = new InputStreamReader(is);
+
+                    XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+                    XmlPullParser xpp = factory.newPullParser();
+                    xpp.setInput(isr);
+
+                    int eventType = xpp.getEventType();
+
+                    StringBuffer stringBuffer = new StringBuffer();
+
+                    while (eventType != XmlPullParser.END_DOCUMENT) {
+
+                        eventType = xpp.next();
+
+                        switch (eventType) {
+                            case XmlPullParser.START_DOCUMENT :
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(context, "검색시작", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                break;
+                            case XmlPullParser.START_TAG :
+                                String tagName_start = xpp.getName();
+                                if(tagName_start.equals("items")) stringBuffer = new StringBuffer();
+                                else if(tagName_start.equals("item")) stringBuffer = new StringBuffer();
+                                else if(tagName_start.equals("sgguNm")) {
+                                    xpp.next();
+                                    stringBuffer.append(xpp.getText() + "\n");
+                                }
+                                else if(tagName_start.equals("yadmNm")) {
+                                    xpp.next();
+                                    stringBuffer.append("병원 이름 : " + xpp.getText() + "\n");
+                                }
+                                break;
+                            case XmlPullParser.TEXT :
+                                break;
+                            case XmlPullParser.END_TAG :
+                                if(xpp.getName().equals("item")) {
+                                    Log.w("TAG", "SafetyHospital : " + stringBuffer.toString());
+                                    arrayListGetDataSafetyHospital.add( stringBuffer.toString() );
+                                    stringBuffer = new StringBuffer();
+                                }
+                                break;
+                        }//switch case
+
+                    }//while
+
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(context, "검색종료", Toast.LENGTH_SHORT).show();
+                            adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, arrayListGetDataSafetyHospital);
+                            adapter.notifyDataSetChanged();
 
                             try {
                                 isr.close();
@@ -248,7 +346,7 @@ public class FragmentHospitalPharmacy extends Fragment {
             }//run
         }.start();
 
-    }//getDataHospital method
+    }//getDataSafetyHospital method
 
     //지도가 생성되고 난후 내부 에서 정할때 사용
     public void setGoogleMapLocation(GoogleMap googleMap){
@@ -259,8 +357,8 @@ public class FragmentHospitalPharmacy extends Fragment {
         //마크 옵션 객체 생성(marker 의 설정)
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position( myLatLng );
-        markerOptions.title( "현재위치" );
-        markerOptions.snippet( "현재위치" );
+        markerOptions.title( "설정위치" );
+        markerOptions.snippet( "설정위치" );
 
         //지도에 마크를 추가
         googleMap.addMarker( markerOptions );
@@ -314,14 +412,6 @@ public class FragmentHospitalPharmacy extends Fragment {
             }//onClick method
         });//searchHospitalPharmacy.setOnClickListener
 
-        // 전체 진료 과목 누르면 행동하는 것
-        btnMedicalSubject.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "전체 진료 과목 선택", Toast.LENGTH_SHORT).show();
-            }//onClick method
-        });//btnMedicalSubject.setOnClickListener
-
         // 위치 선택 누르면 이동
         btnLocation.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -345,7 +435,13 @@ public class FragmentHospitalPharmacy extends Fragment {
                         listView.setVisibility(View.VISIBLE);
                         listView.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
-                    } else if(btnSeeMore.getText().toString().equals("약국 보기")) {
+                    }
+                    else if(btnSeeMore.getText().toString().equals("코로나 안심병원 보기")) {
+                        listView.setVisibility(View.VISIBLE);
+                        listView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                    }
+                    else if(btnSeeMore.getText().toString().equals("약국 보기")) {
                     }// if else if
 
                 } else if(btnSeeMoreBoolean) {
@@ -366,6 +462,15 @@ public class FragmentHospitalPharmacy extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         String[] s = getResources().getStringArray(R.array.hospital_alert_dialog_medical_subject);
                         btnMedicalSubject.setText(s[which]);
+
+                        if(btnMedicalSubject.getText().equals("코로나 안심병원")) {
+                            getDataSafetyHospital();
+                            btnSeeMore.setText( btnMedicalSubject.getText() + " 보기" );
+                        } else if(btnMedicalSubject.getText().equals("일반 진료 병원")) {
+                            getDataHospital();
+                            btnSeeMore.setText( "병원 보기" );
+                        }
+
                     }// AlertDialog onClick
                 }).show();
 
