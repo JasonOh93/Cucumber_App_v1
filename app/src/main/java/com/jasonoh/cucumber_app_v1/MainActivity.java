@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -51,6 +52,12 @@ public class MainActivity extends AppCompatActivity {
         Log.w("TAG", kakaoKeyHash);
 
         backPressCloseAppHandler = new BackPressCloseAppHandler(this);
+
+//        switch (bottomNavigationView.getMenu().findItem(bottomNavigationView.getSelectedItemId()).getItemId()) {
+//            case R.id.menu_home :
+//                Toast.makeText(this, bottomNavigationView.getMenu().findItem(bottomNavigationView.getSelectedItemId()).getTitle(), Toast.LENGTH_SHORT).show();
+//                break;
+//        }
 
     }//onCreate Method
 

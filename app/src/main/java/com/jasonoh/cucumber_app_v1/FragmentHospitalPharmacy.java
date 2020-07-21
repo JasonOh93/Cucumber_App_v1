@@ -3,6 +3,7 @@ package com.jasonoh.cucumber_app_v1;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -191,20 +192,21 @@ public class FragmentHospitalPharmacy extends Fragment {
                                 else if(tagName_start.equals("item")) stringBuffer = new StringBuffer();
                                 else if(tagName_start.equals("dutyDivNam")) {
                                     xpp.next();
-                                    stringBuffer.append(xpp.getText() + "\n");
+//                                    stringBuffer.append(xpp.getText() + "\n");
                                 }
                                 else if(tagName_start.equals("dutyName")) {
                                     xpp.next();
-                                    stringBuffer.append("병원 이름 : " + xpp.getText() + "\n");
+                                    stringBuffer.append(xpp.getText() + "\n");
+//                                    stringBuffer.append("병원 이름 : " + xpp.getText() + "\n");
                                 }
                                 else if(tagName_start.equals("wgs84Lat")) {
                                     xpp.next();
-                                    stringBuffer.append("Lat : " + xpp.getText() + "\n");
+//                                    stringBuffer.append("Lat : " + xpp.getText() + "\n");
                                     lat = xpp.getText();
                                 }
                                 else if(tagName_start.equals("wgs84Lon")) {
                                     xpp.next();
-                                    stringBuffer.append("Lon : " + xpp.getText() + "\n");
+//                                    stringBuffer.append("Lon : " + xpp.getText() + "\n");
                                     lon = xpp.getText();
                                 }
                                 break;
@@ -298,11 +300,12 @@ public class FragmentHospitalPharmacy extends Fragment {
                                 else if(tagName_start.equals("item")) stringBuffer = new StringBuffer();
                                 else if(tagName_start.equals("sgguNm")) {
                                     xpp.next();
-                                    stringBuffer.append(xpp.getText() + "\n");
+//                                    stringBuffer.append(xpp.getText() + "\n");
                                 }
                                 else if(tagName_start.equals("yadmNm")) {
                                     xpp.next();
-                                    stringBuffer.append("병원 이름 : " + xpp.getText() + "\n");
+                                    stringBuffer.append(xpp.getText() + "\n");
+//                                    stringBuffer.append("병원 이름 : " + xpp.getText() + "\n");
                                 }
                                 break;
                             case XmlPullParser.TEXT :
@@ -476,6 +479,21 @@ public class FragmentHospitalPharmacy extends Fragment {
 
             }//onClick method
         });// btnMedicalSubject.setOnClickListener
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(context, arrayListGetDataHospital.get(position), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                if(btnSeeMore.getText().equals("병원 보기")) {
+                    intent.setData(Uri.parse( "https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query=" + arrayListGetDataHospital.get(position) ));
+                } else if(btnSeeMore.getText().equals("코로나 안심병원 보기")) {
+                    intent.setData(Uri.parse( "https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query=" + arrayListGetDataSafetyHospital.get(position) ));
+                }
+                getActivity().startActivity( intent );
+            }
+        });
 
     }//clickItem
 
