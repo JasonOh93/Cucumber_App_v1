@@ -119,16 +119,32 @@ public class FragmentHospitalPharmacy extends Fragment {
         if(!Global.hospitalPharmacyBooleanFromHomeFrag) setHospital();
         else setPharmacy();
 
+//        supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.frag_map_google);
+//        supportMapFragment.getMapAsync(new OnMapReadyCallback() {
+//            @Override
+//            public void onMapReady(GoogleMap googleMap) {
+//                GoogleMap = googleMap;
+//                setGoogleMapLocation(googleMap);
+//            }
+//        });
+
+    }//onViewCreated method
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.main_frag, this).commit();
+
         supportMapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.frag_map_google);
         supportMapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
-//                GoogleMap = googleMap;
+                GoogleMap = googleMap;
                 setGoogleMapLocation(googleMap);
             }
         });
-
-    }//onViewCreated method
+    }//onResume method
 
     //todo : 위치정보 가져오기
     public void getNowMyLocation(){
@@ -238,19 +254,23 @@ public class FragmentHospitalPharmacy extends Fragment {
     public void setGoogleMapLocation(GoogleMap googleMap){
 
         //원하는 좌표 객체 생성
-        LatLng seoul = new LatLng(Global.locationLatitude, Global.locationLongitude);
+        LatLng myLatLng = new LatLng(Global.locationLatitude, Global.locationLongitude);
 
         //마크 옵션 객체 생성(marker 의 설정)
         MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position( seoul );
-        markerOptions.title( "Seoul" );
-        markerOptions.snippet( "대한민국의 수도" );
+        markerOptions.position( myLatLng );
+        markerOptions.title( "현재위치" );
+        markerOptions.snippet( "현재위치" );
 
         //지도에 마크를 추가
         googleMap.addMarker( markerOptions );
 
         //카메라 이동을 스무스하게 효과를 주면서 줌까지 적용
-        googleMap.animateCamera( CameraUpdateFactory.newLatLngZoom( seoul, 16 ) );
+        googleMap.animateCamera( CameraUpdateFactory.newLatLngZoom( myLatLng, 16 ) );
+
+        googleMap.setMyLocationEnabled(true);
+
+        //todo : 내위치 주변에 병원 위치 나타나도록
 
     }//setGoogleMapLocation method
 

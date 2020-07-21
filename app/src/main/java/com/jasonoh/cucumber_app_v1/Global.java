@@ -31,8 +31,8 @@ public class Global {
     static final String LOGIN_EMAIL_KEY = "Email";
     static final String LOGIN_IMG_URI_KEY = "ImageUri";
     static final String LOGIN_APP_PASSWORD_KEY = "AppPassword";
-    static final String LOGIN_GOOGLE_SUCCESS_BOOLEAN_KEY = "KakaoLoginSuccessBoolean";
-    static final String LOGIN_KAKAO_SUCCESS_BOOLEAN_KEY = "GoogleLoginSuccessBoolean";
+    static final String LOGIN_KAKAO_SUCCESS_BOOLEAN_KEY = "KakaoLoginSuccessBoolean";
+    static final String LOGIN_GOOGLE_SUCCESS_BOOLEAN_KEY = "GoogleLoginSuccessBoolean";
     static boolean kakaoLoginSuccessBoolean = false;
     static boolean googleLoginSuccessBoolean = false;
 
@@ -57,6 +57,9 @@ public class Global {
     //Location Activity
     static double locationLatitude;
     static double locationLongitude;
+    final static String MY_LOCATION_KEY_NAME = "myLocation";
+    final static String MY_LOCATION_LAT_KEY_NAME = "myLocationLat";
+    final static String MY_LOCATION_LON_KEY_NAME = "myLocationLon";
 
 
 }//Global class

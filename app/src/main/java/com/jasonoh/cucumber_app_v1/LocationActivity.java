@@ -98,6 +98,12 @@ public class LocationActivity extends AppCompatActivity {
             Global.locationLatitude = location.getLatitude();
             Global.locationLongitude = location.getLongitude();
 
+            getSharedPreferences(Global.MY_LOCATION_KEY_NAME, MODE_PRIVATE)
+                    .edit()
+                    .putString(Global.MY_LOCATION_LAT_KEY_NAME, Global.locationLatitude + "")
+                    .putString(Global.MY_LOCATION_LON_KEY_NAME, Global.locationLongitude + "")
+                    .commit();
+
             Toast.makeText(LocationActivity.this, Global.locationLatitude + ", " + Global.locationLongitude, Toast.LENGTH_SHORT).show();
 
             super.onLocationResult(locationResult);
