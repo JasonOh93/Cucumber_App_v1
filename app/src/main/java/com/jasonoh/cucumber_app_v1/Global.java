@@ -61,5 +61,8 @@ public class Global {
     final static String MY_LOCATION_LAT_KEY_NAME = "myLocationLat";
     final static String MY_LOCATION_LON_KEY_NAME = "myLocationLon";
 
+    //Calendar Activity
+    static String getDateFromCalendar = "";
+
 
 }//Global class

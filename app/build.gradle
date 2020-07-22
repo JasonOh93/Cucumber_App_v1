@@ -60,4 +60,8 @@ dependencies {
 
     //구글 위치 정보 가져오기
     implementation 'com.google.android.gms:play-services-location:17.0.0'
+
+    //캘린더 활용
+    //https://webnautes.tistory.com/1216
+    implementation 'com.github.applikeysolutions:cosmocalendar:1.0.4'
 }

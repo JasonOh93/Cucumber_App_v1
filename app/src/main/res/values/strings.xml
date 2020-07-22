@@ -136,4 +136,8 @@
     <string name="chat_top_name">대화상대이름</string>
     <string name="chat_send_btn">전송</string>
 
+    <!--  Calendar Activity  -->
+    <string name="calendar_top_name">달력</string>
+    <string name="calendar_select_btn">선택</string>
+
 </resources>
