@@ -1,15 +1,26 @@
 package com.jasonoh.cucumber_app_v1;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 public class EditActivity extends AppCompatActivity {
+
+    final int PICTURE_SELECT_REQUEST_CODE = 650;
+
+    ImageView iv;
+    EditText etTitle, etLocation, etMessage, etDate, etWeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +30,37 @@ public class EditActivity extends AppCompatActivity {
         setSupportActionBar( findViewById(R.id.edit_toolbar) );
         getSupportActionBar().setTitle("");
 
+        initFindViewById();
+
     }//onCreate method
+
+    public void initFindViewById(){
+        iv = findViewById(R.id.edit_iv);
+        etTitle = findViewById(R.id.edit_title_et);
+        etLocation = findViewById(R.id.edit_location_et);
+        etMessage = findViewById(R.id.edit_msg_et);
+        etDate = findViewById(R.id.edit_date_et);
+        etWeight = findViewById(R.id.edit_weight_et);
+    }//initFindViewById
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case PICTURE_SELECT_REQUEST_CODE :
+                if(resultCode == RESULT_OK) {
+                    //이미지를 선택했다면
+                    Uri uri = data.getData();
+                    if(uri != null) {
+                        Toast.makeText(this, uri.toString(), Toast.LENGTH_SHORT).show();
+                        Glide.with(this).load(uri).into(iv);
+                    }
+                }
+                break;
+        }
+
+    }//onActivityResult method
 
     public void clickBackBtn(View view) {
         finish();
@@ -43,11 +84,18 @@ public class EditActivity extends AppCompatActivity {
 
     }//clickIv method
 
+    //todo : EditActivity 사진 찾아오기 버튼 클릭시 method
+    public void getPicture(){
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, PICTURE_SELECT_REQUEST_CODE);
+    }//getPicture method
+
     public void clickBtn(View view) {
 
         switch (view.getId()) {
 
-            //취소 버튼 클릭시
+            //todo : EditActivity 취소 버튼 클릭시
             case R.id.edit_cancel_btn :
                 new AlertDialog.Builder(this).setMessage(R.string.edit_cancel_alert_msg).setNegativeButton(R.string.edit_cancel_btn, new DialogInterface.OnClickListener() {
                     @Override
@@ -60,7 +108,7 @@ public class EditActivity extends AppCompatActivity {
                 }).show();
                 break;
 
-            //확인 버튼 클릭시
+            //todo : EditActivity 확인 버튼 클릭시
             case R.id.edit_ok_btn :
                 new AlertDialog.Builder(this).setMessage(R.string.edit_ok_alert_msg).setNegativeButton(R.string.edit_cancel_btn, new DialogInterface.OnClickListener() {
                     @Override
@@ -73,9 +121,10 @@ public class EditActivity extends AppCompatActivity {
                 }).show();
                 break;
 
-            //사진 찾아오기 버튼 클릭시
+            //todo : EditActivity 사진 찾아오기 버튼 클릭시
             case R.id.edit_select_image_fa_btn :
                 Toast.makeText(this, "사진을 찾아오기", Toast.LENGTH_SHORT).show();
+                getPicture();
                 break;
         }//switch case
 

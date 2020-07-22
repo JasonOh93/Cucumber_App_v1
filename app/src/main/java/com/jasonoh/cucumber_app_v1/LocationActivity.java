@@ -6,10 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -25,7 +28,9 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class LocationActivity extends AppCompatActivity {
 
@@ -87,6 +92,8 @@ public class LocationActivity extends AppCompatActivity {
         }
     };
 
+    Location location;
+
     //위치정보가 갱신 되는 것을 듣는 리스너
     LocationCallback locationCallback = new LocationCallback(){
 
@@ -94,7 +101,8 @@ public class LocationActivity extends AppCompatActivity {
         @Override
         public void onLocationResult(LocationResult locationResult) {
 
-            Location location = locationResult.getLastLocation();
+            location = locationResult.getLastLocation();
+            //todo : 위도 경도 저장
             Global.locationLatitude = location.getLatitude();
             Global.locationLongitude = location.getLongitude();
 
@@ -104,22 +112,43 @@ public class LocationActivity extends AppCompatActivity {
                     .putString(Global.MY_LOCATION_LON_KEY_NAME, Global.locationLongitude + "")
                     .commit();
 
-            Toast.makeText(LocationActivity.this, Global.locationLatitude + ", " + Global.locationLongitude, Toast.LENGTH_SHORT).show();
+            //todo : 위도 경도를 한글로 저장
+            changeAddressFromLatLon();
+            //Toast.makeText(LocationActivity.this, Global.locationLatitude + ", " + Global.locationLongitude, Toast.LENGTH_SHORT).show();
 
             super.onLocationResult(locationResult);
         }
     };
 
+    //todo : 위도 경도를 한글로 저장 메소드
+    public void changeAddressFromLatLon(){
+
+        final Geocoder geocoder = new Geocoder(LocationActivity.this);
+
+        List<Address> addressList = null;
+        try {
+            Log.w("TAG", "지오코딩 테스트");
+            addressList = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 10);
+        } catch (IOException e) { e.printStackTrace(); }
+
+        if(addressList != null) {
+            if(addressList.size() == 0) Toast.makeText(LocationActivity.this, "해당되는 주소가 없습니다.", Toast.LENGTH_SHORT).show();
+            else {
+                Toast.makeText(LocationActivity.this, addressList.get(0).getAddressLine(0), Toast.LENGTH_SHORT).show();
+                Global.locationAddressFromLatLong = addressList.get(0).getAddressLine(0);
+            }// if else
+        }//if(addressList != null)
+
+    }//changeAddressFromLatLon method
+
     //액티비티가 화면에 보이지 않으면 위치정보를 더이상 갱신하지 않도록
-
-
     @Override
     protected void onPause() {
         super.onPause();
 
         if(providerClient != null) providerClient.removeLocationUpdates( locationCallback );
 
-    }
+    }//onPause method
 
 
     @Override
