@@ -1,13 +1,20 @@
 package com.jasonoh.cucumber_app_v1;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.content.CursorLoader;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -23,6 +30,8 @@ public class EditActivity extends AppCompatActivity {
     ImageView iv;
     EditText etTitle, etLocation, etMessage, etDate, etWeight;
 
+    String imgPath;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +42,11 @@ public class EditActivity extends AppCompatActivity {
 
         initFindViewById();
 
-
+        //외부 저장소의 접근 동적 퍼미션
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
+                requestPermissions( new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, Global.REQUEST_STORAGE_FROM_EDIT_ACTIVITY );
+        }
 
     }//onCreate method
 
@@ -45,6 +58,15 @@ public class EditActivity extends AppCompatActivity {
         etDate = findViewById(R.id.edit_date_et);
         etWeight = findViewById(R.id.edit_weight_et);
     }//initFindViewById
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if(requestCode == Global.REQUEST_STORAGE_FROM_EDIT_ACTIVITY && grantResults[0] == PackageManager.PERMISSION_DENIED) {
+            Toast.makeText(this, "사진 파일 전송이 불가합니다!!", Toast.LENGTH_SHORT).show();
+        }
+    }//onRequestPermissionsResult method
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -59,12 +81,13 @@ public class EditActivity extends AppCompatActivity {
                     if(uri != null) {
                         Toast.makeText(this, uri.toString(), Toast.LENGTH_SHORT).show();
                         Glide.with(this).load(uri).into(iv);
+
+//                        imgPath = getRealPathFromUri(uri);
                     }
                 }
                 break;
             //위치로 이동 한 것
             case Global.REQUEST_LOCATION_FROM_EDIT_ACTIVITY :
-                Log.w("TAG", "aaaaaaa");
                 if(resultCode == RESULT_OK) etLocation.setText(data.getStringExtra("myLocation"));
                 break;
 
@@ -75,6 +98,18 @@ public class EditActivity extends AppCompatActivity {
         }
 
     }//onActivityResult method
+
+//    //Uri -- > 절대경로로 바꿔서 리턴시켜주는 메소드
+//    String getRealPathFromUri(Uri uri){
+//        String[] proj= {MediaStore.Images.Media.DATA};
+//        CursorLoader loader= new CursorLoader(this, uri, proj, null, null, null);
+//        Cursor cursor= loader.loadInBackground();
+//        int column_index= cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+//        cursor.moveToFirst();
+//        String result= cursor.getString(column_index);
+//        cursor.close();
+//        return  result;
+//    }
 
     public void clickBackBtn(View view) {
         finish();

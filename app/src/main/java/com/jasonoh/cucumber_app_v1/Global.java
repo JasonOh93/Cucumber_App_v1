@@ -68,6 +68,7 @@ public class Global {
     //Edit Activity
     final static int REQUEST_LOCATION_FROM_EDIT_ACTIVITY = 210;
     final static int REQUEST_DATE_FROM_EDIT_ACTIVITY = 211;
+    final static int REQUEST_STORAGE_FROM_EDIT_ACTIVITY = 212;
 
 
 }//Global class
