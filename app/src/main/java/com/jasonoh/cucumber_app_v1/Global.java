@@ -65,5 +65,9 @@ public class Global {
     //Calendar Activity
     static String getDateFromCalendar = "";
 
+    //Edit Activity
+    final static int REQUEST_LOCATION_FROM_EDIT_ACTIVITY = 210;
+    final static int REQUEST_DATE_FROM_EDIT_ACTIVITY = 211;
+
 
 }//Global class

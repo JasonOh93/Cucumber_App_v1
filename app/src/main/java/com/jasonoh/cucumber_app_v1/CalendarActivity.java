@@ -3,6 +3,7 @@ package com.jasonoh.cucumber_app_v1;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.OrientationHelper;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Selection;
 import android.util.Log;
@@ -50,6 +51,10 @@ public class CalendarActivity extends AppCompatActivity {
         }
 
         Global.getDateFromCalendar = result;
+
+        Intent intent = getIntent();
+        intent.putExtra("myDate", result);
+        setResult(RESULT_OK, intent);
 
         calendarView.setSelectionType(SelectionType.SINGLE);
 

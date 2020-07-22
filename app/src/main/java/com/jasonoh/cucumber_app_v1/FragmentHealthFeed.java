@@ -79,11 +79,34 @@ public class FragmentHealthFeed extends Fragment {
         this.context = context;
     }//HomeFragment Constructor
 
+    //시작시 로그인 확인
+    public void confirmLoginInfo(){
+        if(!Global.kakaoLoginSuccessBoolean && !Global.googleLoginSuccessBoolean)
+            new AlertDialog.Builder(context)
+                    .setMessage("로그인이 필요합니다.\n로그인을 하시겠습니까?")
+                    .setNegativeButton(R.string.edit_cancel_btn, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ((MainActivity)getActivity()).bottomNavigationView.setSelectedItemId( R.id.menu_home );
+                        }
+                    })
+                    .setPositiveButton(R.string.edit_ok_btn, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            startActivity( new Intent(context, SocialLoginActivity.class) );
+                        }
+                    })
+                    .setCancelable(false)
+                    .show();
+    }//confirmLoginInfo method
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setHasOptionsMenu(true);
+
+        confirmLoginInfo();
 
         myHealthMembers.add( new FragmentMyHealthMember( "https://i.pinimg.com/originals/c6/f4/4a/c6f44a7aba8db7ae72bfd08e0160c752.png",
                 "title",
@@ -144,6 +167,8 @@ public class FragmentHealthFeed extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        confirmLoginInfo();
 
         // 로그인 정보가 없다면 기본정보로 -> 임시 방편
         if(!Global.loginPreferences.getString("ImageUri", "").equals(""))

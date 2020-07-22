@@ -1,7 +1,10 @@
 package com.jasonoh.cucumber_app_v1;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,6 +28,27 @@ public class FavoritesHospitalAndPharmacyActivity extends AppCompatActivity {
     ImageButton btnSearch;
     Button btnHospital, btnPharmacy;
 
+    //시작시 로그인 확인
+    public void confirmLoginInfo(){
+        if(!Global.kakaoLoginSuccessBoolean && !Global.googleLoginSuccessBoolean)
+            new AlertDialog.Builder(this)
+                    .setMessage("로그인이 필요합니다.\n로그인을 하시겠습니까?")
+                    .setNegativeButton(R.string.edit_cancel_btn, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+                    })
+                    .setPositiveButton(R.string.edit_ok_btn, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            startActivity( new Intent(FavoritesHospitalAndPharmacyActivity.this, SocialLoginActivity.class) );
+                        }
+                    })
+                    .setCancelable(false)
+                    .show();
+    }//confirmLoginInfo method
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +56,8 @@ public class FavoritesHospitalAndPharmacyActivity extends AppCompatActivity {
 
         setSupportActionBar( findViewById(R.id.favorites_hospital_pharmacy_toolbar) );
         getSupportActionBar().setTitle("");
+
+        confirmLoginInfo();
 
         etFavoritesHospitalSearch = findViewById(R.id.et_favorites_hospital_pharmacy_search);
 
@@ -49,6 +75,12 @@ public class FavoritesHospitalAndPharmacyActivity extends AppCompatActivity {
         else setFavoritesPharmacy();
 
     }//onCreate method
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        confirmLoginInfo();
+    }//onResume method
 
     public void setFavoritesHospitalPharmacyListView(){
 

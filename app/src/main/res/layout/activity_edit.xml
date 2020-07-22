@@ -174,7 +174,8 @@
                         android:layout_marginRight="8dp"
                         android:layout_below="@id/edit_share_date_check_box"
                         android:inputType="text"
-                        android:maxLines="1"/>
+                        android:maxLines="1"
+                        android:enabled="false"/>
 
                     <CheckBox
                         android:id="@+id/edit_share_weight_check_box"

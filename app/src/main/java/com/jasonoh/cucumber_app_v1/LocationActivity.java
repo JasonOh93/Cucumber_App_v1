@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -123,19 +124,29 @@ public class LocationActivity extends AppCompatActivity {
     //todo : 위도 경도를 한글로 저장 메소드
     public void changeAddressFromLatLon(){
 
+        List<Address> addressList = null;
+
         final Geocoder geocoder = new Geocoder(LocationActivity.this);
 
-        List<Address> addressList = null;
         try {
             Log.w("TAG", "지오코딩 테스트");
             addressList = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 10);
         } catch (IOException e) { e.printStackTrace(); }
 
         if(addressList != null) {
-            if(addressList.size() == 0) Toast.makeText(LocationActivity.this, "해당되는 주소가 없습니다.", Toast.LENGTH_SHORT).show();
+            if(addressList.size() == 0) Toast.makeText(this, "해당되는 주소가 없습니다.", Toast.LENGTH_SHORT).show();
             else {
-                Toast.makeText(LocationActivity.this, addressList.get(0).getAddressLine(0), Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, addressList.get(0).getAddressLine(0), Toast.LENGTH_SHORT).show();
                 Global.locationAddressFromLatLong = addressList.get(0).getAddressLine(0);
+
+                //온 인텐트 에게 다시 보내기기
+                Intent intent = getIntent();
+                intent.putExtra("myLocation", addressList.get(0).getAddressLine(0));
+//                Log.w("TAG", "aaaaaaa" + intent.getStringExtra("myLocation"));
+                setResult(RESULT_OK, intent);
+
+                finish();
+
             }// if else
         }//if(addressList != null)
 
@@ -217,8 +228,6 @@ public class LocationActivity extends AppCompatActivity {
                 googleApiClient = builder.build();
                 googleApiClient.connect();
                 providerClient = LocationServices.getFusedLocationProviderClient(this);
-
-                finish();
 
                 break;
         }//switch case

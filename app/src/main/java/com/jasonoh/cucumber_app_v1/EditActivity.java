@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -32,6 +33,8 @@ public class EditActivity extends AppCompatActivity {
 
         initFindViewById();
 
+
+
     }//onCreate method
 
     public void initFindViewById(){
@@ -48,6 +51,7 @@ public class EditActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         switch (requestCode) {
+            //사진 앱으로 이동
             case PICTURE_SELECT_REQUEST_CODE :
                 if(resultCode == RESULT_OK) {
                     //이미지를 선택했다면
@@ -57,6 +61,16 @@ public class EditActivity extends AppCompatActivity {
                         Glide.with(this).load(uri).into(iv);
                     }
                 }
+                break;
+            //위치로 이동 한 것
+            case Global.REQUEST_LOCATION_FROM_EDIT_ACTIVITY :
+                Log.w("TAG", "aaaaaaa");
+                if(resultCode == RESULT_OK) etLocation.setText(data.getStringExtra("myLocation"));
+                break;
+
+            //날짜정보 창으로 이동 한것
+            case Global.REQUEST_DATE_FROM_EDIT_ACTIVITY :
+                if(resultCode == RESULT_OK) etDate.setText(Global.getDateFromCalendar);
                 break;
         }
 
@@ -72,12 +86,12 @@ public class EditActivity extends AppCompatActivity {
 
             //위치 클릭시
             case R.id.edit_location_iv :
-                startActivity( new Intent( this, LocationActivity.class ));
+                startActivityForResult( new Intent( this, LocationActivity.class ), Global.REQUEST_LOCATION_FROM_EDIT_ACTIVITY);
                 break;
 
             //달력 클릭시
             case R.id.edit_calendar_iv :
-                startActivity( new Intent(this, CalendarActivity.class) );
+                startActivityForResult( new Intent(this, CalendarActivity.class), Global.REQUEST_DATE_FROM_EDIT_ACTIVITY );
                 break;
 
         }// switch case
