@@ -117,28 +117,6 @@ public class FragmentHealthFeed extends Fragment {
 
         confirmLoginInfo();
 
-//        myHealthMembers.add( new FragmentMyHealthMember( "https://i.pinimg.com/originals/c6/f4/4a/c6f44a7aba8db7ae72bfd08e0160c752.png",
-//                "title",
-//                "weight",
-//                "message",
-//                "date" ) );
-
-//        boardMembers.add( new FragmentBoardMember( "https://i.pinimg.com/originals/c6/f4/4a/c6f44a7aba8db7ae72bfd08e0160c752.png",
-//                "title",
-//                "weight",
-//                "message",
-//                "date",
-//                "sample@email.com",
-//                1) );
-//
-//        boardMembers.add( new FragmentBoardMember( "https://i.pinimg.com/originals/c6/f4/4a/c6f44a7aba8db7ae72bfd08e0160c752.png",
-//                "title",
-//                "weight",
-//                "message",
-//                "date",
-//                "sample@email.com",
-//                0) );
-
     }//onCreate method
 
     @Nullable

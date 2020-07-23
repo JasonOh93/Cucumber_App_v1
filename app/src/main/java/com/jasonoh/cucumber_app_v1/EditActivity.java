@@ -246,7 +246,9 @@ public class EditActivity extends AppCompatActivity {
 
         Map<String, String> dataPart = new HashMap<>();
         dataPart.put("personEmail", Global.loginPreferences.getString(Global.LOGIN_EMAIL_KEY, "이메일 없음"));
+
         Log.w("TAG", "아이디!!" + Global.loginPreferences.getString(Global.LOGIN_EMAIL_KEY, "이메일 없음"));
+
         dataPart.put("title", etTitle.getText().toString());
         dataPart.put("location", etLocation.getText().toString());
         dataPart.put("message", etMessage.getText().toString());
@@ -261,13 +263,10 @@ public class EditActivity extends AppCompatActivity {
         dataPart.put("dateShare", cbDateShare.isChecked() + "");
         dataPart.put("weightShare", cbWeightShare.isChecked() + "");
 
-        Log.w("TAG", "Response77");
-
         Call<String> call = retrofitService.postDataToMyBoard(dataPart, filePart);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Log.w("TAG", "Response11");
                 if(response.isSuccessful()) {
                     Log.w("TAG", "Response");
                     Toast.makeText(EditActivity.this, response.body(), Toast.LENGTH_SHORT).show();
@@ -277,7 +276,7 @@ public class EditActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<String> call, Throwable t) {
-                Log.w("TAG", "FAILED" + t.getMessage());
+                Log.w("TAG", "FAILED " + t.getMessage());
             }
         });//call.enqueue(new Callback<String>()
 

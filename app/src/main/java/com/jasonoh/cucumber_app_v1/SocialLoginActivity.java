@@ -68,7 +68,9 @@ public class SocialLoginActivity extends AppCompatActivity {
                 .setPositiveButton(R.string.edit_ok_btn, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) { }
-                }).show();
+                })
+                .setCancelable(false)
+                .show();
     }//initSettingEmail method
 
     @Override
