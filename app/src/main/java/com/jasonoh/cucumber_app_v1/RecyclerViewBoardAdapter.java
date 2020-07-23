@@ -52,6 +52,7 @@ public class RecyclerViewBoardAdapter extends RecyclerView.Adapter<RecyclerView.
 
         CircleImageView civ;
         TextView tvTitle, tvWeight, tvMessage, tvDate, tvEmail;
+        TextView tvLocation;
         ImageView ivChat;
         ToggleButton tgFavor;
 
@@ -67,6 +68,8 @@ public class RecyclerViewBoardAdapter extends RecyclerView.Adapter<RecyclerView.
             tgFavor = itemView.findViewById(R.id.recycler_item_frag_board_favorite);
             ivChat = itemView.findViewById(R.id.recycler_item_frag_board_chat);
 
+            tvLocation = itemView.findViewById(R.id.recycler_item_frag_board_location);
+
         }//constructor
 
         public void setItem(){
@@ -75,7 +78,8 @@ public class RecyclerViewBoardAdapter extends RecyclerView.Adapter<RecyclerView.
             tvMessage.setText( members.get(getLayoutPosition()).message );
             tvDate.setText( members.get(getLayoutPosition()).date );
             tvEmail.setText( members.get(getLayoutPosition()).email );
-            Glide.with(context).load( members.get(getLayoutPosition()).imgUri ).into( civ );
+            tvLocation.setText( members.get(getLayoutPosition()).location );
+            Glide.with(context).load( "http://jasonoh93.dothome.co.kr/CucumberRetrofit/" + members.get(getLayoutPosition()).imgUri ).into( civ );
             tgFavor.setChecked( members.get(getLayoutPosition()).favor == 1 ? true : false );
 
             //채팅 버튼 클릭시 반응

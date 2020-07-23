@@ -68,6 +68,7 @@
                 android:background="@drawable/chat_et_bg"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="8dp"
+                android:inputType="text"
                 android:lines="1"
                 android:padding="8dp"/>
 
@@ -102,6 +103,7 @@
                 android:background="@drawable/chat_et_bg"
                 android:layout_marginTop="8dp"
                 android:layout_marginRight="8dp"
+                android:inputType="text"
                 android:lines="1"
                 android:padding="8dp"/>
 

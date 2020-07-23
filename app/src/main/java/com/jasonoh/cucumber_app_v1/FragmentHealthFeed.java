@@ -76,6 +76,10 @@ public class FragmentHealthFeed extends Fragment {
     private ArrayList<FragmentBoardMember> boardMembers = new ArrayList<>();
     private RecyclerViewBoardAdapter adapterBoard;
 
+    private String boardSeeMoreBtnAllSee;
+    private String boardSeeMoreBtnMyShare;
+    private String boardSeeMoreBtnNoMyShare;
+
 
     public FragmentHealthFeed() {
     }//HomeFragment Constructor (null)
@@ -119,21 +123,21 @@ public class FragmentHealthFeed extends Fragment {
 //                "message",
 //                "date" ) );
 
-        boardMembers.add( new FragmentBoardMember( "https://i.pinimg.com/originals/c6/f4/4a/c6f44a7aba8db7ae72bfd08e0160c752.png",
-                "title",
-                "weight",
-                "message",
-                "date",
-                "sample@email.com",
-                1) );
-
-        boardMembers.add( new FragmentBoardMember( "https://i.pinimg.com/originals/c6/f4/4a/c6f44a7aba8db7ae72bfd08e0160c752.png",
-                "title",
-                "weight",
-                "message",
-                "date",
-                "sample@email.com",
-                0) );
+//        boardMembers.add( new FragmentBoardMember( "https://i.pinimg.com/originals/c6/f4/4a/c6f44a7aba8db7ae72bfd08e0160c752.png",
+//                "title",
+//                "weight",
+//                "message",
+//                "date",
+//                "sample@email.com",
+//                1) );
+//
+//        boardMembers.add( new FragmentBoardMember( "https://i.pinimg.com/originals/c6/f4/4a/c6f44a7aba8db7ae72bfd08e0160c752.png",
+//                "title",
+//                "weight",
+//                "message",
+//                "date",
+//                "sample@email.com",
+//                0) );
 
     }//onCreate method
 
@@ -220,6 +224,7 @@ public class FragmentHealthFeed extends Fragment {
 
     }//clickItem
 
+    //나의 건강 정보 얻어 올때 사용
     public void loadMyHealthInfoData(){
         //나의 건강 정보 불러오기!!
         RetrofitService myRetrofitService = RetrofitHelper.getInstanceGson().create(RetrofitService.class);
@@ -246,7 +251,68 @@ public class FragmentHealthFeed extends Fragment {
                             Log.w("TAG", "이미지 경로 : " + "http://jasonoh93.dothome.co.kr/CucumberRetrofit/" + DBmembers.get(i).file);
 
                             adapterMyHealth.notifyItemInserted(0);
-                        }
+                        } else Toast.makeText(context, "사용자의 이메일 정보가 다릅니다.", Toast.LENGTH_SHORT).show();
+                    }//for
+
+
+                }// if(response.isSuccessful())
+            }// onResponse method
+
+            @Override
+            public void onFailure(Call<ArrayList<FragmentAllShareBoardMember>> call, Throwable t) {
+                Log.w("TAG", "돌아온 객체 실패" + t.getMessage());
+            }
+        });
+    }//loadMyHealthInfoData method
+
+    public void loadBoardData(){
+        //나의 건강 정보 불러오기!!
+        RetrofitService myRetrofitService = RetrofitHelper.getInstanceGson().create(RetrofitService.class);
+        Call<ArrayList<FragmentAllShareBoardMember>> call = myRetrofitService.loadDataFromCucumberBoard();
+        call.enqueue(new Callback<ArrayList<FragmentAllShareBoardMember>>() {
+            @Override
+            public void onResponse(Call<ArrayList<FragmentAllShareBoardMember>> call, Response<ArrayList<FragmentAllShareBoardMember>> response) {
+                if(response.isSuccessful()) {
+                    ArrayList<FragmentAllShareBoardMember> DBmembers = response.body();
+                    Log.w("TAG", "돌아온 객체" + DBmembers.toString());
+
+                    boardMembers.clear();
+                    adapterBoard.notifyDataSetChanged();
+
+                    for(int i = 0; i < DBmembers.size(); i++) {
+                        if(Boolean.parseBoolean(DBmembers.get(i).allShare)) {
+                            boardMembers.add(0,
+                                    new FragmentBoardMember(DBmembers.get(i).file,
+                                            DBmembers.get(i).title,
+                                            DBmembers.get(i).weight + "kg",
+                                            DBmembers.get(i).message,
+                                            DBmembers.get(i).date,
+                                            DBmembers.get(i).personEmail,
+                                            DBmembers.get(i).location,
+                                            DBmembers.get(i).favor));
+
+                            Log.w("TAG", "이미지 경로 : " + "http://jasonoh93.dothome.co.kr/CucumberRetrofit/" + DBmembers.get(i).file);
+
+                            adapterBoard.notifyItemInserted(0);
+                            // todo : 아래의 부분은 HealthFeed Board 에서 사용되는 것인데 각각 선택된 항목만 나오는 것이 안된다//
+                        } else if(Boolean.parseBoolean(DBmembers.get(i).titleShare) ||
+                                Boolean.parseBoolean(DBmembers.get(i).pictureShare) ||
+                                Boolean.parseBoolean(DBmembers.get(i).locationShare) ||
+                                Boolean.parseBoolean(DBmembers.get(i).messageShare) ||
+                                Boolean.parseBoolean(DBmembers.get(i).dateShare) ||
+                                Boolean.parseBoolean(DBmembers.get(i).weightShare)) {
+                            new FragmentBoardMember(
+                                    Boolean.parseBoolean(DBmembers.get(i).pictureShare) ? DBmembers.get(i).file : null,
+                                    Boolean.parseBoolean(DBmembers.get(i).titleShare) ? DBmembers.get(i).title : null,
+                                    Boolean.parseBoolean(DBmembers.get(i).weightShare) ? DBmembers.get(i).weight : null,
+                                    Boolean.parseBoolean(DBmembers.get(i).messageShare) ? DBmembers.get(i).message : null,
+                                    Boolean.parseBoolean(DBmembers.get(i).dateShare) ? DBmembers.get(i).date : null,
+                                    DBmembers.get(i).personEmail,
+                                    Boolean.parseBoolean(DBmembers.get(i).locationShare) ? DBmembers.get(i).location : null,
+                                    DBmembers.get(i).favor);
+
+                            adapterBoard.notifyItemInserted(0);
+                        } else Toast.makeText(context, "게시된 항목이 없습니다.", Toast.LENGTH_SHORT).show();
                     }
 
 
@@ -258,7 +324,7 @@ public class FragmentHealthFeed extends Fragment {
                 Log.w("TAG", "돌아온 객체 실패" + t.getMessage());
             }
         });
-    }//loadMyHealthInfoData method
+    }//loadBoardData method
 
     public void setMyHealthRecyclerItem(){
         adapterMyHealth = new RecyclerViewMyHealthAdapter(context, myHealthMembers);
@@ -270,6 +336,8 @@ public class FragmentHealthFeed extends Fragment {
     public void setBoardRecyclerItem(){
         adapterBoard = new RecyclerViewBoardAdapter(context, boardMembers);
         recyclerViewBoard.setAdapter( adapterBoard );
+
+        loadBoardData();
     }//setBoardRecyclerItem method
 
     public void clickMyHealthFeed(){

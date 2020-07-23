@@ -193,7 +193,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_below="@id/edit_share_weight_check_box"
                         android:layout_toRightOf="@id/edit_date_et"
-                        android:inputType="text"
+                        android:inputType="number"
                         android:maxLines="1"/>
 
                     <LinearLayout

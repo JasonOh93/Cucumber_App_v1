@@ -11,7 +11,7 @@ package com.jasonoh.cucumber_app_v1;
 //                              검색 화면 설정하기 (Search Activity)
 //                              위치 불러오기
 //                              근처 병원및 등등 알아오기
-//  Health Feed Fragment : 업로드 한 데이터 불러오기
+//  Health Feed Fragment : 업로드 한 데이터 불러오기   = 일부 함 불러오기만 OK
 //                          나의건강기록에서 차트 설정하기
 //                          게시판 작업시 favor 설정 하기 (우선 boolean으로 하고 다음에 점점 올라가는 것으로 변경하기)
 //                          게시판 더보기 클릭시 각각 분류별로 나오도록 해보기

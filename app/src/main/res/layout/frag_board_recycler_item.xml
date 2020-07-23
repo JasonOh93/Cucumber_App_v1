@@ -45,13 +45,25 @@
             android:maxLines="1"/>
 
         <TextView
+            android:id="@+id/recycler_item_frag_board_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sample location"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@id/recycler_item_frag_board_civ"
+            android:layout_below="@id/recycler_item_frag_board_email"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="20dp"
+            android:maxLines="1"/>
+
+        <TextView
             android:id="@+id/recycler_item_frag_board_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sample msg"
             android:textColor="@android:color/black"
             android:layout_toRightOf="@id/recycler_item_frag_board_civ"
-            android:layout_below="@id/recycler_item_frag_board_email"
+            android:layout_below="@id/recycler_item_frag_board_location"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:layout_marginLeft="20dp"

@@ -3,11 +3,13 @@ package com.jasonoh.cucumber_app_v1;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -26,6 +28,9 @@ import java.util.ArrayList;
 public class FragmentHealthInfo extends Fragment {
 
     private Context context;
+
+    private EditText etWebSearch, etYouTubeSearch;
+    private ImageView ivWebSearch, ivYouTubeSearch;
 
 
     public FragmentHealthInfo() {
@@ -52,6 +57,10 @@ public class FragmentHealthInfo extends Fragment {
         ((MainActivity) getActivity()).setSupportActionBar( view.findViewById(R.id.frag_health_info_toolbar) );
         getActivity().setTitle("");
 
+        etWebSearch = view.findViewById(R.id.frag_health_info_web_search_et);
+        etYouTubeSearch = view.findViewById(R.id.frag_health_info_youtube_search_et);
+        ivWebSearch = view.findViewById(R.id.frag_health_info_web_search_iv);
+        ivYouTubeSearch = view.findViewById(R.id.frag_health_info_youtube_search_iv);
 
         return view;
     }//onCreateView method
@@ -67,7 +76,26 @@ public class FragmentHealthInfo extends Fragment {
 
     public void clickItem(){
 
+        //웹 검색 클릭시
+        ivWebSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse( "https://search.naver.com/search.naver?sm=top_hty&fbm=1&ie=utf8&query="
+                        + etWebSearch.getText().toString() ));
+                startActivity( intent );
+                etWebSearch.setText("");
+            }
+        });// ivWebSearch.setOnClickListener
 
+        //유투브 검색 클릭시
+        ivYouTubeSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });// ivYouTubeSearch.setOnClickListener
     }//clickItem
 
 
