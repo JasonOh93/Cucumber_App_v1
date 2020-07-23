@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,8 +44,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FragmentHealthFeed extends Fragment {
 
@@ -108,11 +113,11 @@ public class FragmentHealthFeed extends Fragment {
 
         confirmLoginInfo();
 
-        myHealthMembers.add( new FragmentMyHealthMember( "https://i.pinimg.com/originals/c6/f4/4a/c6f44a7aba8db7ae72bfd08e0160c752.png",
-                "title",
-                "weight",
-                "message",
-                "date" ) );
+//        myHealthMembers.add( new FragmentMyHealthMember( "https://i.pinimg.com/originals/c6/f4/4a/c6f44a7aba8db7ae72bfd08e0160c752.png",
+//                "title",
+//                "weight",
+//                "message",
+//                "date" ) );
 
         boardMembers.add( new FragmentBoardMember( "https://i.pinimg.com/originals/c6/f4/4a/c6f44a7aba8db7ae72bfd08e0160c752.png",
                 "title",
@@ -216,15 +221,50 @@ public class FragmentHealthFeed extends Fragment {
     }//clickItem
 
     public void loadMyHealthInfoData(){
+        //나의 건강 정보 불러오기!!
+        RetrofitService myRetrofitService = RetrofitHelper.getInstanceGson().create(RetrofitService.class);
+        Call<ArrayList<FragmentAllShareBoardMember>> call = myRetrofitService.loadDataFromCucumberBoard();
+        call.enqueue(new Callback<ArrayList<FragmentAllShareBoardMember>>() {
+            @Override
+            public void onResponse(Call<ArrayList<FragmentAllShareBoardMember>> call, Response<ArrayList<FragmentAllShareBoardMember>> response) {
+                if(response.isSuccessful()) {
+                    ArrayList<FragmentAllShareBoardMember> DBmembers = response.body();
+                    Log.w("TAG", "돌아온 나의건강정보" + DBmembers.toString());
 
+                    myHealthMembers.clear();
+                    adapterMyHealth.notifyDataSetChanged();
+
+                    for(int i = 0; i < DBmembers.size(); i++) {
+                        if(Global.loginPreferences.getString(Global.LOGIN_EMAIL_KEY, "이메일 없음")
+                                .equals(DBmembers.get(i).personEmail)){
+                            myHealthMembers.add(0, new FragmentMyHealthMember( DBmembers.get(i).file,
+                                    DBmembers.get(i).title,
+                                    DBmembers.get(i).weight,
+                                    DBmembers.get(i).message,
+                                    DBmembers.get(i).date));
+
+                            Log.w("TAG", "이미지 경로 : " + "http://jasonoh93.dothome.co.kr/CucumberRetrofit/" + DBmembers.get(i).file);
+
+                            adapterMyHealth.notifyItemInserted(0);
+                        }
+                    }
+
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<FragmentAllShareBoardMember>> call, Throwable t) {
+                Log.w("TAG", "돌아온 객체 실패" + t.getMessage());
+            }
+        });
     }//loadMyHealthInfoData method
 
     public void setMyHealthRecyclerItem(){
-
-        loadMyHealthInfoData();
-
         adapterMyHealth = new RecyclerViewMyHealthAdapter(context, myHealthMembers);
         recyclerViewMyHealth.setAdapter( adapterMyHealth );
+
+        loadMyHealthInfoData();
     }//setMyHealthRecyclerItem method
 
     public void setBoardRecyclerItem(){

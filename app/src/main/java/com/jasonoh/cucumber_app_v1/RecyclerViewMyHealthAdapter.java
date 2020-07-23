@@ -68,7 +68,7 @@ public class RecyclerViewMyHealthAdapter extends RecyclerView.Adapter<RecyclerVi
             tvWeight.setText( members.get(getLayoutPosition()).weight );
             tvMessage.setText( members.get(getLayoutPosition()).message );
             tvDate.setText( members.get(getLayoutPosition()).date );
-            Glide.with(context).load( members.get(getLayoutPosition()).imgUri ).into( civ );
+            Glide.with(context).load( "http://jasonoh93.dothome.co.kr/CucumberRetrofit/" + members.get(getLayoutPosition()).imgUri ).into( civ );
         }//setItem method
 
     }// inner class ViewHolder

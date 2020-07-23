@@ -28,6 +28,7 @@
             android:textColor="@android:color/black"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:layout_below="@id/recycler_item_frag_board_date"
             android:layout_toRightOf="@id/recycler_item_frag_board_civ"
             android:layout_marginLeft="20dp"/>
 
