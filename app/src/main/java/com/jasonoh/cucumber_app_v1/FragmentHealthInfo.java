@@ -22,8 +22,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
 
 import java.util.ArrayList;
+
+import kr.co.prnd.YouTubePlayerView;
 
 public class FragmentHealthInfo extends Fragment {
 
@@ -31,6 +35,8 @@ public class FragmentHealthInfo extends Fragment {
 
     private EditText etWebSearch, etYouTubeSearch;
     private ImageView ivWebSearch, ivYouTubeSearch;
+
+    private YouTubePlayerView youTubePlayerView;
 
 
     public FragmentHealthInfo() {
@@ -62,6 +68,8 @@ public class FragmentHealthInfo extends Fragment {
         ivWebSearch = view.findViewById(R.id.frag_health_info_web_search_iv);
         ivYouTubeSearch = view.findViewById(R.id.frag_health_info_youtube_search_iv);
 
+        youTubePlayerView = view.findViewById(R.id.frag_health_info_youtube_view);
+
         return view;
     }//onCreateView method
 
@@ -72,7 +80,25 @@ public class FragmentHealthInfo extends Fragment {
 
         clickItem();
 
+        loadYouTube();
+
     }//onViewCreated method
+
+    //todo : 유투브 알아보기
+    //  https://github.com/PRNDcompany/YouTubePlayerView
+    public void loadYouTube(){
+        youTubePlayerView.play("fyyiEBit8F0", new YouTubePlayerView.OnInitializedListener() {
+            @Override
+            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
+
+            }
+
+            @Override
+            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
+
+            }
+        });
+    }//loadYouTube method
 
     public void clickItem(){
 

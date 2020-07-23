@@ -119,6 +119,13 @@
 
         <!--      YouTube 넣기      -->
 
+            <kr.co.prnd.YouTubePlayerView
+                android:id="@+id/frag_health_info_youtube_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/frag_health_info_line"
+                android:layout_marginTop="8dp"/>
+
 
         </RelativeLayout>
 

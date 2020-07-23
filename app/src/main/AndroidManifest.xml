@@ -55,7 +55,8 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.MainActivity"
-            android:windowSoftInputMode="adjustResize" /> <!-- 카카오 앱키 설정 -->
+            android:windowSoftInputMode="adjustResize"
+            android:configChanges="orientation"/> <!-- 카카오 앱키 설정 -->
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_api_key" /> <!-- 구글 API 키 -->
