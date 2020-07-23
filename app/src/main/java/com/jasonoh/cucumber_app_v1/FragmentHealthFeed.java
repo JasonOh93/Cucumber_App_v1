@@ -215,7 +215,14 @@ public class FragmentHealthFeed extends Fragment {
 
     }//clickItem
 
+    public void loadMyHealthInfoData(){
+
+    }//loadMyHealthInfoData method
+
     public void setMyHealthRecyclerItem(){
+
+        loadMyHealthInfoData();
+
         adapterMyHealth = new RecyclerViewMyHealthAdapter(context, myHealthMembers);
         recyclerViewMyHealth.setAdapter( adapterMyHealth );
     }//setMyHealthRecyclerItem method

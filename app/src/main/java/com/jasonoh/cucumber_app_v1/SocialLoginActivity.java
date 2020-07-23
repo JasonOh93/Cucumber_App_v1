@@ -1,8 +1,10 @@
 package com.jasonoh.cucumber_app_v1;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -44,6 +46,8 @@ public class SocialLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social_login);
 
+        initSettingEmail();
+
         toolbar = findViewById(R.id.social_login_toolbar);
         setSupportActionBar( toolbar );
         getSupportActionBar().setTitle("");
@@ -57,6 +61,15 @@ public class SocialLoginActivity extends AppCompatActivity {
         Session.getCurrentSession().addCallback( sessionCallback );
 
     }//onCreate method
+
+    // 로그인시 필수로 이메일을 넣어야 사용이 가능하다는 것을 알려주기 위한 설정
+    public void initSettingEmail(){
+        new AlertDialog.Builder(this).setMessage("나의건강기록 및 게시판을 정상적으로 사용하기 위해서는 이메일을 필수로 넣어야 합니다.")
+                .setPositiveButton(R.string.edit_ok_btn, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) { }
+                }).show();
+    }//initSettingEmail method
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

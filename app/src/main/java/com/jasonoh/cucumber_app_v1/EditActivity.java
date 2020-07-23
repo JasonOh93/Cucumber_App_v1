@@ -245,6 +245,8 @@ public class EditActivity extends AppCompatActivity {
         }
 
         Map<String, String> dataPart = new HashMap<>();
+        dataPart.put("personEmail", Global.loginPreferences.getString(Global.LOGIN_EMAIL_KEY, "이메일 없음"));
+        Log.w("TAG", "아이디!!" + Global.loginPreferences.getString(Global.LOGIN_EMAIL_KEY, "이메일 없음"));
         dataPart.put("title", etTitle.getText().toString());
         dataPart.put("location", etLocation.getText().toString());
         dataPart.put("message", etMessage.getText().toString());
