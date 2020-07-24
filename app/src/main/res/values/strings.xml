@@ -32,12 +32,12 @@
 
     <string-array name="hospital_alert_dialog_medical_subject">
         <item>일반 진료 병원</item>
-<!--        <item>전체 진료 과목</item>-->
-<!--        <item>외과</item>-->
-<!--        <item>내과</item>-->
-<!--        <item>피부과</item>-->
-<!--        <item>치과</item>-->
-<!--        <item>종합병원</item>-->
+        <!--        <item>전체 진료 과목</item>-->
+        <!--        <item>외과</item>-->
+        <!--        <item>내과</item>-->
+        <!--        <item>피부과</item>-->
+        <!--        <item>치과</item>-->
+        <!--        <item>종합병원</item>-->
         <item>코로나 안심병원</item>
     </string-array>
 
@@ -139,5 +139,11 @@
     <!--  Calendar Activity  -->
     <string name="calendar_top_name">달력</string>
     <string name="calendar_select_btn">선택</string>
+
+    <!--  YouTubeDetailListActivity  -->
+    <string name="youtube_detail_list_top_title">YouTube 검색</string>
+    <string name="youtube_detail_list_search_hint_et">검색어를 입력하세요</string>
+    <string name="youtube_detail_list_search_btn">YouTube에서 보기</string>
+
 
 </resources>

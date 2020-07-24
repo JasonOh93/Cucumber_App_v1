@@ -119,7 +119,9 @@ public class FragmentHealthInfo extends Fragment {
         ivYouTubeSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(context, YouTubeDetailListActivity.class);
+                intent.putExtra("SearchText", etYouTubeSearch.getText().toString());
+                startActivity( intent );
             }
         });// ivYouTubeSearch.setOnClickListener
     }//clickItem

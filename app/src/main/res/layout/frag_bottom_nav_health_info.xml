@@ -33,7 +33,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <RelativeLayout
-            android:id="@+id/frag_health_info_linear"
+            android:id="@+id/frag_health_info_relative"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="8dp">

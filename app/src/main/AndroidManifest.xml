@@ -19,7 +19,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AppIntroPasswordActivity"></activity>
+        <activity android:name=".YouTubeDetailListActivity"></activity>
+        <activity android:name=".AppIntroPasswordActivity" />
         <activity android:name=".ChattingActivity" />
         <activity android:name=".EditActivity" />
         <activity android:name=".SearchHospitalAndPharmacyActivity" />
@@ -54,9 +55,9 @@
         </activity>
         <activity
             android:name=".MainActivity"
+            android:configChanges="orientation"
             android:theme="@style/AppTheme.MainActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:configChanges="orientation"/> <!-- 카카오 앱키 설정 -->
+            android:windowSoftInputMode="adjustResize" /> <!-- 카카오 앱키 설정 -->
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_api_key" /> <!-- 구글 API 키 -->

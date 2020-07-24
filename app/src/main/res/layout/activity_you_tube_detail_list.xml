@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".YouTubeDetailListActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@android:color/white">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/youtube_detail_list_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/youtube_detail_list_back_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_back_black_24dp"
+                    android:background="@android:color/white"
+                    android:clickable="true"
+                    android:onClick="clickBackBtn"/>
+
+                <TextView
+                    android:id="@+id/youtube_detail_list_top_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/youtube_detail_list_top_title"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:layout_marginLeft="25dp"/>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <RelativeLayout
+            android:id="@+id/youtube_detail_list_relative"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="8dp">
+
+            <ImageView
+                android:id="@+id/youtube_detail_list_search_iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_search_black_24dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="8dp"
+                android:clickable="true"
+                android:onClick="clickIv"/>
+
+            <EditText
+                android:id="@+id/youtube_detail_list_search_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@id/youtube_detail_list_search_iv"
+                android:background="@drawable/chat_et_bg"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:inputType="text"
+                android:hint="@string/youtube_detail_list_search_hint_et"
+                android:lines="1"
+                android:padding="8dp"/>
+
+            <Button
+                android:id="@+id/youtube_detail_list_link_youtube_see_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/youtube_detail_list_search_et"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/mymenu_btn_selector"
+                android:textAllCaps="false"
+                android:text="@string/youtube_detail_list_search_btn"
+                android:onClick="clickBtn"/>
+
+
+            <View
+                android:id="@+id/youtube_detail_list_line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_below="@id/youtube_detail_list_link_youtube_see_btn"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="16dp"/>
+
+            <!--     들어가야 할 내용
+                   1. -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/youtube_detail_list_detail_youtube_info_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/youtube_detail_list_line"
+                android:layout_marginTop="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"/>
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>
