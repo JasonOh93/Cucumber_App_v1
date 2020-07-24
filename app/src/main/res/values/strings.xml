@@ -143,7 +143,7 @@
     <!--  YouTubeDetailListActivity  -->
     <string name="youtube_detail_list_top_title">YouTube 검색</string>
     <string name="youtube_detail_list_search_hint_et">검색어를 입력하세요</string>
-    <string name="youtube_detail_list_search_btn">YouTube에서 보기</string>
+    <string name="youtube_detail_list_search_btn">YouTube로 이동하여 검색</string>
 
 
 </resources>

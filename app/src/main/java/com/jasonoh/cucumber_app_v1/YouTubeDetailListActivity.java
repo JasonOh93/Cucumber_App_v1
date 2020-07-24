@@ -1,6 +1,8 @@
 package com.jasonoh.cucumber_app_v1;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -134,5 +136,9 @@ public class YouTubeDetailListActivity extends AppCompatActivity {
 
     public void clickBtn(View view) {
         //유투브 검색으로 보내버리기
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse("https://www.youtube.com/results?search_query=" + etSearchYouTube.getText().toString()));
+        startActivity( intent );
     }//clickBtn method
 }//YouTubeDetailListActivity class
