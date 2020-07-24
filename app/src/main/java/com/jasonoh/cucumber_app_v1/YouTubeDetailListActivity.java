@@ -140,5 +140,6 @@ public class YouTubeDetailListActivity extends AppCompatActivity {
         intent.setAction(Intent.ACTION_VIEW);
         intent.setData(Uri.parse("https://www.youtube.com/results?search_query=" + etSearchYouTube.getText().toString()));
         startActivity( intent );
+        etSearchYouTube.setText("");
     }//clickBtn method
 }//YouTubeDetailListActivity class
