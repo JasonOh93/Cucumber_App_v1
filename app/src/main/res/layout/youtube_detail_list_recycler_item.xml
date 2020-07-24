@@ -11,17 +11,35 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <kr.co.prnd.YouTubePlayerView
-            android:id="@+id/recycler_item_youtube_detail_youtube_view"
-            android:layout_width="120dp"
-            android:layout_height="90dp"
-            android:layout_centerVertical="true"/>
-
-<!--        <Button-->
+            <!--    처음 찾은 유투브 활용법    -->
+<!--        <kr.co.prnd.YouTubePlayerView-->
 <!--            android:id="@+id/recycler_item_youtube_detail_youtube_view"-->
 <!--            android:layout_width="120dp"-->
 <!--            android:layout_height="90dp"-->
 <!--            android:layout_centerVertical="true"/>-->
+
+            <!--   이전 사용법     -->
+<!--        <fragment-->
+<!--            android:id="@+id/recycler_item_youtube_detail_youtube_view"-->
+<!--            android:layout_width="120dp"-->
+<!--            android:layout_height="90dp"-->
+<!--            android:name="com.google.android.youtube.player.YouTubePlayerFragment"-->
+<!--            android:layout_centerVertical="true"/>-->
+
+            <!--    새로 찾은 유투브 활용법    -->
+<!--        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView-->
+<!--            android:id="@+id/recycler_item_youtube_detail_youtube_view"-->
+<!--            android:layout_width="120dp"-->
+<!--            android:layout_height="90dp"-->
+<!--            app:autoPlay="false"-->
+<!--            app:showFullScreenButton="false"-->
+<!--            android:layout_centerVertical="true"/>-->
+
+        <ImageView
+            android:id="@+id/recycler_item_youtube_detail_youtube_view"
+            android:layout_width="120dp"
+            android:layout_height="90dp"
+            android:layout_centerVertical="true"/>
 
         <TextView
             android:id="@+id/recycler_item_youtube_detail_title"

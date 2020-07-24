@@ -2,8 +2,6 @@ package com.jasonoh.cucumber_app_v1;
 
 import android.content.SharedPreferences;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-
 public class Global {
     //전체에서 사용 할수 있도록 하는 것
 

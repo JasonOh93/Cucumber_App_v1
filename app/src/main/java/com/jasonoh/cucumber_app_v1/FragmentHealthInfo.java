@@ -1,31 +1,21 @@
 package com.jasonoh.cucumber_app_v1;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.github.mikephil.charting.charts.LineChart;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
-
-import java.util.ArrayList;
 
 import kr.co.prnd.YouTubePlayerView;
 
@@ -80,12 +70,17 @@ public class FragmentHealthInfo extends Fragment {
 
         clickItem();
 
-        loadYouTube();
-
     }//onViewCreated method
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadYouTube();
+    }
 
     //todo : 유투브 알아보기
     //  https://github.com/PRNDcompany/YouTubePlayerView
+    //      이것은 한개의 뷰밖에 볼수가 없다 그러므로 여러개의 뷰를 볼수 있는 것으로 바뀌어야 한다.
     public void loadYouTube(){
         youTubePlayerView.play("fyyiEBit8F0", new YouTubePlayerView.OnInitializedListener() {
             @Override
@@ -98,6 +93,7 @@ public class FragmentHealthInfo extends Fragment {
 
             }
         });
+
     }//loadYouTube method
 
     public void clickItem(){

@@ -1,14 +1,13 @@
 package com.jasonoh.cucumber_app_v1;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.OrientationHelper;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Selection;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.OrientationHelper;
 
 import com.applikeysolutions.cosmocalendar.utils.SelectionType;
 import com.applikeysolutions.cosmocalendar.view.CalendarView;

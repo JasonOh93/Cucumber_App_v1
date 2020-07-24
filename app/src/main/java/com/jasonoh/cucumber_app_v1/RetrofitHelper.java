@@ -18,6 +18,13 @@ public class RetrofitHelper {
                 .baseUrl("http://jasonoh93.dothome.co.kr/")
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
-    }
+    }//getInstanceScalars
+
+    public static Retrofit getInstanceGsonYouTube(){
+        return new Retrofit.Builder()
+                .baseUrl("https://www.googleapis.com")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+    }//getInstanceGsonYouTube
 
 }//RetrofitHelper class

@@ -3,8 +3,6 @@ package com.jasonoh.cucumber_app_v1;
 import android.app.Activity;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 public class BackPressCloseAppHandler {
 
     // 하단 뒤로가기 버튼 두번 클릭시 종료 되도록 하는 것

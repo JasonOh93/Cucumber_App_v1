@@ -1,9 +1,9 @@
 package com.jasonoh.cucumber_app_v1;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ChattingActivity extends AppCompatActivity {
 

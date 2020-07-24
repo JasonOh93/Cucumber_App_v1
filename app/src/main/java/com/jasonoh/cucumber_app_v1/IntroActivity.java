@@ -20,11 +20,11 @@ package com.jasonoh.cucumber_app_v1;
 // Health Information Fragment : 검색어 누를시 웹으로 검색 시키기
 //                               유투브 검색시 해당 유투브 나오도록 설정
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class IntroActivity extends AppCompatActivity {
 

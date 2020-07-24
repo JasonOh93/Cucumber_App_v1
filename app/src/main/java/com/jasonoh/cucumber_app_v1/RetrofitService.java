@@ -10,6 +10,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
+import retrofit2.http.Query;
 
 public interface RetrofitService {
 
@@ -17,16 +18,14 @@ public interface RetrofitService {
     @POST("/CucumberRetrofit/insertDB.php")
     Call<String> postDataToMyBoard(@PartMap Map<String, String> dataPart, @Part MultipartBody.Part filePart);
 
-//    @GET("/CucumberRetrofit/loadMyHealthInfoDB.php")
-//    Call<ArrayList<FragmentMyHealthMember>> loadDataFromMyHealthInfoCucumberBoard();
-
-    @GET("/CucumberRetrofit/loadMyHealthInfoDB.php")
-    Call<Map<String, Object>> loadDataFromMyHealthInfoCucumberBoard();
-
-//    @GET("/CucumberRetrofit/loadBoardDB.php")
-//    Call<ArrayList<FragmentBoardMember>> loadDataFromCucumberBoard();
-
     @GET("/CucumberRetrofit/loadMyHealthInfoDB.php")
     Call<ArrayList<FragmentAllShareBoardMember>> loadDataFromCucumberBoard();
+
+    // 요청 파라미터 : key(필수), part(필수), q(검색어), maxResults(결과 개수 0~50개) default로 5개
+    @GET("/youtube/v3/search")
+    Call<Map<String, Object>> loadDataFromYouTube(@Query("key") String key,
+                                                  @Query("part") String part,
+                                                  @Query("q") String q,
+                                                  @Query("maxResult") int maxResult);
 
 }//RetrofitService interface
