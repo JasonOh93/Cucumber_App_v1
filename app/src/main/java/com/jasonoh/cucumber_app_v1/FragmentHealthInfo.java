@@ -4,11 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -75,24 +77,20 @@ public class FragmentHealthInfo extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        Log.w("TAG", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         loadYouTube();
+
     }
 
     //todo : 유투브 알아보기
     //  https://github.com/PRNDcompany/YouTubePlayerView
     //      이것은 한개의 뷰밖에 볼수가 없다 그러므로 여러개의 뷰를 볼수 있는 것으로 바뀌어야 한다.
     public void loadYouTube(){
-        youTubePlayerView.play("fyyiEBit8F0", new YouTubePlayerView.OnInitializedListener() {
-            @Override
-            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-
-            }
-
-            @Override
-            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-
-            }
-        });
+        if(Global.youTubeVideoId != null) {
+            Log.w("TAG", "bbbbbbbbbbbbbbbbbbbbb");
+            youTubePlayerView.setVisibility(View.VISIBLE);
+            youTubePlayerView.play(Global.youTubeVideoId, null);
+        } else youTubePlayerView.setVisibility(View.GONE);
 
     }//loadYouTube method
 
@@ -118,6 +116,7 @@ public class FragmentHealthInfo extends Fragment {
                 Intent intent = new Intent(context, YouTubeDetailListActivity.class);
                 intent.putExtra("SearchText", etYouTubeSearch.getText().toString());
                 startActivity( intent );
+                etYouTubeSearch.setText("");
             }
         });// ivYouTubeSearch.setOnClickListener
     }//clickItem

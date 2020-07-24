@@ -1,13 +1,16 @@
 package com.jasonoh.cucumber_app_v1;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -36,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     //하단 뒤로가기 버튼 두번 클릭시 종료되도록
     BackPressCloseAppHandler backPressCloseAppHandler;
 
+    final int LOCATION_ACCESS_REQUEST_CODE = 600;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
         backPressCloseAppHandler = new BackPressCloseAppHandler(this);
 
+        getLocation();
+
 //        switch (bottomNavigationView.getMenu().findItem(bottomNavigationView.getSelectedItemId()).getItemId()) {
 //            case R.id.menu_home :
 //                Toast.makeText(this, bottomNavigationView.getMenu().findItem(bottomNavigationView.getSelectedItemId()).getTitle(), Toast.LENGTH_SHORT).show();
@@ -59,6 +65,29 @@ public class MainActivity extends AppCompatActivity {
 //        }
 
     }//onCreate Method
+
+    public void getLocation(){
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+                requestPermissions( new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_ACCESS_REQUEST_CODE );
+        }
+    }//getLocation method
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode) {
+            case LOCATION_ACCESS_REQUEST_CODE :
+                if(grantResults[0] == PackageManager.PERMISSION_DENIED){
+                    Toast.makeText(this, "위치 정보 사용을 거부하셨습니다.\n사용자의 위치 탐색이 불가합니다.", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                break;
+        }
+
+    }//onRequestPermissionsResult method
 
     public void setBottomNav(){
 

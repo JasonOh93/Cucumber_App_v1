@@ -68,5 +68,8 @@ public class Global {
     final static int REQUEST_DATE_FROM_EDIT_ACTIVITY = 211;
     final static int REQUEST_STORAGE_FROM_EDIT_ACTIVITY = 212;
 
+    //YouTube Detail List Activity
+    static String youTubeVideoId;
+
 
 }//Global class

@@ -1,9 +1,12 @@
 package com.jasonoh.cucumber_app_v1;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -116,8 +119,17 @@ public class YouTubeDetailListActivity extends AppCompatActivity {
 
     public void clickIv(View view) {
         // 리스트로 항목 보여주기
-        query = etSearchYouTube.getText().toString();
-        loadDataFromYouTube();
+        if(!etSearchYouTube.getText().toString().equals("")){
+            query = etSearchYouTube.getText().toString();
+            loadDataFromYouTube();
+
+            //소프트 키패드를 안보이도록
+            InputMethodManager imm =  (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0); //flags 는 즉시하려면 0
+            //imm.showSoftInput() //화면에 보일때는 show
+
+        } else Toast.makeText(this, "검색어를 입력하세요", Toast.LENGTH_SHORT).show();;
+
     }//clickIv method
 
     public void clickBtn(View view) {

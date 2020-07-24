@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -57,6 +58,14 @@ public class YouTubeDetailListAdapter extends RecyclerView.Adapter<RecyclerView.
             tvChannelTitle = itemView.findViewById(R.id.recycler_item_youtube_detail_channel_title);
             tvPublishTime = itemView.findViewById(R.id.recycler_item_youtube_detail_publish_time);
             ivYouTubeThumbnails = itemView.findViewById(R.id.recycler_item_youtube_detail_youtube_view);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Global.youTubeVideoId = items.get(getLayoutPosition()).videoId;
+                    ((AppCompatActivity)context).finish();
+                }
+            });
 
         }//constructor
 

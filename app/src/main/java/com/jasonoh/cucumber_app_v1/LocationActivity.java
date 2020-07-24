@@ -61,6 +61,7 @@ public class LocationActivity extends AppCompatActivity {
     FusedLocationProviderClient providerClient;
     final int LOCATION_ACCESS_REQUEST_CODE = 600;
 
+    //메인 엑티비티에 적었음
     public void getLocation(){
 
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -162,6 +163,7 @@ public class LocationActivity extends AppCompatActivity {
     }//onPause method
 
 
+    //메인 엑티비티에 적었음
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
