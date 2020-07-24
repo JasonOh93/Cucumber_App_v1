@@ -3,9 +3,14 @@
     package="com.jasonoh.cucumber_app_v1">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".MyApplication"
+        android:allowAudioPlaybackCapture="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,13 +19,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-        <!--   카카오 앱키 설정     -->
-        <meta-data
-            android:name="com.kakao.sdk.AppKey"
-            android:value="38df59b6a482263085938b8e57e640f7" />
-
-        <activity android:name=".SocialLoginActivity"></activity>
+        <activity android:name=".YouTubeDetailListActivity"></activity>
+        <activity android:name=".AppIntroPasswordActivity" />
+        <activity android:name=".ChattingActivity" />
+        <activity android:name=".EditActivity" />
+        <activity android:name=".SearchHospitalAndPharmacyActivity" />
+        <activity
+            android:name=".FavoritesHospitalAndPharmacyActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".SocialLoginActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".AppInnerPasswordActivity"
             android:windowSoftInputMode="adjustResize" />
@@ -29,6 +38,7 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".LocationActivity"
+            android:theme="@style/AppTheme.LocationActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".CalendarActivity"
@@ -45,8 +55,15 @@
         </activity>
         <activity
             android:name=".MainActivity"
+            android:configChanges="orientation"
             android:theme="@style/AppTheme.MainActivity"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize" /> <!-- 카카오 앱키 설정 -->
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="@string/kakao_api_key" /> <!-- 구글 API 키 -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_api_key" />
     </application>
 
 </manifest>

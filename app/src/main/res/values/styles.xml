@@ -5,7 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary_my</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark_my</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorPrimaryDark_my</item>
     </style>
 
     <!-- IntroActivity theme. -->
@@ -13,15 +13,23 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary_my</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark_my</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorPrimaryDark_my</item>
     </style>
 
-    <!-- Base application theme. -->
+    <!-- MainActivity theme. -->
     <style name="AppTheme.MainActivity" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary_my</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark_my</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorPrimaryDark_my</item>
+    </style>
+
+    <!-- Location theme. -->
+    <style name="AppTheme.LocationActivity" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary_my</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_my</item>
+        <item name="colorAccent">@color/colorPrimaryDark_my</item>
     </style>
 
 </resources>

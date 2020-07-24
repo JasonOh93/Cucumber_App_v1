@@ -37,6 +37,7 @@
                 android:id="@+id/social_login_relative"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@android:color/white"
                 android:padding="16dp">
 
                 <TextView
@@ -53,6 +54,21 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_marginBottom="16dp"/>
+
+                <com.google.android.gms.common.SignInButton
+                    android:id="@+id/social_login_google"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/social_login_kakao"
+                    android:layout_marginBottom="16dp"/>
+
+<!--                <Button-->
+<!--                    android:id="@+id/logout_btn"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_below="@id/social_login_kakao"-->
+<!--                    android:text="logout"-->
+<!--                    android:onClick="clickLogoutBtn"/>-->
 
             </RelativeLayout>
 
