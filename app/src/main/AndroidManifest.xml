@@ -19,8 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".YouTubeDetailListActivity"
-            android:windowSoftInputMode="adjustResize"
+        <activity android:name=".YouTubeDetailActivity"
             android:configChanges="orientation"></activity>
         <activity android:name=".AppIntroPasswordActivity" />
         <activity android:name=".ChattingActivity" />

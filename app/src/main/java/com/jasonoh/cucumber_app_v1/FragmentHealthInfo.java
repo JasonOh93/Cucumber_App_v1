@@ -9,21 +9,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.youtube.player.YouTubeInitializationResult;
-import com.google.android.youtube.player.YouTubePlayer;
-import com.google.android.youtube.player.YouTubePlayerFragment;
-import com.google.android.youtube.player.YouTubePlayerSupportFragment;
+import java.util.ArrayList;
+import java.util.Map;
 
-//import kr.co.prnd.YouTubePlayerView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FragmentHealthInfo extends Fragment {
 
@@ -33,11 +34,9 @@ public class FragmentHealthInfo extends Fragment {
     private EditText etWebSearch, etYouTubeSearch;
     private ImageView ivWebSearch, ivYouTubeSearch;
 
-//    private YouTubePlayerView youTubePlayerView;
-
-    YouTubePlayerFragment youTubePlayerFragment = new YouTubePlayerFragment();
-    YouTubePlayerSupportFragment youTubePlayerSupportFragment;
-    FrameLayout frameLayout;
+    RecyclerView recyclerView;
+    YouTubeDetailListAdapter adapter;
+    ArrayList<YouTubeDetailListRecyclerItem> items = new ArrayList<>();
 
     public FragmentHealthInfo() {
     }//HomeFragment Constructor (null)
@@ -52,8 +51,6 @@ public class FragmentHealthInfo extends Fragment {
         super.onCreate(savedInstanceState);
 
         setHasOptionsMenu(true);
-
-//        fragmentManager.beginTransaction().add(R.id.frag_health_info_container, youTubePlayerFragment).commit();
 
     }//onCreate method
 
@@ -71,13 +68,7 @@ public class FragmentHealthInfo extends Fragment {
         ivWebSearch = view.findViewById(R.id.frag_health_info_web_search_iv);
         ivYouTubeSearch = view.findViewById(R.id.frag_health_info_youtube_search_iv);
 
-//        youTubePlayerView = view.findViewById(R.id.frag_health_info_youtube_view);
-
-        //fragment를 찾아오지 못하고 있다.
-        //youTubePlayerFragment = (YouTubePlayerFragment) fragmentManager.findFragmentById(R.id.frag_health_info_youtube_view_frag);
-        //Log.w("TAG", "널인지 " + youTubePlayerFragment);
-
-//        frameLayout = view.findViewById(R.id.frag_health_info_container);
+        recyclerView = view.findViewById(R.id.frag_health_info_youtube_info_recycler);
 
         return view;
     }//onCreateView method
@@ -89,63 +80,10 @@ public class FragmentHealthInfo extends Fragment {
 
         clickItem();
 
+        adapter = new YouTubeDetailListAdapter(context, items);
+        recyclerView.setAdapter(adapter);
+
     }//onViewCreated method
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.w("TAG", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        loadYouTube();
-
-    }
-
-    //todo : 유투브 알아보기
-    //  https://github.com/PRNDcompany/YouTubePlayerView
-    //      이것은 한개의 뷰밖에 볼수가 없다 그러므로 여러개의 뷰를 볼수 있는 것으로 바뀌어야 한다.
-    public void loadYouTube(){
-//        if(Global.youTubeVideoId != null) {
-//            Log.w("TAG", "bbbbbbbbbbbbbbbbbbbbb");
-//            youTubePlayerView.setVisibility(View.VISIBLE);
-//            youTubePlayerView.play(Global.youTubeVideoId, null);
-//        } else youTubePlayerView.setVisibility(View.GONE);
-
-        //===========================================================================================================
-
-//        if(Global.youTubeVideoId != null) {
-//            youTubePlayerFragment.initialize("first", new YouTubePlayer.OnInitializedListener() {
-//                @Override
-//                public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-//                    youTubePlayer.cueVideo(Global.youTubeVideoId);
-//                }
-//
-//                @Override
-//                public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-//
-//                }
-//            });
-//        }
-
-        //===========================================================================================================
-
-//        if(Global.youTubeVideoId != null) {
-//
-//        }
-//
-//        fragmentManager.beginTransaction().replace(R.id.frag_health_info_container, youTubePlayerFragment).commit();
-//
-//        youTubePlayerFragment.initialize("first", new YouTubePlayer.OnInitializedListener() {
-//            @Override
-//            public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
-//                youTubePlayer.cueVideo("FqPwlR4WKpg");
-//            }
-//
-//            @Override
-//            public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-//
-//            }
-//        });
-
-    }//loadYouTube method
 
     public void clickItem(){
 
@@ -166,14 +104,79 @@ public class FragmentHealthInfo extends Fragment {
         ivYouTubeSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, YouTubeDetailListActivity.class);
-                intent.putExtra("SearchText", etYouTubeSearch.getText().toString());
-                startActivity( intent );
+
+                if(!etYouTubeSearch.getText().toString().equals("")){
+                    loadDataFromYouTube();
+
+                    //소프트 키패드를 안보이도록
+                    InputMethodManager imm =  (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0); //flags 는 즉시하려면 0
+                    //imm.showSoftInput() //화면에 보일때는 show
+
+                } else Toast.makeText(context, "검색어를 입력하세요", Toast.LENGTH_SHORT).show();;
+
                 etYouTubeSearch.setText("");
             }
         });// ivYouTubeSearch.setOnClickListener
     }//clickItem
 
+    public void loadDataFromYouTube(){
 
+        String key = "AIzaSyCC2I2baJQ_5x5jKM7ysLmbUYYyDWlK1jY";//구글 키 값
+        String part = "snippet";
+        String query = etYouTubeSearch.getText().toString();
+
+        int maxResult = 10;
+
+        RetrofitService retrofitService = RetrofitHelper.getInstanceGsonYouTube().create(RetrofitService.class);
+        Call<Map<String, Object>> call = retrofitService.loadDataFromYouTube( key, part, query, maxResult );
+        call.enqueue(new Callback<Map<String, Object>>() {
+            @Override
+            public void onResponse(Call<Map<String, Object>> call, Response<Map<String, Object>> response) {
+                if(response.isSuccessful()) {
+
+                    items.clear();
+                    adapter.notifyDataSetChanged();
+
+                    Map<String, Object> allYouTubeInfo = response.body();
+                    ArrayList<Map<String, Object>> itemsYouTubeInfo =  (ArrayList<Map<String, Object>>) allYouTubeInfo.get("items");
+
+                    for(int i = 0; i < itemsYouTubeInfo.size(); i++) {
+
+                        Map<String, Object> idYouTubeInfo =  ( Map<String, Object> ) itemsYouTubeInfo.get(i).get("id");
+                        Map<String, Object> snippetYouTubeInfo =  ( Map<String, Object> ) itemsYouTubeInfo.get(i).get("snippet");
+
+                        //이미지 얻어오기
+                        Map<String, Object> thumbnailsYouTubeInfo =  (Map<String, Object>) snippetYouTubeInfo.get("thumbnails");
+                        Map<String, Object> defaultYouTubeInfo =  (Map<String, Object>) thumbnailsYouTubeInfo.get("default");
+
+                        if(idYouTubeInfo.get("videoId") != null) {
+                            items.add( items.size(),
+                                    new YouTubeDetailListRecyclerItem(
+                                            idYouTubeInfo.get("videoId").toString(),
+                                            snippetYouTubeInfo.get("title").toString(),
+                                            snippetYouTubeInfo.get("description").toString(),
+                                            snippetYouTubeInfo.get("channelTitle").toString(),
+                                            snippetYouTubeInfo.get("publishTime").toString(),
+                                            defaultYouTubeInfo.get("url").toString()
+                                    ) // new YouTubeDetailListRecyclerItem
+                            );// items.add
+                            adapter.notifyItemInserted(items.size());
+                        }//if(idYouTubeInfo.get("videoId") != null)
+                    }//for
+
+                }// if(response.isSuccessful())
+            }//onResponse method
+
+            @Override
+            public void onFailure(Call<Map<String, Object>> call, Throwable t) {
+                Log.w("TAG", "유투브로 부터 실패한 이유 : " + t.getMessage());
+            }
+        });
+
+
+        //==========================================================================================================
+
+    }//loadDataFromYouTube method
 
 }//FragmentHealthFeed fragment class

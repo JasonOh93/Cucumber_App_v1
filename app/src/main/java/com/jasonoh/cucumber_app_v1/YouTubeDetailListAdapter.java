@@ -1,6 +1,7 @@
 package com.jasonoh.cucumber_app_v1;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +64,8 @@ public class YouTubeDetailListAdapter extends RecyclerView.Adapter<RecyclerView.
                 @Override
                 public void onClick(View v) {
                     Global.youTubeVideoId = items.get(getLayoutPosition()).videoId;
-                    ((AppCompatActivity)context).finish();
+                    context.startActivity( new Intent(context, YouTubeDetailActivity.class));
+//                    ((AppCompatActivity)context).finish();
                 }
             });
 

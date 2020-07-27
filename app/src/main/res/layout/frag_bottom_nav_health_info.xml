@@ -117,36 +117,16 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="16dp"/>
 
-        <!--      YouTube 넣기      -->
-
-<!--            <kr.co.prnd.YouTubePlayerView-->
-<!--                android:id="@+id/frag_health_info_youtube_view"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@id/frag_health_info_line"-->
-<!--                android:layout_marginTop="8dp"/>-->
-
-            <!--
-                   설정을
-                   android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
-                   에러가 안나고
-                   android:name="com.google.android.youtube.player.YouTubePlayerFragment"
-                   에러가 난다.
-                   왜일까????-->
-            <fragment
-                android:id="@+id/frag_health_info_youtube_view_frag"
+            <!--     들어가야 할 내용
+       1. -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/frag_health_info_youtube_info_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
+                android:layout_height="match_parent"
                 android:layout_below="@id/frag_health_info_line"
-                android:layout_marginTop="17dp" />
-
-            <!--            <FrameLayout-->
-<!--                android:id="@+id/frag_health_info_container"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@id/frag_health_info_line"-->
-<!--                android:layout_marginTop="8dp"/>-->
+                android:layout_marginTop="8dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"/>
 
         </RelativeLayout>
 
