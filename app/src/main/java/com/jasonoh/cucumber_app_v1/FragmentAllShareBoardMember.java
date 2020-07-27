@@ -15,10 +15,12 @@ public class FragmentAllShareBoardMember {
 
     String allShare, titleShare, pictureShare, locationShare, messageShare, dateShare, weightShare;
 
+    String personName;
+
     public FragmentAllShareBoardMember() {
     }//constructor
 
-    public FragmentAllShareBoardMember(int no, String date, String file, String title, String weight, String message, String saveDate, String personEmail, int favor, String location, String allShare, String titleShare, String pictureShare, String locationShare, String messageShare, String dateShare, String weightShare) {
+    public FragmentAllShareBoardMember(int no, String date, String file, String title, String weight, String message, String saveDate, String personEmail, int favor, String location, String allShare, String titleShare, String pictureShare, String locationShare, String messageShare, String dateShare, String weightShare, String personName) {
         this.no = no;
         this.date = date;
         this.file = file;
@@ -36,5 +38,6 @@ public class FragmentAllShareBoardMember {
         this.messageShare = messageShare;
         this.dateShare = dateShare;
         this.weightShare = weightShare;
+        this.personName = personName;
     }
 }//FragmentMyHealthMember class

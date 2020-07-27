@@ -18,7 +18,8 @@ android:layout_marginBottom="8dp">
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:src="@mipmap/ic_launcher_round"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"/>
 
     <TextView
         android:id="@+id/recycler_item_frag_my_health_feed_title"

@@ -51,7 +51,7 @@ public class RecyclerViewBoardAdapter extends RecyclerView.Adapter<RecyclerView.
     class ViewHolder extends RecyclerView.ViewHolder {
 
         CircleImageView civ;
-        TextView tvTitle, tvWeight, tvMessage, tvDate, tvEmail;
+        TextView tvTitle, tvWeight, tvMessage, tvDate, tvEmail, tvPersonName;
         TextView tvLocation;
         ImageView ivChat;
         ToggleButton tgFavor;
@@ -69,6 +69,7 @@ public class RecyclerViewBoardAdapter extends RecyclerView.Adapter<RecyclerView.
             ivChat = itemView.findViewById(R.id.recycler_item_frag_board_chat);
 
             tvLocation = itemView.findViewById(R.id.recycler_item_frag_board_location);
+            tvPersonName = itemView.findViewById(R.id.recycler_item_frag_board_person_name);
 
         }//constructor
 
@@ -79,6 +80,7 @@ public class RecyclerViewBoardAdapter extends RecyclerView.Adapter<RecyclerView.
             tvDate.setText( members.get(getLayoutPosition()).date );
             tvEmail.setText( members.get(getLayoutPosition()).email );
             tvLocation.setText( members.get(getLayoutPosition()).location );
+            tvPersonName.setText( members.get(getLayoutPosition()).personName );
             Glide.with(context).load( "http://jasonoh93.dothome.co.kr/CucumberRetrofit/" + members.get(getLayoutPosition()).imgUri ).into( civ );
             tgFavor.setChecked( members.get(getLayoutPosition()).favor == 1 ? true : false );
 
@@ -90,7 +92,7 @@ public class RecyclerViewBoardAdapter extends RecyclerView.Adapter<RecyclerView.
                     // 바로 채팅창으로 이동 해보자!!
                     Intent intent = new Intent(context, ChattingActivity.class);
                     //todo : 채팅창으로 넘어갈때 해당 사용자 정보 받아오기 (이메일 필수)
-                    intent.putExtra( "Others", members.get(getLayoutPosition()).email );
+                    intent.putExtra( "ChattingPersonName", members.get(getLayoutPosition()).personName );
                     context.startActivity( intent );
 
                 }//onClick method

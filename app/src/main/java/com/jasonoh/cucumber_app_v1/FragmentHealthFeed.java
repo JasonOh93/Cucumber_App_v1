@@ -247,6 +247,7 @@ public class FragmentHealthFeed extends Fragment {
                                             DBmembers.get(i).date,
                                             DBmembers.get(i).personEmail,
                                             DBmembers.get(i).location,
+                                            DBmembers.get(i).personName,
                                             DBmembers.get(i).favor));
 
                             Log.w("TAG", "이미지 경로 : " + "http://jasonoh93.dothome.co.kr/CucumberRetrofit/" + DBmembers.get(i).file);
@@ -267,6 +268,7 @@ public class FragmentHealthFeed extends Fragment {
                                     Boolean.parseBoolean(DBmembers.get(i).dateShare) ? DBmembers.get(i).date : null,
                                     DBmembers.get(i).personEmail,
                                     Boolean.parseBoolean(DBmembers.get(i).locationShare) ? DBmembers.get(i).location : null,
+                                    DBmembers.get(i).personName,
                                     DBmembers.get(i).favor);
 
                             adapterBoard.notifyItemInserted(0);
