@@ -74,7 +74,8 @@ public class FragmentHealthFeed extends Fragment {
 
     //시작시 로그인 확인
     public void confirmLoginInfo(){
-        if(!Global.kakaoLoginSuccessBoolean && !Global.googleLoginSuccessBoolean)
+        Log.w("TAG", "Context -- " + context);
+        if(!Global.kakaoLoginSuccessBoolean && !Global.googleLoginSuccessBoolean) {
             new AlertDialog.Builder(context)
                     .setMessage("로그인이 필요합니다.\n로그인을 하시겠습니까?")
                     .setNegativeButton(R.string.edit_cancel_btn, new DialogInterface.OnClickListener() {
@@ -86,11 +87,15 @@ public class FragmentHealthFeed extends Fragment {
                     .setPositiveButton(R.string.edit_ok_btn, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            startActivity( new Intent(context, SocialLoginActivity.class) );
+                            context.startActivity( new Intent(context, SocialLoginActivity.class) );
                         }
                     })
                     .setCancelable(false)
                     .show();
+        } else {
+
+        }
+
     }//confirmLoginInfo method
 
     @Override
@@ -98,8 +103,6 @@ public class FragmentHealthFeed extends Fragment {
         super.onCreate(savedInstanceState);
 
         setHasOptionsMenu(true);
-
-        confirmLoginInfo();
 
     }//onCreate method
 
@@ -141,12 +144,12 @@ public class FragmentHealthFeed extends Fragment {
 
         confirmLoginInfo();
 
-//        // 로그인 정보가 없다면 기본정보로 -> 임시 방편
-//        if(!Global.loginPreferences.getString("ImageUri", "").equals(""))
-//            Glide.with(context).load(Global.loginPreferences.getString("ImageUri", "")).into(civProfile);
-//        else Glide.with(context).load(R.mipmap.ic_launcher_round).into(civProfile);
-//        tvName.setText( Global.loginPreferences.getString("Name", "No Name") );
-//        tvEmail.setText( Global.loginPreferences.getString( "Email", "No Email" ) );
+        // 로그인 정보가 없다면 기본정보로 -> 임시 방편
+        if(!Global.loginPreferences.getString("ImageUri", "").equals(""))
+            Glide.with(context).load(Global.loginPreferences.getString("ImageUri", "")).into(civProfile);
+        else Glide.with(context).load(R.mipmap.ic_launcher_round).into(civProfile);
+        tvName.setText( Global.loginPreferences.getString("Name", "No Name") );
+        tvEmail.setText( Global.loginPreferences.getString( "Email", "No Email" ) );
 
         if(!Global.loginPreferences.getString( Global.LOGIN_EMAIL_KEY, "No Email" ).equals("" + sameToLoginInfoFromDotHomeDB)){
             myHealthMembers.clear();

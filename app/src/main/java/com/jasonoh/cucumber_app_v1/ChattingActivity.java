@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -50,6 +52,10 @@ public class ChattingActivity extends AppCompatActivity {
         setSupportActionBar( findViewById(R.id.chatting_toolbar) );
         getSupportActionBar().setTitle( "" );
 
+//        items.add( new ChattingMessageItem("a", "a", "a", "a" , "a") );
+//        items.add( new ChattingMessageItem("a", "a", "a", "a" , "a") );
+
+
         initChattingRoom();
 
     }//onCreate method
@@ -78,24 +84,36 @@ public class ChattingActivity extends AppCompatActivity {
 
     public void setChattingRoom(){
 
-        listView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                hideSoftKeyBoard();
-                return false;
-            }
-        });
+//        if(getCurrentFocus() != null) {
+            listView.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    Log.w("TAG", "aaaaaaaa");
+                    hideSoftKeyBoard();
+                    return false;
+                }
+            });
+//        }
+
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        chatRef = firebaseDatabase.getReference( "chat" );
+        chatRef = firebaseDatabase.getReference( "chat_" + getIntent().getStringExtra("ChattingPersonName") );
         chatRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 ChattingMessageItem chattingMessageItem = snapshot.getValue( ChattingMessageItem.class );
 
-                items.add(chattingMessageItem);
-                adapter.notifyDataSetChanged();
-                listView.setSelection( items.size() - 1 );
+                //이부분 부터 개별 채팅을 만들고 싶어서 하는 것이다!! 하지만 잘 안된다.
+                if(Global.loginPreferences.getString(Global.LOGIN_NAME_KEY, "").equals(chattingMessageItem.name) ||
+                getIntent().getStringExtra("ChattingPersonName").equals(chattingMessageItem.name)) {
+
+                    items.add(chattingMessageItem);
+                    adapter.notifyDataSetChanged();
+                    listView.setSelection( items.size() - 1 );
+                    listView.requestFocus();
+
+                }
+
             }
 
             @Override
@@ -145,7 +163,7 @@ public class ChattingActivity extends AppCompatActivity {
 
         ChattingMessageItem chattingMessageItem =
                 new ChattingMessageItem(
-                        getIntent().getStringExtra("ChattingPersonName"),
+                        Global.loginPreferences.getString(Global.LOGIN_NAME_KEY, "noName"),
                         etMessage.getText().toString(),
                         time,
                         Global.loginPreferences.getString(Global.LOGIN_IMG_URI_KEY, noImageUrl),
@@ -164,6 +182,9 @@ public class ChattingActivity extends AppCompatActivity {
         //소프트 키패드를 안보이도록
         InputMethodManager imm =  (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0); //flags 는 즉시하려면 0
+
+//        InputMethodManager imm2 =  (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+//        imm2.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0); //flags 는 즉시하려면 0
         //imm.showSoftInput() //화면에 보일때는 show
     }//hideSoftKeyBoard method
 

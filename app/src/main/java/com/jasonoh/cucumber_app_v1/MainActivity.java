@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         bottomNavFrags[0] = new FragmentHome(this);
         bottomNavFrags[1] = new FragmentHospitalPharmacy(this);
         bottomNavFrags[2] = new FragmentHealthFeed( this );
-        bottomNavFrags[3] = new FragmentHealthInfo(this, getFragmentManager());
+        bottomNavFrags[3] = new FragmentHealthInfo(this);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 

@@ -29,7 +29,6 @@ import retrofit2.Response;
 public class FragmentHealthInfo extends Fragment {
 
     private Context context;
-    private FragmentManager fragmentManager;
 
     private EditText etWebSearch, etYouTubeSearch;
     private ImageView ivWebSearch, ivYouTubeSearch;
@@ -41,9 +40,8 @@ public class FragmentHealthInfo extends Fragment {
     public FragmentHealthInfo() {
     }//HomeFragment Constructor (null)
 
-    public FragmentHealthInfo(Context context, FragmentManager fragmentManager) {
+    public FragmentHealthInfo(Context context) {
         this.context = context;
-        this.fragmentManager = fragmentManager;
     }//HomeFragment Constructor
 
     @Override
