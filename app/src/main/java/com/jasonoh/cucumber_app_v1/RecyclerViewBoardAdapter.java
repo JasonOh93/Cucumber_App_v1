@@ -93,6 +93,7 @@ public class RecyclerViewBoardAdapter extends RecyclerView.Adapter<RecyclerView.
                     Intent intent = new Intent(context, ChattingActivity.class);
                     //todo : 채팅창으로 넘어갈때 해당 사용자 정보 받아오기 (이메일 필수)
                     intent.putExtra( "ChattingPersonName", members.get(getLayoutPosition()).personName );
+                    intent.putExtra( "ChattingPersonEmail", members.get(getLayoutPosition()).email );
                     context.startActivity( intent );
 
                 }//onClick method

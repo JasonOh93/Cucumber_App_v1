@@ -45,6 +45,7 @@ public class Global {
 
     // Health Feed Fragment
     static boolean healthFeedBooleanFromMyMenuActivity = false;
+    static boolean healthFeedBoardBooleanFromMyMenuActivity = false;
 
     //Search Hospital Pharmacy Activity
 //    static boolean searchHospitalPharmacyBooleanFromMyMenuActivity = false;

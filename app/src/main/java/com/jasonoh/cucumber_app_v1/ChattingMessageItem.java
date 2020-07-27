@@ -7,11 +7,14 @@ public class ChattingMessageItem {
     String time;            //작성시간
     String profileUrl;      //프로필 이미지의 https://... URL
 
-    public ChattingMessageItem(String name, String message, String time, String profileUrl) {
+    String email;
+
+    public ChattingMessageItem(String name, String message, String time, String profileUrl, String email) {
         this.name = name;
         this.message = message;
         this.time = time;
         this.profileUrl = profileUrl;
+        this.email = email;
     }
 
     public ChattingMessageItem() {
@@ -47,5 +50,13 @@ public class ChattingMessageItem {
 
     public void setProfileUrl(String profileUrl) {
         this.profileUrl = profileUrl;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }//ChattingMessageItem class

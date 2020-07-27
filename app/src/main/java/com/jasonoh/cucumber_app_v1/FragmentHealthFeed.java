@@ -56,9 +56,13 @@ public class FragmentHealthFeed extends Fragment {
     private ArrayList<FragmentBoardMember> boardMembers = new ArrayList<>();
     private RecyclerViewBoardAdapter adapterBoard;
 
+    private boolean touchToBoardViewBoolean = false;
+
     private String boardSeeMoreBtnAllSee;
     private String boardSeeMoreBtnMyShare;
     private String boardSeeMoreBtnNoMyShare;
+
+    private String sameToLoginInfoFromDotHomeDB = null;
 
 
     public FragmentHealthFeed() {
@@ -137,16 +141,23 @@ public class FragmentHealthFeed extends Fragment {
 
         confirmLoginInfo();
 
-        // 로그인 정보가 없다면 기본정보로 -> 임시 방편
-        if(!Global.loginPreferences.getString("ImageUri", "").equals(""))
-            Glide.with(context).load(Global.loginPreferences.getString("ImageUri", "")).into(civProfile);
-        else Glide.with(context).load(R.mipmap.ic_launcher_round).into(civProfile);
-        tvName.setText( Global.loginPreferences.getString("Name", "No Name") );
-        tvEmail.setText( Global.loginPreferences.getString( "Email", "No Email" ) );
+//        // 로그인 정보가 없다면 기본정보로 -> 임시 방편
+//        if(!Global.loginPreferences.getString("ImageUri", "").equals(""))
+//            Glide.with(context).load(Global.loginPreferences.getString("ImageUri", "")).into(civProfile);
+//        else Glide.with(context).load(R.mipmap.ic_launcher_round).into(civProfile);
+//        tvName.setText( Global.loginPreferences.getString("Name", "No Name") );
+//        tvEmail.setText( Global.loginPreferences.getString( "Email", "No Email" ) );
+
+        if(!Global.loginPreferences.getString( Global.LOGIN_EMAIL_KEY, "No Email" ).equals("" + sameToLoginInfoFromDotHomeDB)){
+            myHealthMembers.clear();
+            adapterMyHealth.notifyDataSetChanged();
+        }
 
         //마이 메뉴에서 나의 건강 정보 또는 건강 게시판 누를시에 해당 탭으로 이동
-        if(!Global.healthFeedBooleanFromMyMenuActivity) setMyHealthInfo();
-        else setBoard();
+        if(!Global.healthFeedBooleanFromMyMenuActivity) {
+            if(!Global.healthFeedBoardBooleanFromMyMenuActivity) setMyHealthInfo();
+            else setBoard();
+        } else setBoard();
 
     }//onResume method
 
@@ -197,9 +208,12 @@ public class FragmentHealthFeed extends Fragment {
                     myHealthMembers.clear();
                     adapterMyHealth.notifyDataSetChanged();
 
+
+
                     for(int i = 0; i < DBmembers.size(); i++) {
                         if(Global.loginPreferences.getString(Global.LOGIN_EMAIL_KEY, "이메일 없음")
                                 .equals(DBmembers.get(i).personEmail)){
+                            sameToLoginInfoFromDotHomeDB = DBmembers.get(i).personEmail;
                             myHealthMembers.add(0, new FragmentMyHealthMember( DBmembers.get(i).file,
                                     DBmembers.get(i).title,
                                     DBmembers.get(i).weight,
@@ -315,6 +329,7 @@ public class FragmentHealthFeed extends Fragment {
             @Override
             public void onClick(View v) {
                 setMyHealthInfo();
+                Global.healthFeedBoardBooleanFromMyMenuActivity = false;
             }//onClick method
         });//btnMyHealthInfo.setOnClickListener
 
@@ -357,6 +372,7 @@ public class FragmentHealthFeed extends Fragment {
             @Override
             public void onClick(View v) {
                 setBoard();
+                Global.healthFeedBoardBooleanFromMyMenuActivity = true;
             }//onClick method
         });//btnBoard.setOnClickListener
 

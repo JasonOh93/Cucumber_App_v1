@@ -50,9 +50,6 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <include layout="@layout/chatting_my_msgbox"/>
-        <include layout="@layout/chatting_other_msgbox"/>
-
     <ListView
         android:id="@+id/chatting_list_view"
         android:layout_width="match_parent"

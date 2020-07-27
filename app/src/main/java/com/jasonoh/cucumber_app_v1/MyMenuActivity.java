@@ -372,6 +372,7 @@ public class MyMenuActivity extends AppCompatActivity {
             //나의 건강 기록 클릭시
             case R.id.my_menu_health_feed :
                 Global.healthFeedBooleanFromMyMenuActivity = false;
+                Global.healthFeedBoardBooleanFromMyMenuActivity = false;
                 Intent intent = getIntent();
                 intent.putExtra( "StartHealthFeed", "StartHealthFeed" );
                 setResult( RESULT_OK, intent );

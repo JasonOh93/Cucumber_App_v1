@@ -1,6 +1,7 @@
 package com.jasonoh.cucumber_app_v1;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +18,15 @@ public class ChattingAdapter extends BaseAdapter {
 
     Context context;
     ArrayList<ChattingMessageItem> items;
+    String personEmail;
 
     public ChattingAdapter() {
     }//constructor
 
-    public ChattingAdapter(Context context, ArrayList<ChattingMessageItem> items) {
+    public ChattingAdapter(Context context, ArrayList<ChattingMessageItem> items, String personEmail) {
         this.context = context;
         this.items = items;
+        this.personEmail = personEmail;
     }//constructor
 
     @Override
@@ -48,9 +51,15 @@ public class ChattingAdapter extends BaseAdapter {
         // 우선 나의 정보를 이용해서 채팅방 만들기
         View view = null;
         if(Global.googleLoginSuccessBoolean || Global.kakaoLoginSuccessBoolean) {
-            if(Global.loginPreferences.getString("Name", "").equals(items.get(position).name))
+            if(Global.loginPreferences.getString(Global.LOGIN_EMAIL_KEY, "").equals(items.get(position).email)) {
+                Log.w("TAG", "EMAIL 확인" + Global.loginPreferences.getString(Global.LOGIN_EMAIL_KEY, ""));
+                Log.w("TAG", "EMAIL 확인222" + items.get(position).email );
                 view = LayoutInflater.from(context).inflate(R.layout.chatting_my_msgbox, parent, false);
-            else view = LayoutInflater.from(context).inflate(R.layout.chatting_other_msgbox, parent, false);
+            } else {
+                view = LayoutInflater.from(context).inflate(R.layout.chatting_other_msgbox, parent, false);
+                Log.w("TAG", "EMAIL 확인" + Global.loginPreferences.getString(Global.LOGIN_EMAIL_KEY, ""));
+                Log.w("TAG", "EMAIL 확인222" + items.get(position).email + "   " + items.get(position).name );
+            }
         }//if 로그인이 되어있는지 아닌지
 
         //2. bind view
