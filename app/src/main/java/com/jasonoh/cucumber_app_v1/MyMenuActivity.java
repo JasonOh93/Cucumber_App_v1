@@ -1,6 +1,7 @@
 package com.jasonoh.cucumber_app_v1;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -278,6 +279,7 @@ public class MyMenuActivity extends AppCompatActivity {
                 break;
 
             case R.id.btn_my_menu_personal_info :
+                startActivity( new Intent().setAction(Intent.ACTION_VIEW).setData(Uri.parse("http://jasonoh93.dothome.co.kr/CucumberApp.html")));
                 break;
 
             case R.id.btn_my_menu_logout :
