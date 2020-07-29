@@ -5,11 +5,14 @@ import java.util.Map;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface RetrofitService {
@@ -27,5 +30,9 @@ public interface RetrofitService {
                                                   @Query("part") String part,
                                                   @Query("q") String q,
                                                   @Query("maxResult") int maxResult);
+
+    //좋아요 버튼 클릭시 사용되는 변수
+    @PUT("/CucumberRetrofit/{filename}")
+    Call<FragmentBoardMember> updateBoardData(@Path("filename") String filename, @Body FragmentBoardMember boardMember);
 
 }//RetrofitService interface

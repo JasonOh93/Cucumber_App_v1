@@ -2,6 +2,7 @@ package com.jasonoh.cucumber_app_v1;
 
 public class FragmentBoardMember {
 
+    int no;
     String imgUri;
     String title, weight, message, date, email;
     String location;
@@ -13,7 +14,8 @@ public class FragmentBoardMember {
     public FragmentBoardMember() {
     }//constructor
 
-    public FragmentBoardMember(String imgUri, String title, String weight, String message, String date, String email, String location, String personName, int favor) {
+    public FragmentBoardMember(int no, String imgUri, String title, String weight, String message, String date, String email, String location, String personName, int favor) {
+        this.no = no;
         this.imgUri = imgUri;
         this.title = title;
         this.weight = weight;

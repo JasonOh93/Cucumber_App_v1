@@ -2,11 +2,14 @@ package com.jasonoh.cucumber_app_v1;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
@@ -17,6 +20,9 @@ import com.bumptech.glide.Glide;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RecyclerViewBoardAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -83,6 +89,32 @@ public class RecyclerViewBoardAdapter extends RecyclerView.Adapter<RecyclerView.
             tvPersonName.setText( members.get(getLayoutPosition()).personName );
             Glide.with(context).load( "http://jasonoh93.dothome.co.kr/CucumberRetrofit/" + members.get(getLayoutPosition()).imgUri ).into( civ );
             tgFavor.setChecked( members.get(getLayoutPosition()).favor == 1 ? true : false );
+
+            //좋아요 버튼 클릭시
+            tgFavor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                    Toast.makeText(context, "" + isChecked, Toast.LENGTH_SHORT).show();
+                    members.get(getLayoutPosition()).favor = isChecked? 1 : 0;
+
+                    RetrofitHelper.getInstanceGson()
+                            .create(RetrofitService.class)
+                            .updateBoardData("updateBoardFavor.php", members.get(getLayoutPosition()))
+                            .enqueue(new Callback<FragmentBoardMember>() {
+                                @Override
+                                public void onResponse(Call<FragmentBoardMember> call, Response<FragmentBoardMember> response) {
+                                    Log.w("TAG", "좋아요 버튼 클릭 후 성공시 : " + response.body().toString());
+                                }
+
+                                @Override
+                                public void onFailure(Call<FragmentBoardMember> call, Throwable t) {
+                                    Log.w("TAG", "좋아요 버튼 클릭 후 실패시 : " + t.getMessage());
+                                }
+                            });//updateBoardFavor CallBack method
+
+                }//onCheckedChanged method
+            });// tgFavor.setOnCheckedChangeListener
 
             //채팅 버튼 클릭시 반응
             ivChat.setOnClickListener(new View.OnClickListener() {

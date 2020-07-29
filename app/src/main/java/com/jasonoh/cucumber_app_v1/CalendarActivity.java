@@ -38,14 +38,15 @@ public class CalendarActivity extends AppCompatActivity {
 
         for (int i = 0; i < calendarView.getSelectedDates().size(); i++ ) {
             Calendar calendar = calendarView.getSelectedDates().get(i);
-            int hour = calendar.get(Calendar.HOUR);
+            int hour = calendar.get(Calendar.HOUR_OF_DAY);
             int minute = calendar.get(Calendar.MINUTE);
             int day = calendar.get(Calendar.DAY_OF_MONTH);
             int month = calendar.get(Calendar.MONTH);
             int year = calendar.get(Calendar.YEAR);
             String week = new SimpleDateFormat("EE", Locale.KOREA).format(calendar.getTime());
-            String day_full = year + "년 " + (month+1) + "월 " + day + "일 " + hour + "시 " + minute + "분 " + week + "요일";
-            Log.w("TAG", "갤린터 시간" + day_full);
+//            String day_full = year + "년 " + (month+1) + "월 " + day + "일 " + hour + "시 " + minute + "분 " + week + "요일";
+            String day_full = year + "년 " + (month+1) + "월 " + day + "일 " + week + "요일";
+            Log.w("TAG", "갤린더 시간" + day_full);
             result = (day_full + "\n");
         }
 

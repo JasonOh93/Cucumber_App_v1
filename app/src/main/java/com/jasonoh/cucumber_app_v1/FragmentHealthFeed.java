@@ -241,7 +241,7 @@ public class FragmentHealthFeed extends Fragment {
     }//loadMyHealthInfoData method
 
     public void loadBoardData(){
-        //나의 건강 정보 불러오기!!
+        //게시판 불러오기!!
         RetrofitService myRetrofitService = RetrofitHelper.getInstanceGson().create(RetrofitService.class);
         Call<ArrayList<FragmentAllShareBoardMember>> call = myRetrofitService.loadDataFromCucumberBoard();
         call.enqueue(new Callback<ArrayList<FragmentAllShareBoardMember>>() {
@@ -257,7 +257,8 @@ public class FragmentHealthFeed extends Fragment {
                     for(int i = 0; i < DBmembers.size(); i++) {
                         if(Boolean.parseBoolean(DBmembers.get(i).allShare)) {
                             boardMembers.add(0,
-                                    new FragmentBoardMember(DBmembers.get(i).file,
+                                    new FragmentBoardMember( DBmembers.get(i).no,
+                                            DBmembers.get(i).file,
                                             DBmembers.get(i).title,
                                             DBmembers.get(i).weight + "kg",
                                             DBmembers.get(i).message,
@@ -278,6 +279,7 @@ public class FragmentHealthFeed extends Fragment {
                                 Boolean.parseBoolean(DBmembers.get(i).dateShare) ||
                                 Boolean.parseBoolean(DBmembers.get(i).weightShare)) {
                             new FragmentBoardMember(
+                                    DBmembers.get(i).no,
                                     Boolean.parseBoolean(DBmembers.get(i).pictureShare) ? DBmembers.get(i).file : null,
                                     Boolean.parseBoolean(DBmembers.get(i).titleShare) ? DBmembers.get(i).title : null,
                                     Boolean.parseBoolean(DBmembers.get(i).weightShare) ? DBmembers.get(i).weight : null,
