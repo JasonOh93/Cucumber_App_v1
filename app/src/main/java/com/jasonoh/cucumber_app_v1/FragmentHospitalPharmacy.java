@@ -367,6 +367,9 @@ public class FragmentHospitalPharmacy extends Fragment {
                             // 여기까지 했음.. 이제 어뎁터를 바꿔줘야함!!
                             hospitalAdapter = new RecyclerViewFragmentHospitalAdapter(context, arrayListHospitalItems);
 
+                            // 확인용 ! 리스트 항목에 내용이 있는지 확인용
+                            new AlertDialog.Builder(context).setMessage(arrayListHospitalItems.get(0).hospitalAddress).show();
+
                             try {
                                 isr.close();
                                 is.close();
@@ -685,9 +688,6 @@ public class FragmentHospitalPharmacy extends Fragment {
 //                        adapter.notifyDataSetChanged();
 
                         recyclerView.setVisibility(View.VISIBLE);
-                        arrayListHospitalItems.add(new FragmentHospitalItem("aa", "aa", "aa", "aa", "aa"));
-                        hospitalAdapter = null;
-                        hospitalAdapter = new RecyclerViewFragmentHospitalAdapter(context, arrayListHospitalItems);
                         recyclerView.setAdapter(hospitalAdapter);
                         hospitalAdapter.notifyDataSetChanged();
                     }
