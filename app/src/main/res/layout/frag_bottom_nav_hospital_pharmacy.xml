@@ -133,12 +133,21 @@
                 android:text="@string/frag_hospital_see_more_btn"
                 android:gravity="center"/>
 
-            <ListView
-                android:id="@+id/frag_hospital_pharmacy_list"
+<!--            <ListView-->
+<!--                android:id="@+id/frag_hospital_pharmacy_list"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_weight="1"-->
+<!--                android:visibility="gone"/>-->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/frag_hospital_pharmacy_recycle_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:visibility="gone"/>
+                android:visibility="visible"/>
+
+            <include layout="@layout/frag_hospital_pharmacy_item"/>
 
         </LinearLayout>
 
