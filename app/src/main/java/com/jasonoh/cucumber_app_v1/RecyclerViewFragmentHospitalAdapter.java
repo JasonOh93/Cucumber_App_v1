@@ -5,10 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
@@ -17,12 +22,15 @@ public class RecyclerViewFragmentHospitalAdapter extends RecyclerView.Adapter {
     Context context;
     ArrayList<FragmentHospitalItem> items;
 
+    GoogleMap googleMap;
+
     public RecyclerViewFragmentHospitalAdapter() {
     }
 
-    public RecyclerViewFragmentHospitalAdapter(Context context, ArrayList<FragmentHospitalItem> items) {
+    public RecyclerViewFragmentHospitalAdapter(Context context, ArrayList<FragmentHospitalItem> items, GoogleMap googleMap) {
         this.context = context;
         this.items = items;
+        this.googleMap = googleMap;
     }
 
     @NonNull
@@ -52,12 +60,25 @@ public class RecyclerViewFragmentHospitalAdapter extends RecyclerView.Adapter {
             address = itemView.findViewById(R.id.recycler_item_frag_hospital_pharmacy_address_tv);
             telNum = itemView.findViewById(R.id.recycler_item_frag_hospital_pharmacy_tel_tv);
             toggleButton = itemView.findViewById(R.id.recycler_item_frag_hospital_pharmacy_favorite_tg);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, items.get(getLayoutPosition()).hospitalLatitude, Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
         public void setHospitalItem(){
             name.setText( items.get(getLayoutPosition()).hospitalName );
             address.setText( items.get(getLayoutPosition()).hospitalAddress );
             telNum.setText( items.get(getLayoutPosition()).hospitalTelNum );
+
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position( new LatLng(Double.parseDouble(items.get(getLayoutPosition()).hospitalLatitude),
+                    Double.parseDouble(items.get(getLayoutPosition()).hospitalLongitude) ));
+            markerOptions.title(name.getText().toString());
+            googleMap.addMarker(markerOptions);
         }
     }
 }

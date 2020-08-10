@@ -365,8 +365,7 @@ public class FragmentHospitalPharmacy extends Fragment {
 
                             //adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, arrayListGetDataHospital);
 
-                            // 여기까지 했음.. 이제 어뎁터를 바꿔줘야함!!
-                            hospitalAdapter = new RecyclerViewFragmentHospitalAdapter(context, arrayListHospitalItems);
+                            hospitalAdapter = new RecyclerViewFragmentHospitalAdapter(context, arrayListHospitalItems, GoogleMap);
 
                             // 확인용 ! 리스트 항목에 내용이 있는지 확인용
 //                            new AlertDialog.Builder(context).setMessage(arrayListHospitalItems.get(0).hospitalAddress).show();
