@@ -145,9 +145,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:visibility="visible"/>
-
-            <include layout="@layout/frag_hospital_pharmacy_item"/>
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
+                android:visibility="gone"/>
 
         </LinearLayout>
 

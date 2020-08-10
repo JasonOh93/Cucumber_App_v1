@@ -277,6 +277,7 @@ public class FragmentHospitalPharmacy extends Fragment {
                 try {
 
                     //arrayListGetDataHospital.clear();
+                    arrayListHospitalItems.clear();
 
                     URL url =new URL(dataHospitalAddress);
                     InputStream is = url.openStream();
@@ -368,7 +369,7 @@ public class FragmentHospitalPharmacy extends Fragment {
                             hospitalAdapter = new RecyclerViewFragmentHospitalAdapter(context, arrayListHospitalItems);
 
                             // 확인용 ! 리스트 항목에 내용이 있는지 확인용
-                            new AlertDialog.Builder(context).setMessage(arrayListHospitalItems.get(0).hospitalAddress).show();
+//                            new AlertDialog.Builder(context).setMessage(arrayListHospitalItems.get(0).hospitalAddress).show();
 
                             try {
                                 isr.close();
@@ -688,7 +689,9 @@ public class FragmentHospitalPharmacy extends Fragment {
 //                        adapter.notifyDataSetChanged();
 
                         recyclerView.setVisibility(View.VISIBLE);
-                        recyclerView.setAdapter(hospitalAdapter);
+                        Log.w("TAG_HOSPI", "Aaa");
+                        recyclerView.setAdapter( hospitalAdapter );
+                        Log.w("TAG_HOSPI", "Aaa");
                         hospitalAdapter.notifyDataSetChanged();
                     }
                     else if(btnSeeMore.getText().toString().equals("코로나 안심병원 보기")) {
