@@ -1,16 +1,16 @@
 package com.jasonoh.cucumber_app_v1;
 
-public class FragmentPharmacyItem {
+public class FragmentSafetyHospitalItem {
     String name, address, latitude, longitude, telNum;
 
-    public FragmentPharmacyItem() {
+    public FragmentSafetyHospitalItem() {
     }
 
-    public FragmentPharmacyItem(String name, String address, String latitude, String longitude, String telNum) {
+    public FragmentSafetyHospitalItem(String name, String address, String latitude, String longitude, String telNum) {
         this.name = name;
         this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
         this.telNum = telNum;
     }
-}//FragmentPharmacyItem class
+}//FragmentSafetyHospitalItem class

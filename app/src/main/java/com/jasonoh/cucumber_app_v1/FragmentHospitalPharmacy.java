@@ -57,11 +57,6 @@ public class FragmentHospitalPharmacy extends Fragment {
     boolean btnSeeMoreBoolean = false;
 
     LinearLayout linearHospitalPharmacyMedicalAndLocation;
-    ListView listView;
-    ArrayAdapter<String> adapter;
-    ArrayList<String> arrayListNearHospital = new ArrayList<>();
-    ArrayList<String> arrayListGetDataSafetyHospital = new ArrayList<>();
-    ArrayList<String> arrayListGetDataPharmacy = new ArrayList<>();
 
     // 병원만 근처 지도에 표시하고 나오기 위한 설정
     RecyclerView recyclerView;
@@ -71,6 +66,10 @@ public class FragmentHospitalPharmacy extends Fragment {
     //약국 근처 지도에 표시되도록 하는 설정
     ArrayList<FragmentPharmacyItem> arrayListPharmacyItems = new ArrayList<>();
     RecyclerViewFragmentPharmacyAdapter pharmacyAdapter;
+
+    // 안심병원
+    ArrayList<FragmentSafetyHospitalItem> arrayListSafetyHospitalItems = new ArrayList<>();
+    RecyclerViewFragmentSafetyHospitalAdapter safetyHospitalAdapter;
 
     GoogleMap GoogleMap;
     SupportMapFragment supportMapFragment;
@@ -114,7 +113,6 @@ public class FragmentHospitalPharmacy extends Fragment {
         linearHospitalPharmacyMedicalAndLocation =
                 view.findViewById(R.id.frag_hospital_pharmacy_medical_location_view);
 
-        //listView = view.findViewById(R.id.frag_hospital_pharmacy_list);
         recyclerView = view.findViewById(R.id.frag_hospital_pharmacy_recycle_list);
 
         return view;
@@ -297,6 +295,8 @@ public class FragmentHospitalPharmacy extends Fragment {
 
                 try {
 
+                    arrayListSafetyHospitalItems.clear();
+
                     URL url =new URL(dataHospitalAddress);
                     InputStream is = url.openStream();
                     InputStreamReader isr = new InputStreamReader(is);
@@ -308,6 +308,11 @@ public class FragmentHospitalPharmacy extends Fragment {
                     int eventType = xpp.getEventType();
 
                     StringBuffer stringBuffer = new StringBuffer();
+
+                    String name = null;
+                    String address1 = "";
+                    String address2 = "";
+                    String telNum = null;
 
                     while (eventType != XmlPullParser.END_DOCUMENT) {
 
@@ -326,14 +331,21 @@ public class FragmentHospitalPharmacy extends Fragment {
                                 String tagName_start = xpp.getName();
                                 if(tagName_start.equals("items")) stringBuffer = new StringBuffer();
                                 else if(tagName_start.equals("item")) stringBuffer = new StringBuffer();
+                                else if(tagName_start.equals("sidoNm")) {
+                                    xpp.next();
+                                    address1 = xpp.getText();
+                                }
                                 else if(tagName_start.equals("sgguNm")) {
                                     xpp.next();
-//                                    stringBuffer.append(xpp.getText() + "\n");
+                                    address2 = xpp.getText();
                                 }
                                 else if(tagName_start.equals("yadmNm")) {
                                     xpp.next();
-                                    stringBuffer.append(xpp.getText() + "\n");
-//                                    stringBuffer.append("병원 이름 : " + xpp.getText() + "\n");
+                                    name = xpp.getText();
+                                }
+                                else if(tagName_start.equals("telno")) {
+                                    xpp.next();
+                                    telNum = xpp.getText();
                                 }
                                 break;
                             case XmlPullParser.TEXT :
@@ -341,7 +353,8 @@ public class FragmentHospitalPharmacy extends Fragment {
                             case XmlPullParser.END_TAG :
                                 if(xpp.getName().equals("item")) {
                                     Log.w("TAG", "SafetyHospital : " + stringBuffer.toString());
-                                    arrayListGetDataSafetyHospital.add( stringBuffer.toString() );
+                                    Log.w("TAG", "SafetyHospital : " + address2);
+                                    arrayListSafetyHospitalItems.add( new FragmentSafetyHospitalItem(name, address1 + " " + address2, null, null, telNum) );
                                     stringBuffer = new StringBuffer();
                                 }
                                 break;
@@ -353,8 +366,9 @@ public class FragmentHospitalPharmacy extends Fragment {
                         @Override
                         public void run() {
                             Toast.makeText(context, "검색종료", Toast.LENGTH_SHORT).show();
-                            adapter = new ArrayAdapter<String>(context, android.R.layout.simple_list_item_1, arrayListGetDataSafetyHospital);
-                            adapter.notifyDataSetChanged();
+
+                            safetyHospitalAdapter = new RecyclerViewFragmentSafetyHospitalAdapter(context, arrayListSafetyHospitalItems, GoogleMap);
+                            safetyHospitalAdapter.notifyDataSetChanged();
 
                             try {
                                 isr.close();
@@ -586,12 +600,11 @@ public class FragmentHospitalPharmacy extends Fragment {
                         hospitalAdapter.notifyDataSetChanged();
                     }
                     else if(btnSeeMore.getText().toString().equals("코로나 안심병원 보기")) {
-                        listView.setVisibility(View.VISIBLE);
-                        listView.setAdapter(adapter);
-                        adapter.notifyDataSetChanged();
+                        recyclerView.setVisibility(View.VISIBLE);
+                        recyclerView.setAdapter(safetyHospitalAdapter);
+                        safetyHospitalAdapter.notifyDataSetChanged();
                     }
                     else if(btnSeeMore.getText().toString().equals("약국 보기")) {
-
                         recyclerView.setVisibility(View.VISIBLE);
                         recyclerView.setAdapter( pharmacyAdapter );
                         hospitalAdapter.notifyDataSetChanged();
