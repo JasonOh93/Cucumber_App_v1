@@ -5,17 +5,17 @@
     <item android:id="@+id/menu_frag_home_calendar"
         android:title="@string/frag_home_menu_calendar"
         app:showAsAction="always"
-        android:icon="@drawable/ic_calendar_white_24dp"/>
+        android:icon="@drawable/ic_calendar_black_24dp"/>
 
     <item android:id="@+id/menu_frag_home_location"
         android:title="@string/frag_home_menu_location"
         app:showAsAction="always"
-        android:icon="@drawable/ic_location_white_24dp"/>
+        android:icon="@drawable/ic_location_black_24dp"/>
 
     <item android:id="@+id/menu_frag_home_my_menu"
         android:title="@string/frag_home_menu_MyMenu"
         app:showAsAction="always"
-        android:icon="@drawable/ic_person_white_24dp"/>
+        android:icon="@drawable/ic_person_black_24dp"/>
 
 
 </menu>

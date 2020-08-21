@@ -13,15 +13,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class HomeFragment extends Fragment {
+public class FragmentHome extends Fragment {
 
     Context context;
 
@@ -37,10 +34,10 @@ public class HomeFragment extends Fragment {
 //    final int LOCATION_REQUEST = 101;
 //    final int MY_MENU_REQUEST = 102;
 
-    public HomeFragment() {
+    public FragmentHome() {
     }//HomeFragment Constructor (null)
 
-    public HomeFragment(Context context) {
+    public FragmentHome(Context context) {
         this.context = context;
     }//HomeFragment Constructor
 
@@ -61,7 +58,7 @@ public class HomeFragment extends Fragment {
 
         toolbar = view.findViewById(R.id.home_frag_toolbar);
         ((MainActivity) getActivity()).setSupportActionBar( toolbar );
-        ((MainActivity) getActivity()).setTitle("");
+        getActivity().setTitle("");
 
 
         civHealthFeed = view.findViewById(R.id.home_frag_civ_health_feed);
@@ -79,7 +76,6 @@ public class HomeFragment extends Fragment {
         civHealthFeed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "feed", Toast.LENGTH_SHORT).show();
                 ((MainActivity)getActivity()).bottomNavigationView.setSelectedItemId( R.id.menu_health_feed );
 
             }//onClick method
@@ -88,7 +84,6 @@ public class HomeFragment extends Fragment {
         civHealthInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "info", Toast.LENGTH_SHORT).show();
                 ((MainActivity)getActivity()).bottomNavigationView.setSelectedItemId( R.id.menu_health_info );
             }//onClick method
         });//setOnClickListener
@@ -96,8 +91,8 @@ public class HomeFragment extends Fragment {
         civHospital.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "hospital", Toast.LENGTH_SHORT).show();
                 ((MainActivity)getActivity()).bottomNavigationView.setSelectedItemId( R.id.menu_hospital_pharmacy );
+                Global.hospitalPharmacyBooleanFromHomeFrag = false;
                 //((MainActivity)getActivity()).bottomNavFrags[1]. //여기서 병원 탭또는 약국 탭으로 이동
             }//onClick method
         });//setOnClickListener
@@ -105,8 +100,8 @@ public class HomeFragment extends Fragment {
         civPharmacy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "pharmacy", Toast.LENGTH_SHORT).show();
                 ((MainActivity)getActivity()).bottomNavigationView.setSelectedItemId( R.id.menu_hospital_pharmacy );
+                Global.hospitalPharmacyBooleanFromHomeFrag = true;
             }//onClick method
         });//setOnClickListener
     }//
@@ -124,17 +119,14 @@ public class HomeFragment extends Fragment {
 
         switch (item.getItemId()) {
             case R.id.menu_frag_home_calendar :
-                Toast.makeText(context, "calendar", Toast.LENGTH_SHORT).show();
                 startActivityForResult( new Intent(context, CalendarActivity.class), Global.CALENDAR_REQUEST);
                 break;
 
             case R.id.menu_frag_home_location :
-                Toast.makeText(context, "location", Toast.LENGTH_SHORT).show();
                 startActivityForResult( new Intent(context, LocationActivity.class), Global.LOCATION_REQUEST);
                 break;
 
             case R.id.menu_frag_home_my_menu :
-                Toast.makeText(context, "mymenu", Toast.LENGTH_SHORT).show();
                 startActivityForResult( new Intent(context, MyMenuActivity.class), Global.MY_MENU_REQUEST);
                 break;
         }
@@ -142,4 +134,32 @@ public class HomeFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }//onOptionsItemSelected method
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode) {
+            case Global.CALENDAR_REQUEST :
+                break;
+
+            case Global.LOCATION_REQUEST :
+                break;
+
+            case Global.MY_MENU_REQUEST :
+
+                if(resultCode == getActivity().RESULT_OK) {
+                    Toast.makeText(context, "OK" + resultCode, Toast.LENGTH_SHORT).show();
+                    //마이 메뉴에서 설정한 값으로 프레그먼트 제어
+                    if(data.getStringExtra(Global.GET_START_HEALTH_FEED_FROM_MY_MENU_ACTIVITY)
+                            .equals(Global.GET_START_HEALTH_FEED_FROM_MY_MENU_ACTIVITY))
+                        ((MainActivity)getActivity()).bottomNavigationView.setSelectedItemId( R.id.menu_health_feed );
+                }//if resultCode OK
+                else {
+                    Toast.makeText(context, "CANCEL" + resultCode, Toast.LENGTH_SHORT).show();
+                }// else
+
+                break;
+        }//switch case
+
+    }//onActivityResult method
 }//HomeFragment Class

@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Cucumber</string>
 
+    <!--  카카오 LOGIN API KEY  -->
+    <string name="kakao_api_key">38df59b6a482263085938b8e57e640f7</string>
+
     <!--  앱 인트로화면 title  -->
     <string name="intro_app_title1">오늘도</string>
     <string name="intro_app_title2">이롭게</string>
@@ -11,35 +14,136 @@
     <string name="bottom_nav_menu_health_feed">건강피드</string>
     <string name="bottom_nav_menu_health_info">건강정보</string>
 
-    <!--  app home top option menu icon  -->
+    <!--  app fragment home top option menu icon  -->
     <string name="frag_home_menu_calendar">Calendar</string>
     <string name="frag_home_menu_location">Location</string>
     <string name="frag_home_menu_MyMenu">My Menu</string>
 
+    <!--  app fragment hospital pharmacy   -->
+    <string name="frag_hospital_top_title_btn">병원</string>
+    <string name="frag_pharmacy_top_title_btn">약국</string>
+    <string name="frag_hospital_medical_subjects_btn">전체 진료 과목</string>
+    <string name="frag_hospital_pharmacy_location_btn">위치 선택</string>
+    <string name="frag_hospital_see_more_btn">병원 보기</string>
+    <string name="frag_pharmacy_see_more_btn">약국 보기</string>
+    <string name="frag_pharmacy_get_hospital_data_server_key">6dqyQeM6Z1N4y9BZCEBwdt00gqLY6XZhny6jJs3ljEWE2NypmtrGJHRNkfgA%2FvtgZlWdqYCjoFGnPu3oKSTi0g%3D%3D</string>
+    <string name="frag_pharmacy_get_hospital_data_address">http://apis.data.go.kr/B552657/HsptlAsembySearchService/getHsptlMdcncFullDown</string>
+
+
+    <string-array name="hospital_alert_dialog_medical_subject">
+        <item>일반 진료 병원</item>
+        <!--        <item>전체 진료 과목</item>-->
+        <!--        <item>외과</item>-->
+        <!--        <item>내과</item>-->
+        <!--        <item>피부과</item>-->
+        <!--        <item>치과</item>-->
+        <!--        <item>종합병원</item>-->
+        <item>코로나 안심병원</item>
+    </string-array>
+
+    <!--  app fragment health feed  -->
+    <string name="frag_health_feed_top_title_tv">건강피드</string>
+    <string name="frag_health_feed_my_health_feed_btn">나의건강기록</string>
+    <string name="frag_health_feed_board">게시판</string>
+    <string name="frag_health_feed_see_line_chart">차트 보기</string>
+    <string name="frag_health_feed_close_line_chart">차트 닫기</string>
+
+    <string name="frag_health_feed_board_all_see_alert">전체보기</string>
+    <string name="frag_health_feed_board_other_see_alert">나의 정보 제외 후 보기</string>
+    <string name="frag_health_feed_board_my_info_see_alert">공유한 나의 정보 보기</string>
+
+    <string-array name="alert_board_see_more">
+        <item>전체보기</item>
+        <item>"나의 정보 제외 후 보기"</item>
+        <item>"공유한 나의 정보 보기"</item>
+    </string-array>
+
+    <!--  app fragment health info  -->
+    <string name="frag_health_info_top_title_tv">건강정보</string>
+    <string name="frag_health_info_web_search_tv">웹으로 검색</string>
+    <string name="frag_health_info_youtube_search_tv">YouTube 검색</string>
+
     <!--  app my menu Activity text  -->
-    <string name="MyMenu_menu_top_title">마이 메뉴</string>
-    <string name="MyMenu_menu_like_hospital">관심 병원</string>
-    <string name="MyMenu_menu_like_pharmacy">관심 약국</string>
-    <string name="MyMenu_menu_health_feed">나의 건강 기록</string>
-    <string name="MyMenu_menu_health_board">건강 게시판</string>
-    <string name="MyMenu_menu_recently_info">최근 본 정보</string>
-    <string name="MyMenu_menu_notification_setting">알림 설정</string>
-    <string name="MyMenu_menu_password_setting">비밀번호 설정</string>
-    <string name="MyMenu_menu_password_change">비밀번호 변경</string>
-    <string name="MyMenu_menu_personal_info">개인정보처리방침</string>
-    <string name="MyMenu_menu_no_login_text">로그인이 필요한 기능입니다.</string>
-    <string name="MyMenu_menu_logout_text">로그아웃</string>
-    <string name="MyMenu_menu_play_login_text">로그인</string>
-    <string name="MyMenu_menu_password_change_btn_text">변경</string>
-    <string name="MyMenu_menu_personal_info_btn_text">확인</string>
+    <string name="myMenu_menu_top_title">마이 메뉴</string>
+    <string name="myMenu_menu_like_hospital">관심 병원</string>
+    <string name="myMenu_menu_like_pharmacy">관심 약국</string>
+    <string name="myMenu_menu_health_feed">나의 건강 기록</string>
+    <string name="myMenu_menu_health_board">건강 게시판</string>
+    <string name="myMenu_menu_recently_info">최근 본 정보</string>
+    <string name="myMenu_menu_notification_setting">알림 설정</string>
+    <string name="myMenu_menu_password_setting">비밀번호 설정</string>
+    <string name="myMenu_menu_password_setting_on">비밀번호 설정이 ON 되었습니다.</string>
+    <string name="myMenu_menu_password_setting_off">비밀번호 설정이 OFF 되었습니다.</string>
+    <string name="myMenu_menu_password_change">비밀번호 변경</string>
+    <string name="myMenu_menu_personal_info">개인정보처리방침</string>
+    <string name="myMenu_menu_no_login_text">로그인이 필요한 기능입니다.</string>
+    <string name="myMenu_menu_logout_text">로그아웃</string>
+    <string name="myMenu_menu_play_login_text">로그인</string>
+    <string name="myMenu_menu_password_change_btn_text">변경</string>
+    <string name="myMenu_menu_personal_info_btn_text">확인</string>
 
 
     <!--  app inner password Activity text  -->
     <string name="app_inner_password_top_title">비밀번호 설정</string>
     <string name="app_inner_password_ok">확인</string>
 
+    <!--  app intro password Activity text  -->
+    <string name="app_intro_password_top_title">비밀번호 확인</string>
+    <string name="app_intro_password_different_password">비밀번호가 일치하지 않습니다.</string>
+
     <!--  app social login Activity text  -->
     <string name="social_login_title">Log in</string>
+
+    <!--  구글 로그인을 위한   -->
+    <!--    <string name="default_web_client_id">392962139220-geggq99t5k0iotnt6s8ke76b95o4c4ku.apps.googleusercontent.com</string>-->
+
+    <!--  Location Activity  -->
+    <string name="location_top_title">위치 선택</string>
+    <string name="location_search_text">위치 검색</string>
+    <string name="location_search_et_hint">지역, 주소, 지하철역 검색</string>
+    <string name="location_search_now_location_text">현재 위치로 설정</string>
+    <string name="location_tv_empty">검색 결과가 없습니다.</string>
+
+    <!--  SearchHospitalAndPharmacy Activity  -->
+    <string name="search_hospital_pharmacy_top_title">병원 및 약국</string>
+    <string name="search_hospital_pharmacy_et_hint">검색어를 입력하세요</string>
+    <string name="search_hospital_pharmacy_tv_empty">검색 결과가 없습니다</string>
+    <string name="search_hospital_btn">병원</string>
+    <string name="search_pharmacy_btn">약국</string>
+
+    <!--  FavoritesHospitalAndPharmacy Activity  -->
+    <string name="favorites_hospital_pharmacy_top_title">관심 병원 및 약국</string>
+    <string name="favorites_hospital_pharmacy_et_hint">검색어를 입력하세요</string>
+    <string name="favorites_hospital_pharmacy_tv_empty">검색 결과가 없습니다</string>
+    <string name="favorites_hospital_btn">병원</string>
+    <string name="favorites_pharmacy_btn">약국</string>
+
+    <!--  Edit Activity  -->
+    <string name="edit_top_title">작성</string>
+    <string name="edit_share_all">전체공유</string>
+    <string name="edit_picture">사진</string>
+    <string name="edit_title">제목</string>
+    <string name="edit_location">위치</string>
+    <string name="edit_message">메세지</string>
+    <string name="edit_date">날짜</string>
+    <string name="edit_weight">몸무게</string>
+    <string name="edit_cancel_btn">취소</string>
+    <string name="edit_ok_btn">확인</string>
+    <string name="edit_cancel_alert_msg">작성을 취소하시겠습니까?</string>
+    <string name="edit_ok_alert_msg">작성을 완료하셨습니까?</string>
+
+    <!--  Chatting Activity  -->
+    <string name="chat_top_name">대화상대이름</string>
+    <string name="chat_send_btn">전송</string>
+
+    <!--  Calendar Activity  -->
+    <string name="calendar_top_name">달력</string>
+    <string name="calendar_select_btn">선택</string>
+
+    <!--  YouTubeDetailListActivity  -->
+    <string name="youtube_detail_list_top_title">YouTube 검색</string>
+    <string name="youtube_detail_list_search_hint_et">검색어를 입력하세요</string>
+    <string name="youtube_detail_list_search_btn">YouTube로 이동하여 검색</string>
 
 
 </resources>

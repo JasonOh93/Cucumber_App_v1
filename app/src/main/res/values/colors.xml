@@ -6,4 +6,10 @@
 
     <color name="colorPrimary_my">#8BC34A</color>
     <color name="colorPrimaryDark_my">#4CAF50</color>
+
+    <color name="colorPrimary_translucent_my">#338BC34A</color>
+    <color name="colorPrimaryDark_translucent_my">#334CAF50</color>
+
+    <color name="color_translucent_green">#E1FBC3</color>
+    <color name="color_chat_green">#C7D6B7</color>
 </resources>

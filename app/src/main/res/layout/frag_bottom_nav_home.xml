@@ -17,7 +17,8 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/home_frag_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@android:color/white">
 
                 <ImageView
                     android:id="@+id/home_frag_iv_app_icon"
@@ -32,7 +33,7 @@
                     android:text="오이"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:textColor="@android:color/white"
+                    android:textColor="@color/colorPrimaryDark_my"
                     android:layout_marginLeft="25dp"/>
 
             </androidx.appcompat.widget.Toolbar>
@@ -54,42 +55,83 @@
                 android:id="@+id/home_frag_civ_health_feed"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/ic_assistant_black_24dp"
+                android:src="@drawable/health_feed_icon"
                 android:layout_above="@id/home_frag_civ_center"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="32dp"
                 android:clickable="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/home_frag_civ_center"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="15dp"
+                android:text="건강피드"
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimaryDark_my"/>
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/home_frag_civ_health_info"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/ic_info_black_24dp"
+                android:src="@drawable/health_info_icon"
                 android:layout_below="@id/home_frag_civ_center"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="32dp"
                 android:clickable="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/home_frag_civ_health_info"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:text="건강정보"
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimaryDark_my"/>
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/home_frag_civ_hospital"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/ic_local_hospital_black_24dp"
+                android:src="@drawable/hospital_icon"
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@id/home_frag_civ_center"
-                android:layout_marginRight="30dp"
+                android:layout_marginRight="32dp"
                 android:clickable="true"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/home_frag_civ_hospital"
+                android:layout_toLeftOf="@id/home_frag_civ_center"
+                android:layout_marginRight="56dp"
+                android:layout_marginTop="8dp"
+                android:text="병원"
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimaryDark_my"/>
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/home_frag_civ_pharmacy"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@drawable/ic_local_hospital_black_24dp"
+                android:src="@drawable/pharmacy_icon"
                 android:layout_toRightOf="@id/home_frag_civ_center"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="32dp"
                 android:clickable="true"/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/home_frag_civ_center"
+                android:layout_below="@id/home_frag_civ_pharmacy"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="56dp"
+                android:text="약국"
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimaryDark_my"/>
 
         </RelativeLayout>
 

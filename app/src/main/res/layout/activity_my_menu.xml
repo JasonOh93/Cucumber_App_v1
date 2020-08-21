@@ -12,6 +12,7 @@
         android:orientation="vertical">
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/my_menu_app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -32,7 +33,7 @@
                     android:id="@+id/my_menu_top_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/MyMenu_menu_top_title"
+                    android:text="@string/myMenu_menu_top_title"
                     android:textColor="@android:color/white"
                     android:textSize="20sp"
                     android:layout_marginLeft="25dp"/>
@@ -73,7 +74,7 @@
                     android:layout_marginLeft="20dp"/>
 
                 <TextView
-                    android:id="@+id/my_menu_tv_profile_subtitle"
+                    android:id="@+id/my_menu_tv_profile_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Sample@sample.com"
@@ -89,7 +90,8 @@
                     android:background="@drawable/mymenu_btn_selector"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:text="@string/MyMenu_menu_logout_text"/>
+                    android:text="@string/myMenu_menu_logout_text"
+                    android:onClick="clickBtn"/>
 
             </RelativeLayout>
 
@@ -97,13 +99,14 @@
             <RelativeLayout
                 android:id="@+id/my_menu_no_login"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="visible">
 
                 <TextView
                     android:id="@+id/my_menu_no_login_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/MyMenu_menu_no_login_text"
+                    android:text="@string/myMenu_menu_no_login_text"
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
                     android:gravity="center"
@@ -116,7 +119,7 @@
                     android:layout_height="40dp"
                     android:background="@drawable/mymenu_btn_selector"
                     android:layout_below="@id/my_menu_no_login_title"
-                    android:text="@string/MyMenu_menu_play_login_text"
+                    android:text="@string/myMenu_menu_play_login_text"
                     android:layout_marginBottom="8dp"
                     android:onClick="clickBtn"/>
 
@@ -134,50 +137,55 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="@string/MyMenu_menu_like_hospital"
+                android:text="@string/myMenu_menu_like_hospital"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:onClick="clickTextView"/>
 
             <TextView
                 android:id="@+id/my_menu_like_pharmacy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="@string/MyMenu_menu_like_pharmacy"
+                android:text="@string/myMenu_menu_like_pharmacy"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:onClick="clickTextView"/>
 
             <TextView
                 android:id="@+id/my_menu_health_feed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="@string/MyMenu_menu_health_feed"
+                android:text="@string/myMenu_menu_health_feed"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:onClick="clickTextView"/>
 
             <TextView
                 android:id="@+id/my_menu_health_board"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="@string/MyMenu_menu_health_board"
+                android:text="@string/myMenu_menu_health_board"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:onClick="clickTextView"/>
 
             <TextView
                 android:id="@+id/my_menu_recently_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
-                android:text="@string/MyMenu_menu_recently_info"
+                android:text="@string/myMenu_menu_recently_info"
                 android:textSize="18sp"
                 android:textColor="@android:color/black"
-                android:clickable="true"/>
+                android:clickable="true"
+                android:onClick="clickTextView"/>
 
             <View
                 android:layout_width="match_parent"
@@ -195,7 +203,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
-                    android:text="@string/MyMenu_menu_notification_setting"
+                    android:text="@string/myMenu_menu_notification_setting"
                     android:textSize="18sp"
                     android:textColor="@android:color/black"/>
 
@@ -215,7 +223,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
-                    android:text="@string/MyMenu_menu_password_setting"
+                    android:text="@string/myMenu_menu_password_setting"
                     android:textSize="18sp"
                     android:textColor="@android:color/black"
                     android:layout_below="@id/tv_my_menu_notification_setting"/>
@@ -236,7 +244,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
-                    android:text="@string/MyMenu_menu_password_change"
+                    android:text="@string/myMenu_menu_password_change"
                     android:textSize="18sp"
                     android:textColor="@android:color/black"
                     android:layout_below="@id/tv_my_menu_password_setting"/>
@@ -248,7 +256,7 @@
                     android:background="@drawable/mymenu_btn_selector"
                     android:layout_alignParentRight="true"
                     android:layout_below="@id/switch_btn_my_menu_password_setting"
-                    android:text="@string/MyMenu_menu_password_change_btn_text"
+                    android:text="@string/myMenu_menu_password_change_btn_text"
                     android:layout_marginBottom="8dp"
                     android:onClick="clickBtn"/>
 
@@ -257,7 +265,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
-                    android:text="@string/MyMenu_menu_personal_info"
+                    android:text="@string/myMenu_menu_personal_info"
                     android:textSize="18sp"
                     android:textColor="@android:color/black"
                     android:layout_below="@id/tv_my_menu_password_change"/>
@@ -269,7 +277,7 @@
                     android:background="@drawable/mymenu_btn_selector"
                     android:layout_alignParentRight="true"
                     android:layout_below="@id/btn_my_menu_password_change"
-                    android:text="@string/MyMenu_menu_personal_info_btn_text"
+                    android:text="@string/myMenu_menu_personal_info_btn_text"
                     android:onClick="clickBtn"/>
 
             </RelativeLayout>
