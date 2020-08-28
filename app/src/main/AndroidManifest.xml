@@ -61,10 +61,10 @@
             android:windowSoftInputMode="adjustResize" /> <!-- 카카오 앱키 설정 -->
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="@string/kakao_api_key" /> <!-- 구글 API 키 -->
+            android:value="@string/kakao_api_key" /> 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_api_key" />
+            android:value="@string/google_api_key" /><!-- 구글 API 키 -->
     </application>
 
 </manifest>
