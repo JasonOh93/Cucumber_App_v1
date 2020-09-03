@@ -104,15 +104,15 @@ public class ChattingActivity extends AppCompatActivity {
                 ChattingMessageItem chattingMessageItem = snapshot.getValue( ChattingMessageItem.class );
 
                 //todo : 이부분 부터 개별 채팅을 만들고 싶어서 하는 것이다!! 하지만 잘 안된다.
-                if(!Global.loginPreferences.getString(Global.LOGIN_NAME_KEY, "").equals(chattingMessageItem.name) ||
-                getIntent().getStringExtra("ChattingPersonName").equals(chattingMessageItem.name)) {
+//                if(!Global.loginPreferences.getString(Global.LOGIN_NAME_KEY, "").equals(chattingMessageItem.name) ||
+//                getIntent().getStringExtra("ChattingPersonName").equals(chattingMessageItem.name)) {
 
                     items.add(chattingMessageItem);
                     adapter.notifyDataSetChanged();
                     listView.setSelection( items.size() - 1 );
                     listView.requestFocus();
 
-                }
+//                }
 
             }
 
