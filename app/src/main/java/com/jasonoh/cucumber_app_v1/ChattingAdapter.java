@@ -50,15 +50,16 @@ public class ChattingAdapter extends BaseAdapter {
         //1. create view [ my_msgbox or other_msgbox ]
         // 우선 나의 정보를 이용해서 채팅방 만들기
         View view = null;
+        Log.w("TAG", "EMAIL 확인999999 " + items.get(position).email );
         if(Global.googleLoginSuccessBoolean || Global.kakaoLoginSuccessBoolean) {
             if(Global.loginPreferences.getString(Global.LOGIN_EMAIL_KEY, "").equals(items.get(position).email)) {
-                Log.w("TAG", "EMAIL 확인" + Global.loginPreferences.getString(Global.LOGIN_EMAIL_KEY, ""));
+                Log.w("TAG", "EMAIL 확인11" + Global.loginPreferences.getString(Global.LOGIN_EMAIL_KEY, ""));
                 Log.w("TAG", "EMAIL 확인222" + items.get(position).email );
                 view = LayoutInflater.from(context).inflate(R.layout.chatting_my_msgbox, parent, false);
             } else {
                 view = LayoutInflater.from(context).inflate(R.layout.chatting_other_msgbox, parent, false);
-                Log.w("TAG", "EMAIL 확인" + Global.loginPreferences.getString(Global.LOGIN_EMAIL_KEY, ""));
-                Log.w("TAG", "EMAIL 확인222" + items.get(position).email + "   " + items.get(position).name );
+                Log.w("TAG", "EMAIL 확인33" + Global.loginPreferences.getString(Global.LOGIN_EMAIL_KEY, ""));
+                Log.w("TAG", "EMAIL 확인444" + items.get(position).email + "   " + items.get(position).name );
             }
         }//if 로그인이 되어있는지 아닌지
 

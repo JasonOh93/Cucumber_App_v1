@@ -144,6 +144,8 @@ public class MainActivity extends AppCompatActivity {
             try {
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
+
+                Log.w("KEYHASH", Base64.encodeToString(md.digest(), Base64.NO_WRAP));
                 return Base64.encodeToString(md.digest(), Base64.NO_WRAP);
             } catch (NoSuchAlgorithmException e) {
                 Log.w("TAG", "Unable to get MessageDigest. signature=" + signature, e);
