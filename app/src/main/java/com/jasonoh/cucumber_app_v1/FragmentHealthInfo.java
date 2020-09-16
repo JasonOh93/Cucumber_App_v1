@@ -120,7 +120,7 @@ public class FragmentHealthInfo extends Fragment {
 
     public void loadDataFromYouTube(){
 
-        String key = "AIzaSyCC2I2baJQ_5x5jKM7ysLmbUYYyDWlK1jY";//구글 키 값
+        String key = getResources().getString(R.string.google_api_key);//구글 키 값
         String part = "snippet";
         String query = etYouTubeSearch.getText().toString();
 
