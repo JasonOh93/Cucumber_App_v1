@@ -17,10 +17,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.kakao.util.helper.Utility.getPackageInfo;
 
@@ -64,7 +74,35 @@ public class MainActivity extends AppCompatActivity {
 //                break;
 //        }
 
+//        //todo : FCM Push Service
+//        fcmPushService();
+
     }//onCreate Method
+
+//    // todo : FCM 사용 시 토큰 사항
+//    public void fcmPushService(){
+//        //앱을 FCM 서버에 등록하는 과정
+//        // 앱을 FCM 서버에 등록하면 앱을 식별할수있는 고유 토큰 값(문자열)을 줌
+//        //이 토큰 값(InstanceID)을 통해 앱들(디바이스들)을 구별하여 메세지 전달되는 것임.
+//
+//        FirebaseInstanceId firebaseInstanceId = FirebaseInstanceId.getInstance();
+//        Task<InstanceIdResult> task = firebaseInstanceId.getInstanceId();
+//        task.addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+//            @Override
+//            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+//                fcmToken = task.getResult().getToken();
+//
+//                //토큰값 출력
+//                //Toast.makeText(MainActivity.this, "" + token, Toast.LENGTH_SHORT).show();
+//                //Logcat 창에 토큰값 출력 : 식별값으로 알려주는 것 w는 경고라는 의미
+//                Log.w( "tokenTAG", fcmToken );
+//
+//                //실무에서는 이 토큰값을 본인의 웹서버(닷홈)에 전송하여 웹 DB에 token값 저장하도록 해야함
+//
+//            }
+//        });
+//
+//    }// fcmPushService method
 
     public void getLocation(){
 
