@@ -35,4 +35,9 @@ public interface RetrofitService {
     @PUT("/CucumberRetrofit/{filename}")
     Call<FragmentBoardMember> updateBoardData(@Path("filename") String filename, @Body FragmentBoardMember boardMember);
 
+    //todo : FCM Push Service Post 방식
+    @Multipart
+    @POST("/CucumberRetrofit/fcmPushPost.php")
+    Call<String> postFCMPushService(@PartMap Map<String, String> dataPartFCMPush);
+
 }//RetrofitService interface

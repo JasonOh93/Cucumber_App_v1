@@ -24,6 +24,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.loader.content.CursorLoader;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import java.io.File;
 import java.util.HashMap;
@@ -46,6 +50,9 @@ public class EditActivity extends AppCompatActivity {
     CheckBox cbAllShare, cbTitleShare, cbPictureShare, cbLocationShare, cbMessageShare, cbDateShare, cbWeightShare;
 
     String imgPath;
+
+    // todo : FCM Push Service
+    String fcmToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -199,7 +206,10 @@ public class EditActivity extends AppCompatActivity {
             case R.id.edit_cancel_btn :
                 new AlertDialog.Builder(this).setMessage(R.string.edit_cancel_alert_msg).setNegativeButton(R.string.edit_cancel_btn, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) { }
+                    public void onClick(DialogInterface dialog, int which) {
+                        //todo : FCM Push Service
+                        fcmPushService();
+                    }
                 }).setPositiveButton(R.string.edit_ok_btn, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -230,8 +240,36 @@ public class EditActivity extends AppCompatActivity {
 
     }//clickBtn method
 
+    // todo : FCM 사용 시 토큰 사항
+    public void fcmPushService(){
+        //앱을 FCM 서버에 등록하는 과정
+        // 앱을 FCM 서버에 등록하면 앱을 식별할수있는 고유 토큰 값(문자열)을 줌
+        //이 토큰 값(InstanceID)을 통해 앱들(디바이스들)을 구별하여 메세지 전달되는 것임.
+
+        FirebaseInstanceId firebaseInstanceId = FirebaseInstanceId.getInstance();
+        Task<InstanceIdResult> task = firebaseInstanceId.getInstanceId();
+        task.addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+            @Override
+            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                fcmToken = task.getResult().getToken();
+
+                //토큰값 출력
+                //Toast.makeText(MainActivity.this, "" + token, Toast.LENGTH_SHORT).show();
+                //Logcat 창에 토큰값 출력 : 식별값으로 알려주는 것 w는 경고라는 의미
+                Log.w( "tokenTAG", fcmToken );
+
+                //실무에서는 이 토큰값을 본인의 웹서버(닷홈)에 전송하여 웹 DB에 token값 저장하도록 해야함
+
+                postFCMPushService();
+            }
+        });
+
+    }// fcmPushService method
+
     //todo : Edit Activity 확인 버튼 클릭시 서버 전송
     public void shareData(){
+
+//        --------------------------------------------------------------------------------------------------------------------
 
         RetrofitService retrofitService = RetrofitHelper.getInstanceScalars().create( RetrofitService.class );
 
@@ -269,8 +307,13 @@ public class EditActivity extends AppCompatActivity {
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.isSuccessful()) {
                     Log.w("TAG", "Response");
-                    Toast.makeText(EditActivity.this, response.body(), Toast.LENGTH_SHORT).show();
-                    finish();
+                    //Toast.makeText(EditActivity.this, response.body(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditActivity.this, "게시완료_푸시서비스 시작", Toast.LENGTH_SHORT).show();
+                    Log.w("TAG", "Response2");
+
+                    // todo: FCMPush Service
+                    fcmPushService();
+//                    finish();
                 }
             }
 
@@ -281,4 +324,30 @@ public class EditActivity extends AppCompatActivity {
         });//call.enqueue(new Callback<String>()
 
     }//shareData method
+
+    //todo : FCM Push Service
+    public void postFCMPushService(){
+        // todo: FCM Push Service
+        RetrofitService retrofitServiceFCMPush = RetrofitHelper.getInstanceScalars().create(RetrofitService.class);
+
+        Map<String, String> dataPartFCMPush = new HashMap<>();
+        dataPartFCMPush.put("token", fcmToken);
+        dataPartFCMPush.put("name", Global.loginPreferences.getString(Global.LOGIN_NAME_KEY, "이름 없음"));
+        dataPartFCMPush.put("msg", etTitle.getText().toString());
+
+        Call<String> callFCMPush = retrofitServiceFCMPush.postFCMPushService(dataPartFCMPush);
+        callFCMPush.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.w("TAG", "ResponseFCMPush");
+                //Toast.makeText(EditActivity.this, response.body(), Toast.LENGTH_SHORT).show();
+                Log.w("TAG", response.body());
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+            }
+        });
+    }// postFCMPushService method...
 }//EditActivity class

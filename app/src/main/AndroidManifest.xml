@@ -65,6 +65,16 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_api_key" /><!-- 구글 API 키 -->
+
+        <!-- FCM을 수신하여 백그라운드 동작을 하는 서비스 등록 -->
+        <!-- android:exported="false" : 내 앱이 아니라면 다른 앱에서 이 앱을 실행시키기 못하도록 할때 사용 -->
+        <service
+            android:name=".MyFCMReceiveService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
